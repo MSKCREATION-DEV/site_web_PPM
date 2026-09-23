@@ -1,13 +1,11 @@
 # SPEC — Site vitrine Prosperity Travel
 
-**Version :** 1.2  
-**Date :** 2026-09-23  
-**Client :** Prosperity Management Mali SARL  
-**Prestataire :** MSK Création SARL  
-**Référence contrat :** Devis MSK-CONTRAT-2026-114 · Contrat Site Vitrine (août 2026)  
-**Stack :** Astro · static · TypeScript · Tailwind CSS  
-**Palette :** P0 Bleu nuit & or — **confirmée**  
-**Changelog :** [docs/CHANGELOG.md](./CHANGELOG.md)  
+**Version :** 1.4-f0  
+**Branche :** `design/f0-sable-cuivre` (expérimentale)  
+**Palette active :** F0 — Sable `#EADFC8` · Cuivre `#A8623A` · Blanc `#FFFFFF` (+ Nuit / Indigo pour structure)  
+**Palette P0 conservée sur :** `design/p0-bleu-nuit-or` et `main`  
+
+Réf. visuelle : `docs/references/palette-sable-cuivre-blanc.jpg`
 
 ### Organisation documentation
 
@@ -24,7 +22,7 @@
 
 | Élément | Statut |
 |---------|--------|
-| Palette P0 | Confirmée |
+| Palette | **F0 expérimentale** sur cette branche · P0 figée sur `design/p0-bleu-nuit-or` |
 | WhatsApp / tél / e-mail / adresse / Maps | **Placeholders** (`src/data/site.ts`) issus cahier + contrat — à remplacer après validation |
 | Nom de domaine | Pas encore pris |
 | Textes & photos définitifs | Pas encore OK — placeholders éditoriaux autorisés |
@@ -110,9 +108,20 @@ Le cahier client liste d’autres activités (BTP, restauration, gardiennage, or
 
 ## 3. Design system — décision palette
 
-### Palette officielle V1 : **P0 · Bleu nuit & or** (Option 1) — CONFIRMÉE
+### Palette active (cette branche) : **F0 · Sable / Cuivre / Blanc**
 
-Alignée moodboard stratégique Prosperity Travel. Décision validée le 2026-09-23.
+| Token | Nom | Hex |
+|-------|-----|-----|
+| `--color-nuit` | Nuit | `#0D1330` |
+| `--color-indigo` | Indigo Niger | `#1D2B53` |
+| `--color-sable` / `--color-ivoire` | Sable | `#EADFC8` |
+| `--color-cuivre` / `--color-or` | Cuivre | `#A8623A` |
+| `--color-blanc` | Blanc | `#FFFFFF` |
+| gradient | Cuivre → Sable | métallisé |
+
+### Palette P0 (autre branche) : **Bleu nuit & or** — figée sur `design/p0-bleu-nuit-or`
+
+Ne pas mélanger P0 et F0 dans le même build.
 
 | Token | Nom | Hex | Usage |
 |-------|-----|-----|--------|

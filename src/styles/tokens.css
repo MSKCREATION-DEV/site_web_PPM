@@ -1,32 +1,42 @@
-/* Prosperity Travel — Palette P0 (officielle V1)
-   Réf. docs/SPEC.md · docs/references/palette-option-1-p0.png */
+/* Prosperity Travel — Palette F0 / Sable · Cuivre · Blanc (branche expérimentale)
+   Réf. docs/references/palette-sable-cuivre-blanc.jpg · palette-option-2-f0.png */
 
 :root {
   --color-nuit: #0d1330;
-  --color-or: #c9a227;
-  --color-ivoire: #f5f1e8;
-  --color-vert: #245c4a;
+  --color-indigo: #1d2b53;
+  --color-sable: #eadfc8;
+  --color-cuivre: #a8623a;
+  --color-blanc: #ffffff;
+
+  /* Alias compatibles avec les classes Tailwind existantes (or / ivoire / vert) */
+  --color-or: var(--color-cuivre);
+  --color-ivoire: var(--color-sable);
+  --color-vert: var(--color-indigo);
 
   --gradient-or-metal: linear-gradient(
     90deg,
-    #8a6e1a 0%,
-    #c9a227 35%,
-    #f0e6b8 50%,
-    #c9a227 65%,
-    #8a6e1a 100%
+    #7a3f22 0%,
+    #a8623a 28%,
+    #d4a574 52%,
+    #eadfc8 78%,
+    #c48a5c 100%
   );
 
   --font-display: "Cormorant Garamond", "Times New Roman", serif;
   --font-sans: "DM Sans", "Segoe UI", sans-serif;
 
-  --color-bg: var(--color-ivoire);
+  --color-bg: var(--color-blanc);
   --color-fg: var(--color-nuit);
-  --color-accent: var(--color-or);
+  --color-accent: var(--color-cuivre);
   --color-muted: color-mix(in srgb, var(--color-nuit) 65%, transparent);
 }
 
 @theme inline {
   --color-nuit: var(--color-nuit);
+  --color-indigo: var(--color-indigo);
+  --color-sable: var(--color-sable);
+  --color-cuivre: var(--color-cuivre);
+  --color-blanc: var(--color-blanc);
   --color-or: var(--color-or);
   --color-ivoire: var(--color-ivoire);
   --color-vert: var(--color-vert);

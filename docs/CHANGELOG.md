@@ -1,43 +1,35 @@
+# Changelog — Prosperity Travel
+
+## 2026-09-23 — Branches palette
+
+| Branche | Palette |
+|---------|---------|
+| `main` / `design/p0-bleu-nuit-or` | **P0** Bleu nuit & or (figée) |
+| `design/f0-sable-cuivre` *(actuelle)* | **F0** Sable `#EADFC8` · Cuivre `#A8623A` · Blanc `#FFFFFF` |
+
+### Sur `design/f0-sable-cuivre`
+- Tokens CSS remappés (aliases or/ivoire → cuivre/sable)
+- Fond page blanc, sections chaudes sable, CTA cuivre + texte blanc
+- Gradient cuivre → sable
+- Rules Cursor + SPEC mises à jour pour cette branche
+
 ## 2026-09-23 — V1.3 Copy anti-jargon IA
 
-- Réécriture complète de `src/data/content.ts` : ton concret Bamako, sans « premium / sur mesure / planifier mon voyage »
-- Metas et textes UI nettoyés (pages + layout)
-- Rule Cursor `.cursor/rules/copy-voice.mdc` pour empêcher le retour du jargon IA
+- Réécriture complète de `src/data/content.ts` : ton concret Bamako
+- Rule Cursor `.cursor/rules/copy-voice.mdc`
 
+## 2026-09-23 — V1.2 Design immersif + organisation repo
 
 ### Design & UX
-- Accueil immersif style Wilderness (hero plein écran, destinations, expériences, parcours, CTA)
-- Contenu riche placeholder dans `src/data/content.ts` (toujours périmètre voyage / billetterie / pèlerinage)
-- Animations : reveal au scroll, parallax léger hero, zoom image au hover, header sticky transparent → nuit
-- Pages À propos / Services / Contact redesignées (photos, rythme clair/sombre)
-- Palette **P0 confirmée**
+- Accueil immersif style Wilderness
+- Animations reveal / parallax / header sticky
+- Contenu dans `src/data/content.ts`
 
 ### Footer MSK
-- Correction : **« Design by » + SVG seul** (le fichier SVG contient déjà « MSK CREATION »)
-- SVG footer : viewBox recadré + texte ivoire lisible sur fond nuit
-- Plus de doublon texte « MSK CREATION » à côté du logo
+- « Design by » + SVG seul
 
 ### Organisation repo
 ```
-docs/
-  SPEC.md
-  CHANGELOG.md          ← ce fichier
-  contrat/              Contrat Site Vitrine.pdf
-  cahier/               Cahier des charges .docx
-  brand/                msk-creation.svg (source)
-  references/           palettes, moodboard, captures
-src/                    code Astro
-public/                 assets web (favicon, msk-creation.svg)
+docs/contrat/  docs/cahier/  docs/brand/  docs/references/
+src/  public/
 ```
-Racine nettoyée : plus de PDF / DOCX / captures en vrac.
-
-### Technique
-- Composants : `Header`, `Footer`, `PageHero`, `WhatsAppFab`
-- Script motion : `src/scripts/motion.ts`
-- Images placeholder Unsplash (à remplacer par photos client)
-
-### À faire ensuite
-- Endpoint formulaire HTTPS
-- sitemap / robots / schema SEO
-- Photos & textes client définitifs
-- Domaine + déploiement
