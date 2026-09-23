@@ -1,0 +1,36 @@
+---
+description: Design UI/UX premium Prosperity Travel — hero, composition, motion
+globs: "**/*.{astro,css,scss,tsx,jsx,vue,svelte,html}"
+alwaysApply: false
+---
+
+# Design UI/UX — Prosperity Travel
+
+Inspiration Wilderness Destinations : immersif, photo-first, CTA clair. **Originalité** Prosperity (or/nuit, Mali, billetterie, pèlerinage).
+
+## Premier viewport
+
+- Une seule composition : marque + 1 headline + 1 phrase + groupe CTA + image **full-bleed**
+- Pas de stats, cartes, badges, chips, promo overlays sur le hero
+- Marque = signal hero-level (pas seulement un logo nav)
+
+## Layout
+
+- Sections = 1 objectif, 1 titre, 1 phrase support
+- Alternance fonds `--color-ivoire` / `--color-nuit`
+- Cards : seulement si interaction (service, formulaire) — pas en hero
+- Header sticky : transparent → nuit au scroll ; CTA Contact / WhatsApp visibles
+
+## Typo
+
+- Titres : serif expressive (Cormorant / Playfair) — pas Inter/Roboto/Arial
+- Corps : sans lisible (DM Sans / Source Sans 3)
+- Tracking soigné sur wordmarks uppercase type moodboard
+
+## Motion
+
+2–3 motions max : fade-in au scroll, transition header, hover or métallisé. Pas de bounce ni animations bruyantes.
+
+## Contact toujours accessible
+
+WhatsApp flottant toutes pages + liens footer. Style discret, contraste AA.

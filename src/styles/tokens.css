@@ -1,0 +1,35 @@
+/* Prosperity Travel — Palette P0 (officielle V1)
+   Réf. docs/SPEC.md · docs/references/palette-option-1-p0.png */
+
+:root {
+  --color-nuit: #0d1330;
+  --color-or: #c9a227;
+  --color-ivoire: #f5f1e8;
+  --color-vert: #245c4a;
+
+  --gradient-or-metal: linear-gradient(
+    90deg,
+    #8a6e1a 0%,
+    #c9a227 35%,
+    #f0e6b8 50%,
+    #c9a227 65%,
+    #8a6e1a 100%
+  );
+
+  --font-display: "Cormorant Garamond", "Times New Roman", serif;
+  --font-sans: "DM Sans", "Segoe UI", sans-serif;
+
+  --color-bg: var(--color-ivoire);
+  --color-fg: var(--color-nuit);
+  --color-accent: var(--color-or);
+  --color-muted: color-mix(in srgb, var(--color-nuit) 65%, transparent);
+}
+
+@theme inline {
+  --color-nuit: var(--color-nuit);
+  --color-or: var(--color-or);
+  --color-ivoire: var(--color-ivoire);
+  --color-vert: var(--color-vert);
+  --font-display: var(--font-display);
+  --font-sans: var(--font-sans);
+}

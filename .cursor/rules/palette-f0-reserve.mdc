@@ -1,0 +1,20 @@
+---
+description: Palette F0 Fleuve — réserve non active (ne pas appliquer en V1)
+alwaysApply: false
+globs: "docs/**"
+---
+
+# Palette F0 · Fleuve (Option 2 — réserve)
+
+Réf. : `docs/references/palette-option-2-f0.png`
+
+| Nom | Hex |
+|-----|-----|
+| Indigo Niger | `#1D2B53` |
+| Nuit | `#0D1330` |
+| Sable | `#EADFC8` |
+| Cuivre | `#A8623A` |
+| Blanc | `#FFFFFF` |
+| Cuivre métallisé | gradient dérivé de `#A8623A` |
+
+**Status :** documentée uniquement. Ne pas brancher dans le CSS/Tailwind tant que le client n’a pas validé un switch P0 → F0. Si switch : remplacer tokens + mettre à jour `docs/SPEC.md` §3.

@@ -1,0 +1,48 @@
+---
+description: Palette officielle P0 bleu nuit & or — tokens et usages couleurs
+alwaysApply: true
+---
+
+# Palette couleurs — P0 (officielle V1) — CONFIRMÉE
+
+Réf. : `docs/references/palette-option-1-p0.png` · moodboard Prosperity.  
+Ne plus proposer F0 sauf demande client explicite.
+
+## Tokens obligatoires
+
+```css
+:root {
+  --color-nuit: #0D1330;
+  --color-or: #C9A227;
+  --color-ivoire: #F5F1E8;
+  --color-vert: #245C4A;
+  --gradient-or-metal: linear-gradient(
+    90deg,
+    #8a6e1a 0%,
+    #c9a227 35%,
+    #f0e6b8 50%,
+    #c9a227 65%,
+    #8a6e1a 100%
+  );
+}
+```
+
+## Usages
+
+| Token | Usage |
+|-------|--------|
+| Nuit | Fonds sombres, footer, header scrolled, texte sur ivoire |
+| Or | CTA primaires, liens hover, accents, filets |
+| Ivoire | Fond pages claires (pas blanc pur `#FFF` comme fond principal) |
+| Vert | Accents tourisme / nature uniquement (secondaire) |
+| Or métallisé | Hover CTA, bordures premium — sparingly |
+
+## Interdit
+
+- Couleurs hors tokens (sauf états a11y dérivés : hover/focus or assombri)
+- Violet / indigo gradient « AI default », glow néon, pastels hors charte
+- Activer **F0 Fleuve** (`#1D2B53`, `#A8623A`, `#EADFC8`) sans validation client
+
+## Contraste
+
+Texte sur nuit → ivoire ou or. Texte sur ivoire → nuit. CTA or → texte nuit.

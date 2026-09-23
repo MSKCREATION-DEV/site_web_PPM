@@ -1,0 +1,26 @@
+---
+description: Périmètre contractuel site vitrine Prosperity Travel — ne jamais sortir du cadre
+alwaysApply: true
+---
+
+# Périmètre contractuel (MSK-CONTRAT-2026-114)
+
+Source de vérité : `docs/SPEC.md` + `Contrat Site Vitrine.pdf`.
+
+## Inclus uniquement
+
+- **Agence de voyage – Billetterie – Tourisme**
+- Prestations : billetterie / voyage, organisation de pèlerinage
+- Pages : `/`, `/a-propos`, `/services`, `/contact`
+
+## Interdit sur ce site
+
+BTP, restauration, gardiennage, or, formation, boulangerie, commerce général, e-commerce, location voitures, hôtels en ligne, multilangue V1, newsletter V1 — même si le cahier client les mentionne.
+
+## Priorité
+
+Contrat > SPEC > cahier client > moodboard / inspiration Wilderness.
+
+## Stack
+
+Astro static + TypeScript + Tailwind. Site vitrine professionnel, SEO FR, perf connexions Mali.

@@ -1,0 +1,33 @@
+---
+description: Copy anti-jargon IA — ton humain, concret, agence Bamako
+globs: "src/**/*.{ts,astro,md}"
+alwaysApply: true
+---
+
+# Rédaction site — anti « texte IA »
+
+## À éviter (tout le site)
+
+- Empilements type : « X, Y et Z — un accompagnement premium… »
+- Mots creux : premium, sur mesure, serein, exigence, horizons, immersion, invitation à l’ailleurs
+- CTA marketing flous : « Planifier mon voyage », « Découvrir l’expérience », « Parlons de votre aventure »
+- Tirets cadratins qui collent deux slogans
+- Listes de valeurs abstraites sans fait concret
+
+## Préférer
+
+- Phrases courtes, faits : billet, dossier, Bamako, WhatsApp, dates
+- CTA concrets : « Demander un devis », « Voir les services », « Écrire sur WhatsApp »
+- Une idée par phrase ; pas de poésie de brochure
+
+## Exemple
+
+```
+❌ Agence de voyage, billetterie et pèlerinage — un accompagnement premium pour chaque départ.
+✅ Une agence à Bamako pour vos billets d’avion, voyages et pèlerinage.
+
+❌ Planifier mon voyage
+✅ Demander un devis
+```
+
+Source éditoriale : `src/data/content.ts` + `src/data/site.ts`.

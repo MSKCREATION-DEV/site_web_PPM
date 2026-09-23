@@ -1,0 +1,34 @@
+---
+description: Conventions Astro — structure, SEO, performance Mali
+globs: "**/*.{astro,ts,mjs,json}"
+alwaysApply: false
+---
+
+# Astro — conventions projet
+
+Docs : https://docs.astro.build (Node ≥ 22.12). Output **static**.
+
+## Structure
+
+```
+src/components/  src/layouts/  src/pages/  src/styles/  src/assets/
+```
+
+Pages = les 4 routes contractuelles uniquement (sauf 404).
+
+## Patterns
+
+- Layout unique `BaseLayout.astro` : meta SEO, OG, fonts, WhatsApp
+- Composants `.astro` ; JS client minimal (`client:` seulement si nécessaire)
+- Images via `astro:assets` (WebP/AVIF, width/height, lazy)
+- Tokens dans `src/styles/tokens.css` — importer dans le layout
+
+## SEO
+
+- `title` + `description` uniques ; 1× `h1` ; `sitemap` + `robots.txt`
+- Schema `TravelAgency` / `LocalBusiness` si données OK
+- Contenu FR ; mots-clés : agence de voyage, billets d’avion, pèlerinage
+
+## Perf (Mali)
+
+Peu de JS, CSS critique léger, fonts `font-display: swap`, pas de libs UI lourdes.

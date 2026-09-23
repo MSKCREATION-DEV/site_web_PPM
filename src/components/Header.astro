@@ -1,0 +1,119 @@
+---
+import { site, nav } from '../data/site';
+
+const pathname = Astro.url.pathname;
+---
+
+<header
+  id="site-header"
+  class="site-header fixed inset-x-0 top-0 z-50 transition-[background,box-shadow,backdrop-filter] duration-500"
+  data-scrolled="false"
+>
+  <div class="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-4 md:px-6 md:py-5">
+    <a href="/" class="group relative z-10 no-underline">
+      <span
+        class="font-display text-lg tracking-[0.18em] text-ivoire uppercase transition group-hover:text-or md:text-xl"
+      >
+        Prosperity <span class="text-or">Travel</span>
+      </span>
+    </a>
+
+    <nav aria-label="Principale" class="hidden items-center gap-8 text-[0.8rem] tracking-[0.14em] uppercase md:flex">
+      {
+        nav.map((item) => {
+          const active =
+            item.href === '/'
+              ? pathname === '/'
+              : pathname.startsWith(item.href);
+          return (
+            <a
+              href={item.href}
+              class:list={[
+                'nav-link relative no-underline transition-colors',
+                active ? 'text-or' : 'text-ivoire/85 hover:text-or',
+              ]}
+              aria-current={active ? 'page' : undefined}
+            >
+              {item.label}
+            </a>
+          );
+        })
+      }
+    </nav>
+
+    <div class="flex items-center gap-3">
+      <a
+        href="/contact"
+        class="hidden rounded-sm bg-or px-4 py-2.5 text-xs font-medium tracking-wide text-nuit no-underline transition hover:brightness-110 sm:inline-block"
+      >
+        Demander un devis
+      </a>
+      <button
+        type="button"
+        id="nav-toggle"
+        class="flex h-10 w-10 items-center justify-center text-ivoire md:hidden"
+        aria-expanded="false"
+        aria-controls="mobile-nav"
+        aria-label="Ouvrir le menu"
+      >
+        <span class="sr-only">Menu</span>
+        <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+          <path stroke-linecap="round" stroke-width="1.5" d="M4 7h16M4 12h16M4 17h16"></path>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <div
+    id="mobile-nav"
+    class="hidden border-t border-ivoire/10 bg-nuit/95 px-4 py-6 backdrop-blur-md md:hidden"
+  >
+    <ul class="flex flex-col gap-4 text-sm tracking-wide text-ivoire">
+      {
+        nav.map((item) => (
+          <li>
+            <a href={item.href} class="block py-1 no-underline hover:text-or">
+              {item.label}
+            </a>
+          </li>
+        ))
+      }
+      <li>
+        <a href="/contact" class="mt-2 inline-block rounded-sm bg-or px-4 py-2 text-nuit no-underline">
+          Demander un devis
+        </a>
+      </li>
+    </ul>
+  </div>
+</header>
+
+<script>
+  const header = document.getElementById('site-header');
+  const toggle = document.getElementById('nav-toggle');
+  const mobile = document.getElementById('mobile-nav');
+
+  const onScroll = () => {
+    if (!header) return;
+    const scrolled = window.scrollY > 40;
+    header.dataset.scrolled = scrolled ? 'true' : 'false';
+  };
+
+  onScroll();
+  window.addEventListener('scroll', onScroll, { passive: true });
+
+  toggle?.addEventListener('click', () => {
+    const open = mobile?.classList.toggle('hidden') === false;
+    toggle.setAttribute('aria-expanded', String(open));
+  });
+</script>
+
+<style>
+  .site-header {
+    background: transparent;
+  }
+  .site-header[data-scrolled='true'] {
+    background: color-mix(in srgb, var(--color-nuit) 92%, transparent);
+    backdrop-filter: blur(12px);
+    box-shadow: 0 1px 0 color-mix(in srgb, var(--color-ivoire) 8%, transparent);
+  }
+</style>

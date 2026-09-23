@@ -1,0 +1,21 @@
+---
+description: Placeholders contact jusqu’à validation client — source unique site.ts
+alwaysApply: true
+---
+
+# Données client — placeholders
+
+Fichier unique : `src/data/site.ts`.
+
+## Statut actuel
+
+- Palette P0 confirmée
+- Domaine : pas encore pris
+- Textes / photos : placeholders OK
+- Tél, WhatsApp, e-mail, adresse, Maps, Facebook, Instagram : **provisoires** (cahier/contrat)
+
+## Règles
+
+- Ne pas hardcoder téléphone / WhatsApp / Maps ailleurs que `site.ts`
+- Après validation client : mettre à jour `site.ts` uniquement
+- Footer : toujours « Design by » + **logo SVG MSK** (texte MSK CREATION déjà dans le SVG — ne pas le doubler)
