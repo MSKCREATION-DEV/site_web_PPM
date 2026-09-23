@@ -1,20 +1,19 @@
 ---
-import { site, nav } from '../data/site';
+import { nav } from '../data/site';
 
 const pathname = Astro.url.pathname;
 ---
 
 <header
   id="site-header"
-  class="site-header fixed inset-x-0 top-0 z-50 transition-[background,box-shadow,backdrop-filter] duration-500"
+  class="site-header fixed inset-x-0 top-0 z-50"
+  data-theme="dark"
   data-scrolled="false"
 >
   <div class="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-4 md:px-6 md:py-5">
     <a href="/" class="group relative z-10 no-underline">
-      <span
-        class="font-display text-lg tracking-[0.18em] text-ivoire uppercase transition group-hover:text-or md:text-xl"
-      >
-        Prosperity <span class="text-or">Travel</span>
+      <span class="nav-brand font-display text-lg tracking-[0.18em] uppercase md:text-xl">
+        Prosperity <span class="nav-accent">Travel</span>
       </span>
     </a>
 
@@ -22,16 +21,11 @@ const pathname = Astro.url.pathname;
       {
         nav.map((item) => {
           const active =
-            item.href === '/'
-              ? pathname === '/'
-              : pathname.startsWith(item.href);
+            item.href === '/' ? pathname === '/' : pathname.startsWith(item.href);
           return (
             <a
               href={item.href}
-              class:list={[
-                'nav-link relative no-underline transition-colors',
-                active ? 'text-or' : 'text-ivoire/85 hover:text-or',
-              ]}
+              class:list={['nav-link relative no-underline', active && 'is-active']}
               aria-current={active ? 'page' : undefined}
             >
               {item.label}
@@ -44,14 +38,14 @@ const pathname = Astro.url.pathname;
     <div class="flex items-center gap-3">
       <a
         href="/contact"
-        class="hidden rounded-sm bg-or px-4 py-2.5 text-xs font-medium tracking-wide text-blanc no-underline transition hover:brightness-110 sm:inline-block"
+        class="nav-cta hidden rounded-sm bg-or px-4 py-2.5 text-xs font-medium tracking-wide text-blanc no-underline transition hover:brightness-110 sm:inline-block"
       >
         Demander un devis
       </a>
       <button
         type="button"
         id="nav-toggle"
-        class="flex h-10 w-10 items-center justify-center text-ivoire md:hidden"
+        class="nav-toggle flex h-10 w-10 items-center justify-center md:hidden"
         aria-expanded="false"
         aria-controls="mobile-nav"
         aria-label="Ouvrir le menu"
@@ -64,22 +58,19 @@ const pathname = Astro.url.pathname;
     </div>
   </div>
 
-  <div
-    id="mobile-nav"
-    class="hidden border-t border-ivoire/10 bg-nuit/95 px-4 py-6 backdrop-blur-md md:hidden"
-  >
-    <ul class="flex flex-col gap-4 text-sm tracking-wide text-ivoire">
+  <div id="mobile-nav" class="nav-mobile hidden border-t px-4 py-6 md:hidden">
+    <ul class="flex flex-col gap-4 text-sm tracking-wide">
       {
         nav.map((item) => (
           <li>
-            <a href={item.href} class="block py-1 no-underline hover:text-or">
+            <a href={item.href} class="nav-link block py-1 no-underline">
               {item.label}
             </a>
           </li>
         ))
       }
       <li>
-        <a href="/contact" class="mt-2 inline-block rounded-sm bg-or px-4 py-2 text-blanc no-underline">
+        <a href="/contact" class="nav-cta mt-2 inline-block rounded-sm bg-or px-4 py-2 text-blanc no-underline">
           Demander un devis
         </a>
       </li>
@@ -88,18 +79,8 @@ const pathname = Astro.url.pathname;
 </header>
 
 <script>
-  const header = document.getElementById('site-header');
   const toggle = document.getElementById('nav-toggle');
   const mobile = document.getElementById('mobile-nav');
-
-  const onScroll = () => {
-    if (!header) return;
-    const scrolled = window.scrollY > 40;
-    header.dataset.scrolled = scrolled ? 'true' : 'false';
-  };
-
-  onScroll();
-  window.addEventListener('scroll', onScroll, { passive: true });
 
   toggle?.addEventListener('click', () => {
     const open = mobile?.classList.toggle('hidden') === false;
@@ -109,11 +90,53 @@ const pathname = Astro.url.pathname;
 
 <style>
   .site-header {
-    background: transparent;
+    --nav-fg: var(--color-ivoire);
+    --nav-fg-muted: color-mix(in srgb, var(--color-ivoire) 82%, transparent);
+    /* Couleur injectée en JS = même fond que la section (sinon transparent sur hero) */
+    --nav-bg: transparent;
+    background-color: var(--nav-bg);
+    transition:
+      background-color 0.3s ease,
+      color 0.3s ease;
   }
-  .site-header[data-scrolled='true'] {
-    background: color-mix(in srgb, var(--color-nuit) 92%, transparent);
-    backdrop-filter: blur(12px);
-    box-shadow: 0 1px 0 color-mix(in srgb, var(--color-ivoire) 8%, transparent);
+
+  .site-header[data-theme='dark'] {
+    --nav-fg: var(--color-ivoire);
+    --nav-fg-muted: color-mix(in srgb, var(--color-ivoire) 82%, transparent);
+  }
+
+  .site-header[data-theme='light'] {
+    --nav-fg: var(--color-nuit);
+    --nav-fg-muted: color-mix(in srgb, var(--color-nuit) 72%, transparent);
+  }
+
+  .nav-brand {
+    color: var(--nav-fg);
+    transition: color 0.3s ease;
+  }
+
+  .nav-accent {
+    color: var(--color-cuivre);
+  }
+
+  .nav-link {
+    color: var(--nav-fg-muted);
+    transition: color 0.3s ease;
+  }
+
+  .nav-link:hover,
+  .nav-link.is-active {
+    color: var(--color-cuivre);
+  }
+
+  .nav-toggle {
+    color: var(--nav-fg);
+    transition: color 0.3s ease;
+  }
+
+  .nav-mobile {
+    background-color: var(--nav-bg);
+    border-color: color-mix(in srgb, var(--nav-fg) 12%, transparent);
+    color: var(--nav-fg);
   }
 </style>
