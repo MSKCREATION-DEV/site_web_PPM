@@ -131,11 +131,10 @@ Ne pas mélanger P0 et F0 dans le même build.
 | `--color-vert` | Vert profond | `#245C4A` | Accents tourisme / nature (secondaire) |
 | `--gradient-or-metal` | Or métallisé | dérivé de `#C9A227` | Bordures premium, hover CTA, filets décoratifs |
 
-**Moodboard (référence visuelle) :** navy `#102a43` ≈ variante proche de nuit — **ne pas mélanger** : on standardise sur `#0D1330` + or `#C9A227` + ivoire `#F5F1E8`.
+### Note
 
-### Palette de réserve : **F0 · Fleuve** (Option 2)
-
-Documentée, **non active** en V1. Activation uniquement sur validation client explicite.
+P0 (or / ivoire / vert) = branche `design/p0-bleu-nuit-or`.  
+Cette branche = F0 uniquement.
 
 | Token | Nom | Hex |
 |-------|-----|-----|
