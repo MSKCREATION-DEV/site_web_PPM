@@ -1,6 +1,6 @@
 ## Prosperity Travel — Site vitrine
 
-Lire d’abord : **`docs/SPEC.md`** + **`docs/CHANGELOG.md`**.
+Lire d’abord : **`docs/SPEC.md`** + **`docs/CHANGELOG.md`** + **`docs/brand/CHARTE-TRAVEL.md`**.
 
 ### Stack
 
@@ -16,7 +16,7 @@ npx astro dev --background
 
 ### Règles Cursor
 
-`.cursor/rules/` — scope contrat, palette P0, UI/UX, conventions Astro, placeholders.
+`.cursor/rules/` — scope contrat, charte Travel, UI/UX, conventions Astro, placeholders.
 
 ### Pages contractuelles
 
@@ -24,8 +24,10 @@ npx astro dev --background
 
 ### Contenu
 
-- Contact / MSK : `src/data/site.ts`
-- Éditorial immersif : `src/data/content.ts`
+- Contact / MSK / logos : `src/data/site.ts`
+- Éditorial : `src/data/content.ts`
+- Charte marque : `docs/brand/CHARTE-TRAVEL.md`
+- Assets web : `public/brand/`
 - Footer : « Design by » + SVG MSK seul (pas de texte doublon)
 
 ### Docs Astro

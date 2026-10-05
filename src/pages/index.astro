@@ -11,31 +11,34 @@ const { hero, manifesto, destinations, experiences, journeys, cta } = home;
   title="Accueil"
   description="Prosperity Travel à Bamako. Billets d’avion, organisation de voyages et pèlerinage."
 >
-  <!-- Hero immersif -->
+  <!-- Hero immersif — langage cover charte A-Horizon -->
   <section data-nav="dark" class="relative flex min-h-[100svh] items-end overflow-hidden bg-nuit text-ivoire">
     <img
       src={hero.image}
       alt={hero.imageAlt}
       class="hero-media absolute inset-0 h-full w-full object-cover"
-      width="2400"
-      height="1600"
+      width="1640"
+      height="624"
       fetchpriority="high"
     />
     <div
-      class="absolute inset-0 bg-[linear-gradient(105deg,rgba(13,19,48,0.88)_0%,rgba(13,19,48,0.45)_48%,rgba(13,19,48,0.75)_100%)]"
+      class="absolute inset-0 bg-[linear-gradient(105deg,rgba(18,63,112,0.88)_0%,rgba(18,63,112,0.45)_48%,rgba(18,63,112,0.78)_100%)]"
       aria-hidden="true"
     >
     </div>
     <div class="relative z-10 mx-auto w-full max-w-6xl px-4 pb-20 pt-36 md:px-6 md:pb-28">
-      <p class="reveal text-xs tracking-[0.3em] text-or uppercase md:text-sm">{hero.eyebrow}</p>
-      <p
-        class="reveal reveal-delay-1 mt-3 font-display text-5xl tracking-[0.08em] uppercase md:text-7xl lg:text-8xl"
-      >
-        {hero.brand.split(' ')[0]}
-        <span class="block text-or md:inline md:ml-3">{hero.brand.split(' ')[1]}</span>
+      <img
+        src={site.brandAssets.logoHorizontalBlanc}
+        alt={site.brand}
+        width="320"
+        height="90"
+        class="reveal h-12 w-auto md:h-16"
+        decoding="async"
+      />
+      <p class="reveal reveal-delay-1 mt-8 max-w-xl font-display text-3xl leading-snug md:text-5xl lg:text-6xl">
+        {hero.headline}
       </p>
-      <p class="reveal reveal-delay-2 mt-6 max-w-xl text-base text-ivoire/85 md:text-lg">{hero.headline}</p>
-      <p class="reveal reveal-delay-2 mt-3 max-w-lg text-sm text-ivoire/65 md:text-base">{hero.sub}</p>
+      <p class="reveal reveal-delay-2 mt-4 max-w-lg text-base text-ivoire/75 md:text-lg">{hero.sub}</p>
       <div class="reveal reveal-delay-3 mt-10 flex flex-wrap gap-3">
         <a
           href={hero.ctaPrimary.href}
@@ -126,11 +129,11 @@ const { hero, manifesto, destinations, experiences, journeys, cta } = home;
                 class="group flex flex-col gap-3 py-8 no-underline transition md:flex-row md:items-baseline md:gap-10 md:py-10"
               >
                 <span class="font-mono text-xs tracking-widest text-or">{item.id}</span>
-                <h3 class="font-display text-2xl text-nuit transition group-hover:text-or md:w-64 md:shrink-0 md:text-3xl">
+                <h3 class="font-display text-2xl text-nuit transition group-hover:text-azur md:w-64 md:shrink-0 md:text-3xl">
                   {item.title}
                 </h3>
                 <p class="max-w-xl text-sm text-nuit/65 md:text-base">{item.text}</p>
-                <span class="ml-auto hidden text-or transition group-hover:translate-x-1 md:inline">→</span>
+                <span class="ml-auto hidden text-azur transition group-hover:translate-x-1 md:inline">→</span>
               </a>
             </li>
           ))

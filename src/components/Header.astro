@@ -1,7 +1,8 @@
 ---
-import { nav } from '../data/site';
+import { nav, site } from '../data/site';
 
 const pathname = Astro.url.pathname;
+const { logoHorizontalBlanc, logoHorizontalClair } = site.brandAssets;
 ---
 
 <header
@@ -11,10 +12,24 @@ const pathname = Astro.url.pathname;
   data-scrolled="false"
 >
   <div class="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-4 md:px-6 md:py-5">
-    <a href="/" class="group relative z-10 no-underline">
-      <span class="nav-brand font-display text-lg tracking-[0.18em] uppercase md:text-xl">
-        Prosperity <span class="nav-accent">Travel</span>
-      </span>
+    <a href="/" class="group relative z-10 flex shrink-0 no-underline" aria-label={site.brand}>
+      <img
+        src={logoHorizontalBlanc}
+        alt={site.brand}
+        width="212"
+        height="60"
+        class="nav-logo nav-logo--dark h-9 w-auto md:h-10"
+        decoding="async"
+      />
+      <img
+        src={logoHorizontalClair}
+        alt=""
+        width="212"
+        height="60"
+        class="nav-logo nav-logo--light h-9 w-auto md:h-10"
+        decoding="async"
+        aria-hidden="true"
+      />
     </a>
 
     <nav aria-label="Principale" class="hidden items-center gap-8 text-[0.8rem] tracking-[0.14em] uppercase md:flex">
@@ -90,9 +105,8 @@ const pathname = Astro.url.pathname;
 
 <style>
   .site-header {
-    --nav-fg: var(--color-ivoire);
-    --nav-fg-muted: color-mix(in srgb, var(--color-ivoire) 82%, transparent);
-    /* Couleur injectée en JS = même fond que la section (sinon transparent sur hero) */
+    --nav-fg: var(--color-craie);
+    --nav-fg-muted: color-mix(in srgb, var(--color-craie) 82%, transparent);
     --nav-bg: transparent;
     background-color: var(--nav-bg);
     transition:
@@ -101,22 +115,31 @@ const pathname = Astro.url.pathname;
   }
 
   .site-header[data-theme='dark'] {
-    --nav-fg: var(--color-ivoire);
-    --nav-fg-muted: color-mix(in srgb, var(--color-ivoire) 82%, transparent);
+    --nav-fg: var(--color-craie);
+    --nav-fg-muted: color-mix(in srgb, var(--color-craie) 82%, transparent);
   }
 
   .site-header[data-theme='light'] {
-    --nav-fg: var(--color-nuit);
-    --nav-fg-muted: color-mix(in srgb, var(--color-nuit) 72%, transparent);
+    --nav-fg: var(--color-azur-profond);
+    --nav-fg-muted: color-mix(in srgb, var(--color-azur-profond) 72%, transparent);
   }
 
-  .nav-brand {
-    color: var(--nav-fg);
-    transition: color 0.3s ease;
+  .nav-logo {
+    display: block;
+    object-fit: contain;
+    object-position: left center;
   }
 
-  .nav-accent {
-    color: var(--color-cuivre);
+  .nav-logo--light {
+    display: none;
+  }
+
+  .site-header[data-theme='light'] .nav-logo--dark {
+    display: none;
+  }
+
+  .site-header[data-theme='light'] .nav-logo--light {
+    display: block;
   }
 
   .nav-link {
@@ -126,7 +149,12 @@ const pathname = Astro.url.pathname;
 
   .nav-link:hover,
   .nav-link.is-active {
-    color: var(--color-cuivre);
+    color: var(--color-or);
+  }
+
+  .site-header[data-theme='light'] .nav-link:hover,
+  .site-header[data-theme='light'] .nav-link.is-active {
+    color: var(--color-azur);
   }
 
   .nav-toggle {
@@ -138,5 +166,9 @@ const pathname = Astro.url.pathname;
     background-color: var(--nav-bg);
     border-color: color-mix(in srgb, var(--nav-fg) 12%, transparent);
     color: var(--nav-fg);
+  }
+
+  .site-header[data-theme='light'] .nav-cta {
+    background-color: var(--color-azur-profond);
   }
 </style>

@@ -35,7 +35,7 @@
 
   ::selection {
     background: color-mix(in srgb, var(--color-or) 45%, transparent);
-    color: var(--color-nuit);
+    color: var(--color-azur-profond);
   }
 }
 

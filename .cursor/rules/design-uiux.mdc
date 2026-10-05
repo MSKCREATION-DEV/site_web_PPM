@@ -6,30 +6,37 @@ alwaysApply: false
 
 # Design UI/UX — Prosperity Travel
 
-Inspiration Wilderness Destinations : immersif, photo-first, CTA clair. **Originalité** Prosperity (or/nuit, Mali, billetterie, pèlerinage).
+Source marque : `docs/brand/CHARTE-TRAVEL.md`. Inspiration Wilderness : immersif, photo-first, CTA clair. Identité = bleu azur · or · craie.
 
 ## Premier viewport
 
-- Une seule composition : marque + 1 headline + 1 phrase + groupe CTA + image **full-bleed**
+- Une seule composition : marque (logo PNG) + 1 headline + 1 phrase + groupe CTA + image **full-bleed**
 - Pas de stats, cartes, badges, chips, promo overlays sur le hero
-- Marque = signal hero-level (pas seulement un logo nav)
+- Marque = signal hero-level (logo horizontal officiel, pas seulement la nav)
+- Logo sur photo : overlay azur profond / zone calme (interdit charte : photo chargée)
 
 ## Layout
 
 - Sections = 1 objectif, 1 titre, 1 phrase support
-- Alternance fonds `--color-ivoire` / `--color-nuit`
+- Alternance fonds `--color-craie` / `--color-azur-profond`
 - Cards : seulement si interaction (service, formulaire) — pas en hero
-- Header sticky : transparent → nuit au scroll ; CTA Contact / WhatsApp visibles
+- Header sticky : transparent → azur-profond au scroll ; CTA Contact / WhatsApp visibles
+- Header / footer : logo **horizontal** (pas l’emblème seul)
 
 ## Typo
 
-- Titres : serif expressive (Cormorant / Playfair) — pas Inter/Roboto/Arial
-- Corps : sans lisible (DM Sans / Source Sans 3)
-- Tracking soigné sur wordmarks uppercase type moodboard
+- Wordmark marque : PNG officiels uniquement
+- Titres éditoriaux : serif expressive (Cormorant) — pas Inter/Roboto/Arial
+- Corps : sans lisible (DM Sans)
+
+## CTA
+
+- Sur fond sombre : or plein + texte blanc
+- Sur fond clair : azur / azur-profond + texte blanc (pas d’or plein)
 
 ## Motion
 
-2–3 motions max : fade-in au scroll, transition header, hover or métallisé. Pas de bounce ni animations bruyantes.
+2–3 motions max : fade-in au scroll, transition header, hover or. Pas de bounce ni animations bruyantes.
 
 ## Contact toujours accessible
 

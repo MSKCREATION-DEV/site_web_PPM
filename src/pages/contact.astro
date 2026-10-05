@@ -58,8 +58,11 @@ const waHref = `https://wa.me/${site.contact.whatsappE164}`;
             name="sujet"
             class="mt-1.5 w-full border border-nuit/15 bg-white px-3 py-3 text-nuit outline-none transition focus:border-or"
           >
-            <option>Billetterie / Voyage</option>
-            <option>Pèlerinage</option>
+            <option>Billetterie aérienne</option>
+            <option>Hadj</option>
+            <option>Omra</option>
+            <option>Visa Hadj / Omra</option>
+            <option>Réservation d’hôtels</option>
             <option>Autre demande</option>
           </select>
         </div>
@@ -75,7 +78,7 @@ const waHref = `https://wa.me/${site.contact.whatsappE164}`;
         </div>
         <button
           type="submit"
-          class="rounded-sm bg-or px-7 py-3.5 text-sm font-medium text-blanc transition hover:brightness-110"
+          class="rounded-sm bg-azur-profond px-7 py-3.5 text-sm font-medium text-blanc transition hover:bg-azur"
         >
           Envoyer la demande
         </button>
@@ -97,6 +100,7 @@ const waHref = `https://wa.me/${site.contact.whatsappE164}`;
             </li>
             <li>Adresse : {site.contact.addressLine}, {site.contact.country}</li>
             <li>Horaires : {site.contact.hours}</li>
+            <li>{site.contact.hoursTickets}</li>
           </ul>
         </div>
 

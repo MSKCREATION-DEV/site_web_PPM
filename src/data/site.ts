@@ -2,6 +2,7 @@
  * Données site — placeholders jusqu’à validation client.
  * Remplacer ici uniquement après validation (ne pas hardcoder ailleurs).
  * Sources provisoires : contrat + cahier des charges (fusion à confirmer).
+ * Marque / logos : docs/brand/CHARTE-TRAVEL.md
  */
 export const site = {
   brand: 'Prosperity Travel',
@@ -12,6 +13,14 @@ export const site = {
   domain: null as string | null,
   url: 'https://example.ml',
 
+  brandAssets: {
+    logoHorizontalBlanc: '/brand/logo-horizontal-blanc.png',
+    logoHorizontalClair: '/brand/logo-horizontal-fond-clair.png',
+    embleme: '/brand/embleme.png',
+    emblemeBlanc: '/brand/embleme-blanc.png',
+    heroHorizon: '/brand/hero-horizon.jpg',
+  },
+
   contact: {
     /** PLACEHOLDER — cahier (Mamadou Boussanga Traoré) */
     phoneDisplay: '+223 70 86 91 91',
@@ -21,8 +30,9 @@ export const site = {
     /** PLACEHOLDER — Kalaban Coura ACI (cahier) */
     addressLine: 'Kalaban Coura ACI, Bamako',
     country: 'Mali',
-    /** Horaires fictifs jusqu’à validation */
-    hours: 'Lun – Sam · 8h00 – 18h00',
+    /** Bureau : 8h–17h · billets 24h/24 */
+    hours: 'Bureau · 8h00 – 17h00',
+    hoursTickets: 'Réservation de billets · 24h/24',
     /** WhatsApp Business — même numéro placeholder */
     whatsappE164: '22370869191',
     /** Embed Maps placeholder (Bamako centre — à remplacer) */

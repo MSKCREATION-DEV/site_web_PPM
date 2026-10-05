@@ -9,10 +9,14 @@ alwaysApply: true
 ## À éviter (tout le site)
 
 - Empilements type : « X, Y et Z — un accompagnement premium… »
-- Mots creux : premium, sur mesure, serein, exigence, horizons, immersion, invitation à l’ailleurs
+- Mots creux inventés : premium, sur mesure, horizons, immersion, invitation à l’ailleurs
 - CTA marketing flous : « Planifier mon voyage », « Découvrir l’expérience », « Parlons de votre aventure »
 - Tirets cadratins qui collent deux slogans
-- Listes de valeurs abstraites sans fait concret
+- Listes de valeurs abstraites **hors charte**
+
+## Autorisé (charte officielle)
+
+Les termes issus de `docs/brand/CHARTE-TRAVEL.md` — mission, vision, valeurs **Sérénité · Disponibilité · Ouverture** et leurs textes charte.
 
 ## Préférer
 
@@ -30,4 +34,4 @@ alwaysApply: true
 ✅ Demander un devis
 ```
 
-Source éditoriale : `src/data/content.ts` + `src/data/site.ts`.
+Source éditoriale : `src/data/content.ts` + `src/data/site.ts` + `docs/brand/CHARTE-TRAVEL.md`.

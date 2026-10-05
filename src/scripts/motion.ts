@@ -50,10 +50,14 @@ function initNavTheme() {
   if (!header) return;
 
   const root = document.documentElement;
-  const sable =
-    getComputedStyle(root).getPropertyValue('--color-sable').trim() || '#eadfc8';
+  const craie =
+    getComputedStyle(root).getPropertyValue('--color-craie').trim() ||
+    getComputedStyle(root).getPropertyValue('--color-ivoire').trim() ||
+    '#f5efe0';
   const nuit =
-    getComputedStyle(root).getPropertyValue('--color-nuit').trim() || '#0d1330';
+    getComputedStyle(root).getPropertyValue('--color-azur-profond').trim() ||
+    getComputedStyle(root).getPropertyValue('--color-nuit').trim() ||
+    '#123f70';
 
   const sections = Array.from(
     document.querySelectorAll<HTMLElement>('[data-nav]'),
@@ -87,7 +91,7 @@ function initNavTheme() {
 
     // Hero / image : fond calculé transparent → tokens palette
     if (isTransparent(bg)) {
-      bg = theme === 'light' ? sable : nuit;
+      bg = theme === 'light' ? craie : nuit;
     }
 
     // En haut du hero sombre : nav transparente pour laisser l’image

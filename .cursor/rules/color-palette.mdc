@@ -1,20 +1,30 @@
 ---
-description: Palette F0 Sable/Cuivre — branche design/f0-sable-cuivre (expérimentale)
+description: Palette officielle Prosperity Travel — Bleu azur · Or · Craie
 alwaysApply: true
 ---
 
-# Palette F0 — Sable · Cuivre · Blanc (branche expérimentale)
+# Palette Travel — Charte officielle
 
-Réf. : `docs/references/palette-sable-cuivre-blanc.jpg` · `palette-option-2-f0.png`
+Source : `docs/brand/CHARTE-TRAVEL.md` (extrait de la charte MSK CREATION 2026).
 
 | Token | Nom | Hex | Usage |
 |-------|-----|-----|--------|
-| `--color-nuit` | Nuit | `#0D1330` | Header, footer, sections sombres |
-| `--color-indigo` | Indigo Niger | `#1D2B53` | Accents secondaires (alias `--color-vert`) |
-| `--color-sable` | Sable | `#EADFC8` | Fonds chauds (alias `--color-ivoire`) |
-| `--color-cuivre` | Cuivre | `#A8623A` | CTA, liens (alias `--color-or`) |
-| `--color-blanc` | Blanc | `#FFFFFF` | Fond page / formulaires |
-| gradient | Cuivre → Sable | métallisé | Filets, accents |
+| `--color-azur` | Bleu azur | `#2F8AD0` | Dominant (~60 %), accents, CTA sur fond clair |
+| `--color-azur-profond` | Bleu azur profond | `#123F70` | Header scroll, footer, sections sombres |
+| `--color-or` | Or Prosperity | `#C9A24E` | Accents, filets, CTA sur fonds foncés (~10 %) |
+| `--color-craie` | Craie | `#F5EFE0` | Fonds chauds clairs (alias `--color-ivoire`) |
+| `--color-blanc` | Blanc | `#FFFFFF` | Fond page / formulaires (~30 %) |
 
-CTA cuivre → texte **blanc** (pas nuit).  
-Branche P0 figée : `design/p0-bleu-nuit-or`.
+## Alias compat
+
+- `--color-nuit` → azur-profond  
+- `--color-ivoire` → craie  
+
+## Règles CTA (charte)
+
+- Fond sombre → CTA **or** + texte blanc  
+- Fond clair → CTA **azur** / **azur-profond** + texte blanc (pas d’or plein sur fond clair)
+
+## Interdit
+
+Bleu nuit Groupe (`#24356A`, `#0E132E`), bleu roi Market, cuivre/sable F0.

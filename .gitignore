@@ -22,3 +22,6 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+# Charte PDF archive (trop volumineux pour git — source texte : docs/brand/CHARTE-TRAVEL.md)
+docs/brand/Prosperity-Mises-en-situation.pdf

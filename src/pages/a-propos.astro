@@ -32,18 +32,32 @@ import { about } from '../data/content';
     </div>
   </section>
 
+  <!-- Mission & vision — charte -->
+  <section data-nav="light" class="border-t border-nuit/5 bg-ivoire pb-20 md:pb-28">
+    <div class="mx-auto grid max-w-6xl gap-10 px-4 md:grid-cols-2 md:gap-16 md:px-6">
+      <div class="reveal">
+        <p class="text-xs tracking-[0.28em] text-or uppercase">{about.mission.title}</p>
+        <p class="mt-4 font-display text-2xl leading-snug text-nuit md:text-3xl">{about.mission.text}</p>
+      </div>
+      <div class="reveal reveal-delay-1">
+        <p class="text-xs tracking-[0.28em] text-or uppercase">{about.vision.title}</p>
+        <p class="mt-4 font-display text-2xl leading-snug text-nuit md:text-3xl">{about.vision.text}</p>
+      </div>
+    </div>
+  </section>
+
   <section data-nav="dark" class="bg-nuit py-20 text-ivoire md:py-28">
     <div class="mx-auto max-w-6xl px-4 md:px-6">
       <p class="reveal text-xs tracking-[0.28em] text-or uppercase">Valeurs</p>
-      <h2 class="reveal reveal-delay-1 mt-3 font-display text-3xl md:text-4xl">Notre façon de travailler</h2>
-      <ul class="mt-14 grid gap-8 sm:grid-cols-2">
+      <h2 class="reveal reveal-delay-1 mt-3 font-display text-3xl md:text-4xl">Ce qui nous guide</h2>
+      <ul class="mt-14 grid gap-8 sm:grid-cols-3">
         {
           about.values.map((v, i) => (
             <li
               class:list={[
                 'reveal border-t border-or/40 pt-6',
-                i % 2 === 1 && 'reveal-delay-1',
-                i >= 2 && 'reveal-delay-2',
+                i === 1 && 'reveal-delay-1',
+                i === 2 && 'reveal-delay-2',
               ]}
             >
               <h3 class="font-display text-2xl">{v.title}</h3>
@@ -60,7 +74,7 @@ import { about } from '../data/content';
       <p class="text-nuit/60">Une question ou un devis ? Contactez-nous.</p>
       <a
         href="/contact"
-        class="mt-6 inline-block rounded-sm bg-or px-7 py-3.5 text-sm font-medium text-blanc no-underline transition hover:brightness-110"
+        class="mt-6 inline-block rounded-sm bg-azur-profond px-7 py-3.5 text-sm font-medium text-blanc no-underline transition hover:bg-azur"
       >
         Nous contacter
       </a>

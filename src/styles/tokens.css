@@ -1,44 +1,51 @@
-/* Prosperity Travel — Palette F0 / Sable · Cuivre · Blanc (branche expérimentale)
-   Réf. docs/references/palette-sable-cuivre-blanc.jpg · palette-option-2-f0.png */
+/* Prosperity Travel — Charte officielle
+   Source : docs/brand/CHARTE-TRAVEL.md
+   Bleu azur · Azur profond · Or Prosperity · Craie · Blanc */
 
 :root {
-  --color-nuit: #0d1330;
-  --color-indigo: #1d2b53;
-  --color-sable: #eadfc8;
-  --color-cuivre: #a8623a;
+  --color-azur: #2f8ad0;
+  --color-azur-profond: #123f70;
+  --color-or: #c9a24e;
+  --color-craie: #f5efe0;
   --color-blanc: #ffffff;
 
-  /* Alias compatibles avec les classes Tailwind existantes (or / ivoire / vert) */
-  --color-or: var(--color-cuivre);
-  --color-ivoire: var(--color-sable);
-  --color-vert: var(--color-indigo);
+  /* Alias compat (classes Tailwind / composants existants) */
+  --color-nuit: var(--color-azur-profond);
+  --color-ivoire: var(--color-craie);
+  --color-sable: var(--color-craie);
+  --color-cuivre: var(--color-or);
+  --color-indigo: var(--color-azur);
+  --color-vert: var(--color-azur);
 
   --gradient-or-metal: linear-gradient(
     90deg,
-    #7a3f22 0%,
-    #a8623a 28%,
-    #d4a574 52%,
-    #eadfc8 78%,
-    #c48a5c 100%
+    #8a6e2f 0%,
+    #c9a24e 28%,
+    #e8d49a 52%,
+    #c9a24e 78%,
+    #a8873a 100%
   );
 
   --font-display: "Cormorant Garamond", "Times New Roman", serif;
   --font-sans: "DM Sans", "Segoe UI", sans-serif;
 
   --color-bg: var(--color-blanc);
-  --color-fg: var(--color-nuit);
-  --color-accent: var(--color-cuivre);
-  --color-muted: color-mix(in srgb, var(--color-nuit) 65%, transparent);
+  --color-fg: var(--color-azur-profond);
+  --color-accent: var(--color-or);
+  --color-muted: color-mix(in srgb, var(--color-azur-profond) 65%, transparent);
 }
 
 @theme inline {
+  --color-azur: var(--color-azur);
+  --color-azur-profond: var(--color-azur-profond);
+  --color-or: var(--color-or);
+  --color-craie: var(--color-craie);
+  --color-blanc: var(--color-blanc);
   --color-nuit: var(--color-nuit);
-  --color-indigo: var(--color-indigo);
+  --color-ivoire: var(--color-ivoire);
   --color-sable: var(--color-sable);
   --color-cuivre: var(--color-cuivre);
-  --color-blanc: var(--color-blanc);
-  --color-or: var(--color-or);
-  --color-ivoire: var(--color-ivoire);
+  --color-indigo: var(--color-indigo);
   --color-vert: var(--color-vert);
   --font-display: var(--font-display);
   --font-sans: var(--font-sans);

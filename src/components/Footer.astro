@@ -8,10 +8,16 @@ const waHref = `https://wa.me/${site.contact.whatsappE164}`;
 <footer data-nav="dark" class="bg-nuit text-ivoire">
   <div class="mx-auto grid max-w-6xl gap-10 px-4 py-14 md:grid-cols-12 md:gap-8 md:px-6 md:py-16">
     <div class="md:col-span-5">
-      <p class="font-display text-2xl tracking-[0.12em] uppercase">
-        Prosperity <span class="text-or">Travel</span>
-      </p>
-      <p class="mt-3 max-w-sm text-sm leading-relaxed text-ivoire/60">{site.tagline}</p>
+      <img
+        src={site.brandAssets.logoHorizontalBlanc}
+        alt={site.brand}
+        width="212"
+        height="60"
+        class="h-10 w-auto"
+        loading="lazy"
+        decoding="async"
+      />
+      <p class="mt-4 max-w-sm text-sm leading-relaxed text-ivoire/60">{site.tagline}</p>
       <p class="mt-6 text-xs text-ivoire/40">{site.legalName}</p>
     </div>
 

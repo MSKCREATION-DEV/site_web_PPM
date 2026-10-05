@@ -1,11 +1,9 @@
 # SPEC — Site vitrine Prosperity Travel
 
-**Version :** 1.4-f0  
-**Branche :** `design/f0-sable-cuivre` (expérimentale)  
-**Palette active :** F0 — Sable `#EADFC8` · Cuivre `#A8623A` · Blanc `#FFFFFF` (+ Nuit / Indigo pour structure)  
-**Palette P0 conservée sur :** `design/p0-bleu-nuit-or` et `main`  
-
-Réf. visuelle : `docs/references/palette-sable-cuivre-blanc.jpg`
+**Version :** 1.5-charte  
+**Palette active :** Charte officielle Travel — Bleu azur `#2F8AD0` · Azur profond `#123F70` · Or `#C9A24E` · Craie `#F5EFE0` · Blanc  
+**Source marque :** `docs/brand/CHARTE-TRAVEL.md`  
+**Archive PDF :** `docs/brand/Prosperity-Mises-en-situation.pdf`
 
 ### Organisation documentation
 
@@ -13,8 +11,9 @@ Réf. visuelle : `docs/references/palette-sable-cuivre-blanc.jpg`
 |---------|---------|
 | `docs/contrat/` | PDF contrat |
 | `docs/cahier/` | Cahier des charges |
-| `docs/brand/` | Logo MSK source |
-| `docs/references/` | Palettes P0/F0, moodboard |
+| `docs/brand/` | Charte Travel MD, PDF archive, assets marque |
+| `docs/references/` | Moodboard / références (palettes F0 obsolètes retirées) |
+| `public/brand/` | Logos & hero web |
 
 ---
 
@@ -22,10 +21,11 @@ Réf. visuelle : `docs/references/palette-sable-cuivre-blanc.jpg`
 
 | Élément | Statut |
 |---------|--------|
-| Palette | **F0 expérimentale** sur cette branche · P0 figée sur `design/p0-bleu-nuit-or` |
+| Palette | **Charte Travel officielle** (azur / or / craie) |
+| Logos / assets marque | Intégrés depuis charte (`public/brand/`) |
 | WhatsApp / tél / e-mail / adresse / Maps | **Placeholders** (`src/data/site.ts`) issus cahier + contrat — à remplacer après validation |
 | Nom de domaine | Pas encore pris |
-| Textes & photos définitifs | Pas encore OK — placeholders éditoriaux autorisés |
+| Textes & photos définitifs | Placeholders éditoriaux OK ; mission/valeurs = charte |
 | Réseaux sociaux (URLs) | Placeholders Facebook / Instagram |
 
 > Règle : toute donnée contact/marketing se modifie **uniquement** dans `src/data/site.ts` jusqu’à validation client.
@@ -100,69 +100,49 @@ Le cahier client liste d’autres activités (BTP, restauration, gardiennage, or
 | Différenciation | Conciergerie voyage locale haut de gamme, billetterie, pèlerinage |
 
 **Inspiration UX :** [Wilderness Destinations](https://www.wildernessdestinations.com/) — storytelling immersif, hero plein écran, grilles destinations, listes expériences, CTA fort.  
-**Originalité :** ancrage Malien, pèlerinage, billetterie, identité Prosperity (or / bleu nuit) — **pas de clone**. Contenu éditorial : `src/data/content.ts`.  
+**Originalité :** ancrage Malien, pèlerinage, billetterie, identité charte Travel (azur / or / craie) — **pas de clone**. Contenu : `src/data/content.ts` + `docs/brand/CHARTE-TRAVEL.md`.  
 
 **Motion V1 :** reveal scroll, parallax hero léger, zoom image hover, header sticky. `prefers-reduced-motion` respecté.
 
 ---
 
-## 3. Design system — décision palette
+## 3. Design system — palette charte Travel
 
-### Palette active (cette branche) : **F0 · Sable / Cuivre / Blanc**
-
-| Token | Nom | Hex |
-|-------|-----|-----|
-| `--color-nuit` | Nuit | `#0D1330` |
-| `--color-indigo` | Indigo Niger | `#1D2B53` |
-| `--color-sable` / `--color-ivoire` | Sable | `#EADFC8` |
-| `--color-cuivre` / `--color-or` | Cuivre | `#A8623A` |
-| `--color-blanc` | Blanc | `#FFFFFF` |
-| gradient | Cuivre → Sable | métallisé |
-
-### Palette P0 (autre branche) : **Bleu nuit & or** — figée sur `design/p0-bleu-nuit-or`
-
-Ne pas mélanger P0 et F0 dans le même build.
+Source : `docs/brand/CHARTE-TRAVEL.md`.
 
 | Token | Nom | Hex | Usage |
 |-------|-----|-----|--------|
-| `--color-nuit` | Bleu Nuit | `#0D1330` | Fonds sombres, header scroll, footer, titres sur clair |
-| `--color-or` | Or | `#C9A227` | CTA, accents, soulignements, icônes clés |
-| `--color-ivoire` | Ivoire | `#F5F1E8` | Fond principal pages claires |
-| `--color-vert` | Vert profond | `#245C4A` | Accents tourisme / nature (secondaire) |
-| `--gradient-or-metal` | Or métallisé | dérivé de `#C9A227` | Bordures premium, hover CTA, filets décoratifs |
+| `--color-azur` | Bleu azur | `#2F8AD0` | Dominant (~60 %), CTA sur fond clair |
+| `--color-azur-profond` | Bleu azur profond | `#123F70` | Header, footer, sections sombres |
+| `--color-or` | Or Prosperity | `#C9A24E` | Accents, filets, CTA sur fonds foncés (~10 %) |
+| `--color-craie` / `--color-ivoire` | Craie | `#F5EFE0` | Fonds chauds clairs |
+| `--color-blanc` | Blanc | `#FFFFFF` | Fond page / formulaires (~30 %) |
+| `--color-nuit` | Alias | → azur-profond | Compat classes existantes |
+| `--gradient-or-metal` | Or métallisé | dérivé de `#C9A24E` | Filets, accents |
 
-### Note
+### Règles CTA (charte)
 
-P0 (or / ivoire / vert) = branche `design/p0-bleu-nuit-or`.  
-Cette branche = F0 uniquement.
-
-| Token | Nom | Hex |
-|-------|-----|-----|
-| `--color-indigo-niger` | Indigo Niger | `#1D2B53` |
-| `--color-nuit` | Nuit | `#0D1330` |
-| `--color-sable` | Sable | `#EADFC8` |
-| `--color-cuivre` | Cuivre | `#A8623A` |
-| `--color-blanc` | Blanc | `#FFFFFF` |
-
-Références visuelles : `docs/references/palette-option-1-p0.png`, `palette-option-2-f0.png`, `moodboard-prosperity-travel.jpg`.
+- Fond sombre → CTA or + texte blanc  
+- Fond clair → CTA azur / azur-profond + texte blanc (**pas** d’or plein sur fond clair)
 
 ### Typographie
 
-- **Display / titres :** serif expressive (ex. Cormorant Garamond ou Playfair Display) — majuscules brand type moodboard  
-- **Corps / UI :** sans-serif lisible (ex. DM Sans ou Source Sans 3) — **pas** Inter / Roboto / Arial / system-ui seul  
+- **Wordmark marque :** PNG officiels (`public/brand/`) uniquement  
+- **Display / titres :** serif expressive (Cormorant Garamond)  
+- **Corps / UI :** sans-serif lisible (DM Sans) — **pas** Inter / Roboto / Arial  
 - Hiérarchie claire : H1 hero ≤ 1 ligne d’accroche + 1 sous-texte court
 
 ### Principes UI/UX (expert)
 
-1. **Premier viewport = une composition** : marque + 1 headline + 1 phrase + CTA + image plein cadre  
+1. **Premier viewport = une composition** : logo PNG + 1 headline + 1 phrase + CTA + image plein cadre  
 2. **Pas de cards dans le hero** ; cards seulement si interaction (formulaire, service cliquable)  
 3. **Hero full-bleed** (pas d’image inset / collage)  
-4. **Pas d’overlays** (badges flottants, chips promo) sur le média hero  
-5. Alternance sections **ivoire** / **nuit** pour rythme premium  
-6. Motion : 2–3 animations intentionnelles (fade-in scroll, transition header, hover or) — élégantes, lentes, pas de bounce  
+4. **Pas d’overlays marketing** (badges, chips) ; overlay azur pour lisibilité logo OK  
+5. Alternance sections **craie** / **azur-profond**  
+6. Motion : 2–3 animations intentionnelles — élégantes, lentes, pas de bounce  
 7. WhatsApp flottant discret mais toujours visible  
-8. Performance Mali : images WebP/AVIF, lazy-load, CSS léger, peu de JS
-
+8. Performance Mali : images optimisées, lazy-load, CSS léger, peu de JS  
+9. Header / footer = logo **horizontal** (pas emblème seul)
 ---
 
 ## 4. Architecture des pages (détail)
