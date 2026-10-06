@@ -87,6 +87,96 @@
     background: var(--gradient-or-metal);
   }
 
+  /* Services — image inset, grande, fondu 4 côtés via SVG mask */
+  .service-frame {
+    position: relative;
+    width: 100%;
+    max-width: 42rem;
+  }
+
+  .service-frame__svg {
+    display: block;
+    width: 100%;
+    height: auto;
+    overflow: visible;
+  }
+
+  /* Contact — image fondue */
+  .media-melt {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+  }
+
+  .media-melt img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .media-melt--right {
+    -webkit-mask-image: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(0, 0, 0, 0.35) 18%,
+      #000 42%,
+      #000 100%
+    );
+    mask-image: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(0, 0, 0, 0.35) 18%,
+      #000 42%,
+      #000 100%
+    );
+  }
+
+  .media-veil--dark {
+    background: linear-gradient(
+      90deg,
+      var(--color-azur-profond) 0%,
+      color-mix(in srgb, var(--color-azur-profond) 92%, transparent) 30%,
+      color-mix(in srgb, var(--color-azur-profond) 45%, transparent) 58%,
+      transparent 82%
+    );
+  }
+
+  .field-line {
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid color-mix(in srgb, var(--color-azur-profond) 22%, transparent);
+    background: transparent;
+    border-radius: 0;
+    padding: 0.85rem 0;
+    color: var(--color-azur-profond);
+    transition: border-color 0.25s ease;
+  }
+
+  .field-line:focus {
+    outline: none;
+    border-bottom-color: var(--color-or);
+  }
+
+  .field-line option {
+    color: var(--color-azur-profond);
+  }
+
+  @media (max-width: 767px) {
+    .media-melt--right {
+      -webkit-mask-image: linear-gradient(180deg, #000 0%, #000 45%, transparent 100%);
+      mask-image: linear-gradient(180deg, #000 0%, #000 45%, transparent 100%);
+    }
+
+    .media-veil--dark {
+      background: linear-gradient(
+        180deg,
+        transparent 0%,
+        color-mix(in srgb, var(--color-azur-profond) 50%, transparent) 40%,
+        var(--color-azur-profond) 72%
+      );
+    }
+  }
+
   @media (prefers-reduced-motion: reduce) {
     .reveal,
     .reveal.is-visible,

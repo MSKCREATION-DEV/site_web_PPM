@@ -1,8 +1,12 @@
 # Changelog — Prosperity Travel
 
-## 2026-10-05 — Services client + horaires
+## 2026-10-06 — Accueil restauré + Services bandes 50/50 + photos locales
 
-- Services (priorité) : Billetterie aérienne · Organisation du Hadj · Organisation de la Omra · Visa Hadj/Omra · Réservation d’hôtels
+- **Accueil** : structure validée (hero logo, manifesto craie, destinations, liste expériences, parcours, CTA) + polish léger
+- **Services** : intro + ancres 01–05 + bandes éditoriales 50/50 ; images inset forme panneau adouci (fondu 4 côtés) ; CTA horaires
+- **Contact** : hero split immersif, horaires éditoriaux, formulaire line-fields, carte fondue
+- Photos : `public/images/*.webp` (pack Travel) — Unsplash retiré ; `hero-horizon.jpg` retiré
+- Services (priorité) : Billetterie · Hadj · Omra · Visa · Hôtels
 - Horaires : bureau 8h–17h · réservation de billets 24h/24
 
 ## 2026-10-05 — Charte officielle Travel
@@ -10,7 +14,7 @@
 - Source de vérité marque : `docs/brand/CHARTE-TRAVEL.md` (extrait PDF)
 - Palette : Bleu azur `#2F8AD0` · Azur profond `#123F70` · Or `#C9A24E` · Craie `#F5EFE0` · Blanc
 - Assets Travel classés dans `public/brand/` + `docs/brand/assets/` ; autres entités supprimées
-- Logos PNG officiels en header / footer / favicon ; hero brand `hero-horizon.jpg`
+- Logos PNG officiels en header / footer / favicon
 - CTA : or sur fond sombre uniquement ; azur sur fond clair (interdit or sur fond clair)
 - Valeurs À propos alignées charte : Sérénité · Disponibilité · Ouverture
 - F0 Sable/Cuivre abandonnée sur cette branche
@@ -36,7 +40,7 @@
 ## 2026-09-23 — V1.2 Design immersif + organisation repo
 
 ### Design & UX
-- Accueil immersif style Wilderness
+- Accueil immersif (hero plein écran, grilles, listes)
 - Animations reveal / parallax / header sticky
 - Contenu dans `src/data/content.ts`
 

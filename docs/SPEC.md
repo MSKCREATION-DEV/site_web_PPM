@@ -1,6 +1,6 @@
 # SPEC — Site vitrine Prosperity Travel
 
-**Version :** 1.5-charte  
+**Version :** 1.6  
 **Palette active :** Charte officielle Travel — Bleu azur `#2F8AD0` · Azur profond `#123F70` · Or `#C9A24E` · Craie `#F5EFE0` · Blanc  
 **Source marque :** `docs/brand/CHARTE-TRAVEL.md`  
 **Archive PDF :** `docs/brand/Prosperity-Mises-en-situation.pdf`
@@ -13,7 +13,8 @@
 | `docs/cahier/` | Cahier des charges |
 | `docs/brand/` | Charte Travel MD, PDF archive, assets marque |
 | `docs/references/` | Moodboard / références (palettes F0 obsolètes retirées) |
-| `public/brand/` | Logos & hero web |
+| `public/brand/` | Logos PNG Travel |
+| `public/images/` | Photos site (WebP) |
 
 ---
 
@@ -23,9 +24,10 @@
 |---------|--------|
 | Palette | **Charte Travel officielle** (azur / or / craie) |
 | Logos / assets marque | Intégrés depuis charte (`public/brand/`) |
+| Photos éditoriales | Pack WebP dans `public/images/` — à valider / remplacer client |
 | WhatsApp / tél / e-mail / adresse / Maps | **Placeholders** (`src/data/site.ts`) issus cahier + contrat — à remplacer après validation |
 | Nom de domaine | Pas encore pris |
-| Textes & photos définitifs | Placeholders éditoriaux OK ; mission/valeurs = charte |
+| Textes définitifs | Placeholders éditoriaux OK ; mission/valeurs = charte |
 | Réseaux sociaux (URLs) | Placeholders Facebook / Instagram |
 
 > Règle : toute donnée contact/marketing se modifie **uniquement** dans `src/data/site.ts` jusqu’à validation client.
@@ -149,27 +151,26 @@ Source : `docs/brand/CHARTE-TRAVEL.md`.
 
 ### `/` Accueil
 
-1. Hero immersif (photo voyage / aéroport / destination) + logo Prosperity Travel + CTA Contact + CTA WhatsApp  
-2. Bandeau promesse (1 phrase)  
-3. 3 services phares (Voyage · Billetterie · Pèlerinage) — liens vers `/services`  
-4. Bloc confiance (valeurs courtes / chiffres si fournis)  
-5. CTA final contact  
+1. Hero full-bleed + logo PNG + headline + 2 CTA + coords  
+2. Manifesto centré sur fond craie  
+3. Destinations (grille portraits)  
+4. Expériences = liste numérotée vers `/services#…`  
+5. Parcours (4 colonnes : famille, affaires, seul, pèlerinage)  
+6. CTA final sombre  
 
 ### `/a-propos`
 
-Histoire, philosophie, valeurs (intégrité, professionnalisme, satisfaction client… adaptées au voyage), équipe (si photos fournies), crédibilité.
+Histoire, philosophie, valeurs charte (**Sérénité · Disponibilité · Ouverture**), crédibilité.
 
 ### `/services`
 
-Deux blocs principaux + intro tourisme :
-
-1. **Billetterie / Voyage** — billets d’avion, conseil, accompagnement  
-2. **Pèlerinage** — organisation, accompagnement  
-3. CTA devis / contact / WhatsApp  
+1. Intro (fond azur-profond) + nav ancres `01…05`  
+2. Cinq bandes éditoriales 50/50 (image inset panneau adouci / texte) — ordre : Billetterie · Hadj · Omra · Visa · Hôtels  
+3. CTA final : bureau 8h–17h · billets 24h/24  
 
 ### `/contact`
 
-Formulaire (nom, email, téléphone, sujet, message) · WhatsApp · téléphone · email · adresse · carte Google Maps · réseaux sociaux.
+Hero split (texte + photo fondue) · horaires · formulaire (nom, email, téléphone, sujet, message) · WhatsApp · téléphone · email · adresse · carte Google Maps · réseaux.
 
 ---
 
@@ -204,13 +205,15 @@ Structure projet cible :
 
 ```
 src/
-  components/   # Header, Footer, WhatsApp, Hero, ServiceCard…
+  components/   # Header, Footer, WhatsApp…
   layouts/      # BaseLayout.astro
   pages/        # index, a-propos, services, contact
+  data/         # site.ts (contact), content.ts (éditorial)
   styles/       # tokens.css, global.css
-  assets/       # images optimisées
-public/         # favicon, robots.txt
-docs/           # SPEC + références
+public/
+  brand/        # logos PNG
+  images/       # photos WebP
+docs/           # SPEC, CHANGELOG, brand, contrat, cahier
 .cursor/rules/  # règles agent
 ```
 
@@ -229,7 +232,7 @@ Source unique runtime : **`src/data/site.ts`**.
 | Réseaux | Facebook / Instagram génériques |
 | Interlocuteurs | Mamadou Boussanga Traoré (cahier) · SIRIMAN SISSOKO (contrat) |
 
-Horaires affichés : fictifs (`Lun – Sam · 8h00 – 18h00`) jusqu’à validation.
+Horaires affichés : **bureau 8h–17h** · **réservation de billets 24h/24**.
 
 ---
 
@@ -248,27 +251,28 @@ Deux cycles de corrections inclus.
 |------------------|--------|
 | 4 pages (Accueil, À propos, Services, Contact) | OK (structure) |
 | Périmètre Voyage / Billetterie / Tourisme / Pèlerinage | OK |
-| Design moderne mobile + desktop | En cours (fondation P0) |
+| Design moderne mobile + desktop | OK (fondation Travel) |
 | Navigation claire | OK |
 | WhatsApp toutes pages | OK (FAB + footer) |
 | Formulaire de contact | UI OK · endpoint HTTPS à brancher |
 | Liens réseaux sociaux | OK (placeholders) |
 | Adresse + Google Maps | OK (placeholders Bamako) |
 | SEO mots-clés voyage / billets / pèlerinage | Partiel (titles/metas) · sitemap/robots à ajouter |
-| Perf connexions Mali | À peaufiner (images, fonts) |
+| Perf connexions Mali | WebP locales · à peaufiner (fonts) |
 | HTTPS + hébergement MSK | Mise en ligne (plus tard) |
-| Charte graphique livrée avec le site | En cours (P0 + tokens) |
+| Charte graphique livrée avec le site | Charte Travel intégrée (tokens + logos) |
 | Crédit prestataire footer « Design by » + logo SVG MSK | OK (texte inclus dans le SVG) |
-| Contenu immersif + motion (inspiration Wilderness) | OK (placeholders) |
+| Contenu immersif + motion | OK (reveal / hero) |
 | Contenus client définitifs | Placeholders jusqu’à validation |
 
 ## 10. Critères d’acceptation V1
 
 - [x] 4 pages contractuelles navigables  
-- [x] Palette P0 confirmée + tokens  
+- [x] Palette Travel confirmée + tokens  
 - [x] WhatsApp sur toutes les pages  
 - [x] Footer avec crédit MSK CREATION  
 - [x] Maps + coordonnées + réseaux (placeholders)  
+- [x] Photos locales WebP (`public/images/`)  
 - [ ] Responsive / design premium finalisé  
 - [ ] Formulaire sécurisé (endpoint)  
 - [ ] SEO complet (sitemap, robots, schema)  

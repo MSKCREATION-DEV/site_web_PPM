@@ -135,7 +135,11 @@ Typographie web : **non spécifiée** dans la charte. Le wordmark marque utilise
 | `logo-horizontal-blanc.png` | Header fonds foncés, footer |
 | `logo-horizontal-fond-clair.png` | Header fonds clairs |
 | `embleme.png` | Favicon / apple-touch |
-| `hero-horizon.jpg` (depuis FB A-Horizon) | Hero accueil (réf. visuelle charte) |
+| `embleme-blanc.png` | Emblème sur fonds foncés |
+
+### Photos web — `public/images/`
+
+Pack Travel converti en WebP (héros, destinations, agence). Mapping : `src/data/content.ts` (`images`).
 
 ### Archive — `docs/brand/assets/`
 

@@ -18,7 +18,6 @@ export const site = {
     logoHorizontalClair: '/brand/logo-horizontal-fond-clair.png',
     embleme: '/brand/embleme.png',
     emblemeBlanc: '/brand/embleme-blanc.png',
-    heroHorizon: '/brand/hero-horizon.jpg',
   },
 
   contact: {

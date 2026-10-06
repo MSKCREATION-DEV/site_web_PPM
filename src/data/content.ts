@@ -1,11 +1,24 @@
 /**
- * Contenu éditorial placeholder.
- * Ton : clair, concret, agence Bamako — pas de jargon marketing / « IA ».
- * Périmètre : voyage / billetterie / tourisme / pèlerinage.
- * Mission / vision / valeurs : docs/brand/CHARTE-TRAVEL.md
+ * Contenu éditorial.
+ * Ton : clair, concret, agence Bamako.
+ * Images : public/images/ (charte / pack web Travel).
  */
 
-import { site } from './site';
+export const images = {
+  heroAeroport: '/images/hero-aeroport.webp',
+  coverVoyageuse: '/images/cover-voyageuse.webp',
+  dubai: '/images/dubai.webp',
+  istanbul: '/images/istanbul.webp',
+  laMecque: '/images/la-mecque.webp',
+  paris: '/images/paris.webp',
+  dakar: '/images/dakar.webp',
+  marrakech: '/images/marrakech.webp',
+  conseillere: '/images/conseillere.webp',
+  voyageuseDjenne: '/images/voyageuse-djenne.webp',
+  voyageuseDunes: '/images/voyageuse-dunes.webp',
+  voyageuseBamako: '/images/voyageuse-bamako.webp',
+  voyageuseIstanbul: '/images/voyageuse-istanbul.webp',
+} as const;
 
 export const home = {
   hero: {
@@ -15,8 +28,8 @@ export const home = {
     sub: 'Une agence locale pour réserver, organiser et partir dans de bonnes conditions.',
     ctaPrimary: { label: 'Demander un devis', href: '/contact' },
     ctaSecondary: { label: 'Voir les services', href: '/services' },
-    image: site.brandAssets.heroHorizon,
-    imageAlt: 'Voyageur face à un horizon d’îles — Prosperity Travel',
+    image: images.coverVoyageuse,
+    imageAlt: 'Voyageuse — Prosperity Travel',
     coords: '12.6392° N · 8.0029° W',
   },
   manifesto: {
@@ -34,32 +47,28 @@ export const home = {
         name: 'La Mecque & Médine',
         region: 'Pèlerinage',
         blurb: 'Hadj et Omra : dossier, vols, hébergement et suivi.',
-        image:
-          'https://images.unsplash.com/photo-1564769625905-50e93615e769?auto=format&fit=crop&w=1200&q=80',
+        image: images.laMecque,
         href: '/services#hadj',
       },
       {
         name: 'Paris',
         region: 'Europe',
         blurb: 'Vols vers la France, avec options d’escales selon le budget et le délai.',
-        image:
-          'https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=1200&q=80',
+        image: images.paris,
         href: '/services#billetterie',
       },
       {
         name: 'Dubaï',
         region: 'Moyen-Orient',
         blurb: 'Liaisons via les grands hubs pour affaires ou séjour.',
-        image:
-          'https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=1200&q=80',
+        image: images.dubai,
         href: '/services#billetterie',
       },
       {
         name: 'Dakar',
         region: 'Afrique de l’Ouest',
         blurb: 'Trajets régionaux vers le Sénégal et la sous-région.',
-        image:
-          'https://images.unsplash.com/photo-1580060839134-75a5edca2e99?auto=format&fit=crop&w=1200&q=80',
+        image: images.dakar,
         href: '/services#billetterie',
       },
     ],
@@ -116,10 +125,8 @@ export const about = {
   hero: {
     eyebrow: 'À propos',
     title: 'Qui nous sommes',
-    image:
-      'https://images.unsplash.com/photo-1488085061387-422e29b40080?auto=format&fit=crop&w=2000&q=80',
+    image: images.voyageuseBamako,
   },
-  /** Textes charte — docs/brand/CHARTE-TRAVEL.md */
   mission: {
     title: 'Mission',
     text: 'Rendre le voyage simple et sûr, du premier conseil jusqu’au retour.',
@@ -153,13 +160,11 @@ export const about = {
 
 export const services = {
   hero: {
-    eyebrow: 'Spécialités',
-    title: 'Nos services',
-    sub: 'Billetterie, Hadj, Omra — et l’accompagnement autour du départ.',
-    image:
-      'https://images.unsplash.com/photo-1464037866556-6812c9d1c72e?auto=format&fit=crop&w=2000&q=80',
+    eyebrow: 'Nos services',
+    title: 'Un accompagnement clair pour chaque départ',
+    sub: 'Billetterie, Hadj, Omra — et l’accompagnement autour du voyage. À Bamako, un interlocuteur joignable.',
+    image: images.voyageuseDunes,
   },
-  /** Ordre client : billetterie, Hadj, Omra en priorité ; puis visa et hôtels (fiche Services). */
   blocks: [
     {
       id: 'billetterie',
@@ -167,13 +172,9 @@ export const services = {
       title: 'Billetterie aérienne',
       text:
         'Recherche et réservation de billets d’avion selon votre destination, vos dates et votre budget.',
-      points: [
-        'International et régional',
-        'Réservation possible 24h/24',
-        'Suivi jusqu’au départ',
-      ],
-      image:
-        'https://images.unsplash.com/photo-1556388158-158ea5ccacbd?auto=format&fit=crop&w=1400&q=80',
+      points: ['International et régional', 'Réservation possible 24h/24', 'Suivi jusqu’au départ'],
+      image: images.dubai,
+      imageAlt: 'Départ international — billetterie',
     },
     {
       id: 'hadj',
@@ -182,8 +183,8 @@ export const services = {
       text:
         'Organisation complète du Hadj : visa, billets, hébergement, transport et accompagnement personnalisé des pèlerins.',
       points: ['Visa et dossier', 'Vols et hébergement', 'Accompagnement des pèlerins'],
-      image:
-        'https://images.unsplash.com/photo-1591604129939-f1efa4d9f7fa?auto=format&fit=crop&w=1400&q=80',
+      image: images.laMecque,
+      imageAlt: 'La Mecque — organisation du Hadj',
     },
     {
       id: 'omra',
@@ -192,8 +193,8 @@ export const services = {
       text:
         'Organisation de votre Omra avec billets, hébergement, transferts et accompagnement personnalisé.',
       points: ['Billets et transferts', 'Hébergement', 'Accompagnement personnalisé'],
-      image:
-        'https://images.unsplash.com/photo-1564769625905-50e93615e769?auto=format&fit=crop&w=1400&q=80',
+      image: images.istanbul,
+      imageAlt: 'Istanbul — escale et Omra',
     },
     {
       id: 'visa',
@@ -202,8 +203,8 @@ export const services = {
       text:
         'Assistance complète pour vos démarches de visa Hadj et Omra : préparation du dossier, vérification des pièces et suivi administratif.',
       points: ['Préparation du dossier', 'Vérification des pièces', 'Suivi administratif'],
-      image:
-        'https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&w=1400&q=80',
+      image: images.conseillere,
+      imageAlt: 'Conseillère Prosperity Travel',
     },
     {
       id: 'hotels',
@@ -212,8 +213,8 @@ export const services = {
       text:
         'Réservation d’hébergements adaptés à vos besoins, notamment à La Mecque et Médine.',
       points: ['La Mecque et Médine', 'Selon vos besoins et votre budget', 'Coordination avec le voyage'],
-      image:
-        'https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1400&q=80',
+      image: images.marrakech,
+      imageAlt: 'Hébergement et destinations',
     },
   ],
 } as const;
@@ -221,7 +222,9 @@ export const services = {
 export const contactPage = {
   hero: {
     eyebrow: 'Contact',
-    title: 'Nous joindre',
-    sub: 'Formulaire, WhatsApp, téléphone ou visite à Bamako.',
+    title: 'Parlons de votre départ',
+    sub: 'Un message, un appel ou un passage à Bamako. On vous répond.',
+    image: images.conseillere,
+    imageAlt: 'Conseillère en agence Prosperity Travel',
   },
 } as const;
