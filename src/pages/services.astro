@@ -1,6 +1,8 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { services } from '../data/content';
+import { services, type ServiceBlock } from '../data/content';
+
+const blocks: ServiceBlock[] = services.blocks;
 ---
 
 <BaseLayout
@@ -22,7 +24,7 @@ import { services } from '../data/content';
       >
         <ul class="services-toc flex flex-col gap-0 md:flex-row md:items-stretch">
           {
-            services.blocks.map((b, i) => (
+            blocks.map((b, i) => (
               <li
                 class:list={[
                   'flex-1 border-ivoire/15 md:border-l',
@@ -50,7 +52,7 @@ import { services } from '../data/content';
   </header>
 
   {
-    services.blocks.map((block, index) => {
+    blocks.map((block, index) => {
       const dark = index % 2 === 1;
       const imageFirst = index % 2 === 0;
       const maskId = `svc-mask-${block.id}`;

@@ -161,6 +161,16 @@ export const about = {
   ],
 } as const;
 
+export type ServiceBlock = {
+  id: string;
+  eyebrow: string;
+  title: string;
+  text: string;
+  points: string[];
+  image: string;
+  imageAlt?: string;
+};
+
 export const services = {
   hero: {
     eyebrow: 'Nos services',
@@ -219,8 +229,8 @@ export const services = {
       image: images.marrakech,
       imageAlt: 'Hébergement et destinations',
     },
-  ],
-} as const;
+  ] satisfies ServiceBlock[],
+};
 
 export const contactPage = {
   hero: {
