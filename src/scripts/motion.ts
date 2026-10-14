@@ -225,9 +225,16 @@ function initNavTheme() {
       bg = theme === 'light' ? craie : nuit;
     }
 
-    // En haut du hero sombre : nav transparente pour laisser l’image
-    const atHeroTop = theme === 'dark' && window.scrollY < 40 && active?.querySelector('.hero-media');
-    header.style.setProperty('--nav-bg', atHeroTop ? 'transparent' : bg);
+    // En haut du hero : voile azur (pas transparent) — lisibilité logo / liens sur ciel clair
+    const atHeroTop =
+      theme === 'dark' && window.scrollY < 40 && active?.querySelector('.hero-media');
+    header.style.setProperty(
+      '--nav-bg',
+      atHeroTop
+        ? 'linear-gradient(180deg, rgba(18, 63, 112, 0.88) 0%, rgba(18, 63, 112, 0.55) 55%, rgba(18, 63, 112, 0) 100%)'
+        : bg,
+    );
+    header.dataset.heroTop = atHeroTop ? 'true' : 'false';
 
     header.dataset.theme = theme;
     header.dataset.scrolled = window.scrollY > 24 ? 'true' : 'false';
@@ -246,9 +253,96 @@ function initNavTheme() {
 }
 
 
+/**
+ * Carrousel photo auto — pause au survol / focus, respecte reduced-motion.
+ */
+function initGalleryCarousel() {
+  const root = document.querySelector<HTMLElement>('[data-carousel]');
+  if (!root) return;
+
+  const slides = Array.from(root.querySelectorAll<HTMLElement>('[data-slide]'));
+  const dots = Array.from(root.querySelectorAll<HTMLButtonElement>('[data-dot]'));
+  const indexEl = root.querySelector<HTMLElement>('[data-carousel-index]');
+  const labelEl = root.querySelector<HTMLElement>('[data-carousel-label]');
+  const captionEl = root.querySelector<HTMLElement>('[data-carousel-caption]');
+  if (slides.length < 2) return;
+
+  const intervalMs = Number(root.dataset.interval) || 3200;
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let index = 0;
+  let timer: ReturnType<typeof setInterval> | null = null;
+
+  const preload = (i: number) => {
+    const img = slides[i]?.querySelector('img');
+    if (!img || img.dataset.preloaded === '1') return;
+    const src = img.currentSrc || img.src;
+    if (!src) return;
+    const warm = new Image();
+    warm.src = src;
+    img.dataset.preloaded = '1';
+  };
+
+  const show = (next: number) => {
+    index = (next + slides.length) % slides.length;
+    const active = slides[index];
+    slides.forEach((slide, i) => {
+      const on = i === index;
+      slide.classList.toggle('is-active', on);
+      slide.setAttribute('aria-hidden', on ? 'false' : 'true');
+    });
+    dots.forEach((dot, i) => {
+      const on = i === index;
+      dot.classList.toggle('is-active', on);
+      dot.setAttribute('aria-selected', on ? 'true' : 'false');
+    });
+    if (indexEl) {
+      indexEl.textContent = `${String(index + 1).padStart(2, '0')} / ${String(slides.length).padStart(2, '0')}`;
+    }
+    if (labelEl) labelEl.textContent = active?.dataset.label ?? '';
+    if (captionEl) captionEl.textContent = active?.dataset.caption ?? '';
+    preload((index + 1) % slides.length);
+  };
+
+  const stop = () => {
+    if (timer) {
+      clearInterval(timer);
+      timer = null;
+    }
+  };
+
+  const start = () => {
+    if (reduceMotion) return;
+    stop();
+    timer = setInterval(() => show(index + 1), intervalMs);
+  };
+
+  dots.forEach((dot, i) => {
+    dot.addEventListener('click', () => {
+      show(i);
+      start();
+    });
+  });
+
+  root.addEventListener('mouseenter', stop);
+  root.addEventListener('mouseleave', start);
+  root.addEventListener('focusin', stop);
+  root.addEventListener('focusout', (e) => {
+    if (!root.contains(e.relatedTarget as Node | null)) start();
+  });
+
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) stop();
+    else start();
+  });
+
+  show(0);
+  start();
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   initReveal();
   initHeroMotion();
   initHeroPlay();
   initNavTheme();
+  initGalleryCarousel();
 });

@@ -7,9 +7,12 @@
 export const images = {
   heroAeroport: '/images/hero-aeroport.webp',
   coverVoyageuse: '/images/cover-voyageuse.webp',
+  heroHublot: '/images/hero-hublot.webp',
+  heroDunesH01: '/images/hero-dunes-h01.webp',
   dubai: '/images/dubai.webp',
   istanbul: '/images/istanbul.webp',
   laMecque: '/images/la-mecque.webp',
+  medine: '/images/medine.webp',
   paris: '/images/paris.webp',
   dakar: '/images/dakar.webp',
   marrakech: '/images/marrakech.webp',
@@ -41,6 +44,42 @@ export const home = {
     body:
       'Nous émettons vos billets (24h/24), organisons le Hadj et l’Umrah, et vous accompagnons sur le visa et l’hébergement. Vous parlez à quelqu’un sur place, pas à un formulaire anonyme.',
   },
+  gallery: {
+    eyebrow: 'Horizons',
+    title: 'Des départs qui comptent',
+    slides: [
+      {
+        image: images.heroDunesH01,
+        label: 'Sahel',
+        caption: 'Voyage et patrimoine',
+      },
+      {
+        image: images.heroHublot,
+        label: 'En vol',
+        caption: 'Billetterie aérienne',
+      },
+      {
+        image: images.laMecque,
+        label: 'La Mecque',
+        caption: 'Hadj et Umrah',
+      },
+      {
+        image: images.medine,
+        label: 'Médine',
+        caption: 'Pèlerinage',
+      },
+      {
+        image: images.istanbul,
+        label: 'Istanbul',
+        caption: 'Escales et séjour',
+      },
+      {
+        image: images.dubai,
+        label: 'Dubaï',
+        caption: 'Affaires et voyage',
+      },
+    ],
+  },
   destinations: {
     eyebrow: 'Exemples de destinations',
     title: 'Là où partent souvent nos clients',
@@ -68,10 +107,10 @@ export const home = {
         href: '/services#billetterie',
       },
       {
-        name: 'Dakar',
-        region: 'Afrique de l’Ouest',
-        blurb: 'Trajets régionaux vers le Sénégal et la sous-région.',
-        image: images.dakar,
+        name: 'Istanbul',
+        region: 'Turquie',
+        blurb: 'Hub fréquent pour l’Europe et le Moyen-Orient.',
+        image: images.istanbul,
         href: '/services#billetterie',
       },
     ],
@@ -128,7 +167,7 @@ export const about = {
   hero: {
     eyebrow: 'À propos',
     title: 'Qui nous sommes',
-    image: images.voyageuseBamako,
+    image: images.voyageuseDunes,
   },
   mission: {
     title: 'Mission',
@@ -176,7 +215,7 @@ export const services = {
     eyebrow: 'Nos services',
     title: 'Un accompagnement clair pour chaque départ',
     sub: 'Billetterie, Hadj, Umrah — et l’accompagnement autour du voyage. À Bamako, un interlocuteur joignable.',
-    image: images.voyageuseDunes,
+    image: images.heroHublot,
   },
   blocks: [
     {
@@ -186,8 +225,8 @@ export const services = {
       text:
         'Recherche et réservation de billets d’avion selon votre destination, vos dates et votre budget.',
       points: ['International et régional', 'Réservation possible 24h/24', 'Suivi jusqu’au départ'],
-      image: images.dubai,
-      imageAlt: 'Départ international — billetterie',
+      image: images.heroHublot,
+      imageAlt: 'Voyageuse regardant le ciel depuis le hublot',
     },
     {
       id: 'hadj',
@@ -196,8 +235,8 @@ export const services = {
       text:
         'Organisation complète du Hadj : visa, billets, hébergement, transport et accompagnement personnalisé des pèlerins.',
       points: ['Visa et dossier', 'Vols et hébergement', 'Accompagnement des pèlerins'],
-      image: images.laMecque,
-      imageAlt: 'La Mecque — organisation du Hadj',
+      image: images.medine,
+      imageAlt: 'Médine — organisation du Hadj',
     },
     {
       id: 'umrah',
@@ -206,8 +245,8 @@ export const services = {
       text:
         'Organisation de votre Umrah avec billets, hébergement, transferts et accompagnement personnalisé.',
       points: ['Billets et transferts', 'Hébergement', 'Accompagnement personnalisé'],
-      image: images.istanbul,
-      imageAlt: 'Istanbul — escale et Umrah',
+      image: images.laMecque,
+      imageAlt: 'La Mecque — organisation de l’Umrah',
     },
     {
       id: 'visa',
@@ -226,8 +265,8 @@ export const services = {
       text:
         'Réservation d’hébergements adaptés à vos besoins, notamment à La Mecque et Médine.',
       points: ['La Mecque et Médine', 'Selon vos besoins et votre budget', 'Coordination avec le voyage'],
-      image: images.marrakech,
-      imageAlt: 'Hébergement et destinations',
+      image: images.istanbul,
+      imageAlt: 'Séjour et hébergement — destinations',
     },
   ] satisfies ServiceBlock[],
 };

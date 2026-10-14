@@ -106,12 +106,21 @@ const { logoHorizontalBlanc, logoHorizontalClair } = site.brandAssets;
 <style>
   .site-header {
     --nav-fg: var(--color-craie);
-    --nav-fg-muted: color-mix(in srgb, var(--color-craie) 82%, transparent);
+    --nav-fg-muted: color-mix(in srgb, var(--color-craie) 88%, transparent);
     --nav-bg: transparent;
-    background-color: var(--nav-bg);
+    background: var(--nav-bg);
     transition:
-      background-color 0.3s ease,
+      background 0.3s ease,
       color 0.3s ease;
+  }
+
+  .site-header[data-hero-top='true'] .nav-link,
+  .site-header[data-hero-top='true'] .nav-toggle {
+    text-shadow: 0 1px 10px rgba(18, 63, 112, 0.55);
+  }
+
+  .site-header[data-hero-top='true'] .nav-logo--dark {
+    filter: drop-shadow(0 1px 8px rgba(18, 63, 112, 0.45));
   }
 
   .site-header[data-theme='dark'] {

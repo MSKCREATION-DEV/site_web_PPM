@@ -1,11 +1,12 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import HomeHero from '../components/HomeHero.astro';
+import ImageCarousel from '../components/ImageCarousel.astro';
 import { home } from '../data/content';
 import { site } from '../data/site';
 
 const waHref = `https://wa.me/${site.contact.whatsappE164}`;
-const { manifesto, destinations, experiences, journeys, cta } = home;
+const { manifesto, gallery, destinations, experiences, journeys, cta } = home;
 ---
 
 <BaseLayout
@@ -69,6 +70,8 @@ const { manifesto, destinations, experiences, journeys, cta } = home;
       </ul>
     </div>
   </section>
+
+  <ImageCarousel eyebrow={gallery.eyebrow} title={gallery.title} slides={gallery.slides} />
 
   <!-- Expériences -->
   <section data-nav="light" class="section-pad bg-ivoire">

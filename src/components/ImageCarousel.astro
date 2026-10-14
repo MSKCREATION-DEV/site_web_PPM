@@ -1,0 +1,200 @@
+---
+interface Slide {
+  image: string;
+  label: string;
+  caption: string;
+}
+
+interface Props {
+  eyebrow: string;
+  title: string;
+  slides: readonly Slide[];
+  /** Intervalle auto en ms (défaut 3200) */
+  intervalMs?: number;
+}
+
+const { eyebrow, title, slides, intervalMs = 3200 } = Astro.props;
+const first = slides[0];
+---
+
+<section
+  data-nav="dark"
+  class="gallery-carousel relative overflow-hidden bg-nuit text-ivoire"
+  data-carousel
+  data-interval={intervalMs}
+  aria-roledescription="carrousel"
+  aria-label={title}
+>
+  <div class="gallery-carousel__veil pointer-events-none absolute inset-0 z-[5]" aria-hidden="true"></div>
+
+  <div class="pointer-events-none absolute inset-x-0 top-0 z-20 site-shell pt-12 md:pt-16">
+    <div class="reveal gallery-carousel__heading max-w-xl md:max-w-2xl">
+      <p class="type-eyebrow text-or">{eyebrow}</p>
+      <h2 class="type-display mt-4 text-ivoire">{title}</h2>
+    </div>
+  </div>
+
+  <div class="relative h-[72vh] min-h-[28rem] max-h-[52rem] md:h-[78vh]">
+    {
+      slides.map((slide, i) => (
+        <figure
+          class:list={[
+            'gallery-carousel__slide absolute inset-0 m-0',
+            i === 0 ? 'is-active' : '',
+          ]}
+          data-slide
+          data-label={slide.label}
+          data-caption={slide.caption}
+          aria-hidden={i === 0 ? 'false' : 'true'}
+        >
+          <img
+            src={slide.image}
+            alt={`${slide.label} — ${slide.caption}`}
+            class="h-full w-full object-cover"
+            width="2400"
+            height="1600"
+            loading={i <= 1 ? 'eager' : 'lazy'}
+            fetchpriority={i === 0 ? 'high' : 'auto'}
+            decoding="async"
+          />
+        </figure>
+      ))
+    }
+  </div>
+
+  <!-- Légende + nav au-dessus du voile (comme le titre) -->
+  <div class="absolute inset-x-0 bottom-0 z-20 site-shell pb-8 md:pb-10">
+    <div class="gallery-carousel__caption mb-8 max-w-xl md:mb-10">
+      <p class="type-eyebrow text-or" data-carousel-label>{first?.label}</p>
+      <p class="mt-2 font-display text-2xl text-ivoire md:text-3xl" data-carousel-caption>
+        {first?.caption}
+      </p>
+    </div>
+    <div class="flex items-center justify-between gap-6">
+      <div class="flex items-center gap-2" role="tablist" aria-label="Diapositives">
+        {
+          slides.map((slide, i) => (
+            <button
+              type="button"
+              class:list={['gallery-carousel__dot', i === 0 && 'is-active']}
+              data-dot
+              role="tab"
+              aria-selected={i === 0 ? 'true' : 'false'}
+              aria-label={`${slide.label} : ${slide.caption}`}
+            />
+          ))
+        }
+      </div>
+      <p class="font-mono text-xs tracking-[0.22em] text-ivoire/80" data-carousel-index>
+        01 / {String(slides.length).padStart(2, '0')}
+      </p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .gallery-carousel__veil {
+    background:
+      linear-gradient(
+        90deg,
+        rgba(18, 63, 112, 0.55) 0%,
+        rgba(18, 63, 112, 0.28) 36%,
+        rgba(18, 63, 112, 0.08) 70%,
+        transparent 100%
+      ),
+      linear-gradient(
+        180deg,
+        rgba(18, 63, 112, 0.92) 0%,
+        rgba(18, 63, 112, 0.72) 16%,
+        rgba(18, 63, 112, 0.22) 40%,
+        rgba(18, 63, 112, 0.18) 58%,
+        rgba(18, 63, 112, 0.55) 80%,
+        rgba(18, 63, 112, 0.82) 100%
+      );
+  }
+
+  .gallery-carousel__heading {
+    padding: 1rem 1.5rem 1.15rem 0;
+    background: linear-gradient(
+      90deg,
+      rgba(18, 63, 112, 0.55) 0%,
+      rgba(18, 63, 112, 0.28) 55%,
+      transparent 100%
+    );
+  }
+
+  .gallery-carousel__caption {
+    padding: 0.75rem 1.25rem 0.75rem 0;
+    background: linear-gradient(
+      90deg,
+      rgba(18, 63, 112, 0.75) 0%,
+      rgba(18, 63, 112, 0.4) 60%,
+      transparent 100%
+    );
+  }
+
+  .gallery-carousel__heading h2,
+  .gallery-carousel__caption [data-carousel-caption] {
+    color: #fff;
+    text-shadow: 0 2px 18px rgba(18, 63, 112, 0.75);
+  }
+
+  .gallery-carousel__slide {
+    opacity: 0;
+    visibility: hidden;
+    transition:
+      opacity 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+      visibility 0.55s;
+  }
+
+  .gallery-carousel__slide.is-active {
+    opacity: 1;
+    visibility: visible;
+    z-index: 1;
+  }
+
+  .gallery-carousel__slide img {
+    transform: scale(1.03);
+    transition: transform 4s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .gallery-carousel__slide.is-active img {
+    transform: scale(1);
+  }
+
+  .gallery-carousel__dot {
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 999px;
+    border: 1px solid color-mix(in srgb, var(--color-ivoire) 65%, transparent);
+    background: transparent;
+    padding: 0;
+    cursor: pointer;
+    transition:
+      width 0.35s ease,
+      background 0.35s ease,
+      border-color 0.35s ease;
+  }
+
+  .gallery-carousel__dot.is-active {
+    width: 1.75rem;
+    background: var(--color-or);
+    border-color: var(--color-or);
+  }
+
+  .gallery-carousel__dot:hover {
+    border-color: var(--color-or);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .gallery-carousel__slide,
+    .gallery-carousel__slide img,
+    .gallery-carousel__dot {
+      transition: none;
+    }
+
+    .gallery-carousel__slide img {
+      transform: none;
+    }
+  }
+</style>

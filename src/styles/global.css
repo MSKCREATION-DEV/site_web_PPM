@@ -132,6 +132,19 @@
       opacity 0.7s ease-out;
   }
 
+  /* Voile hero — lisibilité nav + texte sur ciel / photo claire */
+  .hero-veil {
+    background:
+      linear-gradient(
+        180deg,
+        rgba(18, 63, 112, 0.78) 0%,
+        rgba(18, 63, 112, 0.35) 22%,
+        rgba(18, 63, 112, 0.2) 45%,
+        rgba(18, 63, 112, 0.45) 72%,
+        rgba(18, 63, 112, 0.88) 100%
+      );
+  }
+
   /* Marque hero — Prosperity (blanc) + Travel (or) */
   .hero-brand {
     display: flex;
