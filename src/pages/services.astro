@@ -5,34 +5,50 @@ import { services } from '../data/content';
 
 <BaseLayout
   title="Nos services"
-  description="Billetterie aérienne, Hadj, Omra, visa et hôtels avec Prosperity Travel à Bamako."
+  description="Billetterie aérienne, Hadj, Umrah, visa et hôtels avec Prosperity Travel à Bamako."
 >
-  <!-- Intro -->
-  <header data-nav="dark" class="bg-nuit pt-28 pb-8 text-ivoire md:pt-36 md:pb-10">
-    <div class="mx-auto max-w-6xl px-4 md:px-6">
-      <p class="reveal text-xs tracking-[0.28em] text-or uppercase">{services.hero.eyebrow}</p>
-      <h1 class="reveal reveal-delay-1 mt-3 max-w-3xl font-display text-4xl leading-snug md:text-6xl">
+  <header data-nav="dark" class="bg-nuit pt-32 pb-14 text-ivoire md:pt-40 md:pb-20">
+    <div class="site-shell">
+      <p class="reveal type-eyebrow text-or">{services.hero.eyebrow}</p>
+      <h1 class="reveal reveal-delay-1 type-display-lg mt-4 max-w-5xl leading-snug">
         {services.hero.title}
       </h1>
-      <p class="reveal reveal-delay-2 mt-5 max-w-xl text-ivoire/70 md:text-lg">{services.hero.sub}</p>
+      <p class="reveal reveal-delay-2 type-lead mt-6 max-w-3xl text-ivoire/70">{services.hero.sub}</p>
 
-      <nav aria-label="Sommaire des services" class="reveal reveal-delay-3 mt-10 flex flex-wrap gap-2 border-t border-ivoire/15 pt-6">
-        {
-          services.blocks.map((b) => (
-            <a
-              href={`#${b.id}`}
-              class="rounded-sm border border-ivoire/15 px-3 py-2 text-[0.7rem] tracking-[0.1em] text-ivoire/70 uppercase no-underline transition hover:border-or/50 hover:text-or"
-            >
-              <span class="text-or">{b.eyebrow}</span>
-              <span class="ml-1.5">{b.title}</span>
-            </a>
-          ))
-        }
+      <!-- Sommaire : ligne numérotée pleine largeur, sans cases vides -->
+      <nav
+        aria-label="Sommaire des services"
+        class="reveal reveal-delay-3 mt-12 border-t border-ivoire/15 pt-8"
+      >
+        <ul class="services-toc flex flex-col gap-0 md:flex-row md:items-stretch">
+          {
+            services.blocks.map((b, i) => (
+              <li
+                class:list={[
+                  'flex-1 border-ivoire/15 md:border-l',
+                  i === 0 && 'md:border-l-0',
+                  'border-b md:border-b-0',
+                ]}
+              >
+                <a
+                  href={`#${b.id}`}
+                  class="group flex items-baseline gap-4 py-4 no-underline transition md:flex-col md:gap-3 md:px-5 md:py-2 lg:px-6"
+                >
+                  <span class="font-mono text-sm tracking-[0.22em] text-or transition group-hover:text-blanc md:text-base">
+                    {b.eyebrow}
+                  </span>
+                  <span class="type-body font-display text-lg leading-snug text-ivoire/90 transition group-hover:text-or md:text-xl lg:text-[1.35rem]">
+                    {b.title}
+                  </span>
+                </a>
+              </li>
+            ))
+          }
+        </ul>
       </nav>
     </div>
   </header>
 
-  <!-- Bandes 50/50 — même forme panneau adouci pour toutes les images -->
   {
     services.blocks.map((block, index) => {
       const dark = index % 2 === 1;
@@ -44,16 +60,16 @@ import { services } from '../data/content';
         <section
           id={block.id}
           data-nav={dark ? 'dark' : 'light'}
-          class:list={['scroll-mt-24', dark ? 'bg-nuit text-ivoire' : 'bg-ivoire text-nuit']}
+          class:list={['scroll-mt-28', dark ? 'bg-nuit text-ivoire' : 'bg-ivoire text-nuit']}
         >
-          <div class="mx-auto grid max-w-6xl items-center md:grid-cols-2 md:min-h-[min(72vh,720px)]">
+          <div class="site-shell grid items-center md:grid-cols-2 md:min-h-[min(72vh,800px)] md:gap-10 lg:gap-14">
             <div
               class:list={[
-                'flex items-center justify-center px-3 py-10 md:px-4 md:py-12 lg:px-6',
+                'flex items-center justify-center py-12 md:py-16',
                 imageFirst ? 'order-1' : 'order-1 md:order-2',
               ]}
             >
-              <div class="service-frame reveal">
+              <div class="service-frame reveal w-full">
                 <svg
                   class="service-frame__svg"
                   viewBox="0 0 460 520"
@@ -83,28 +99,26 @@ import { services } from '../data/content';
 
             <div
               class:list={[
-                'flex items-center px-4 py-10 md:px-12 md:py-16 lg:px-16',
+                'flex items-center py-12 md:py-20',
                 imageFirst ? 'order-2' : 'order-2 md:order-1',
               ]}
             >
-              <div class="reveal w-full max-w-md">
-                <p class="font-mono text-xs tracking-[0.28em] text-or">{block.eyebrow}</p>
-                <h2 class="mt-3 font-display text-3xl leading-tight md:text-4xl lg:text-[2.75rem]">
-                  {block.title}
-                </h2>
-                <div class="gold-rule mt-6"></div>
+              <div class="reveal w-full max-w-2xl">
+                <p class="font-mono text-sm tracking-[0.28em] text-or">{block.eyebrow}</p>
+                <h2 class="type-display mt-4 leading-tight">{block.title}</h2>
+                <div class="gold-rule mt-7"></div>
                 <p
                   class:list={[
-                    'mt-6 text-base leading-relaxed md:text-lg',
+                    'type-lead mt-7',
                     dark ? 'text-ivoire/70' : 'text-nuit/70',
                   ]}
                 >
                   {block.text}
                 </p>
-                <ul class="mt-8 space-y-3">
+                <ul class="mt-10 space-y-4">
                   {block.points.map((point) => (
-                    <li class="flex items-center gap-4 text-sm md:text-base">
-                      <span class="h-px w-7 shrink-0 bg-or" aria-hidden="true" />
+                    <li class="type-body flex items-center gap-4">
+                      <span class="h-px w-8 shrink-0 bg-or" aria-hidden="true" />
                       {point}
                     </li>
                   ))}
@@ -112,7 +126,7 @@ import { services } from '../data/content';
                 <a
                   href="/contact"
                   class:list={[
-                    'mt-10 inline-block rounded-sm px-7 py-3.5 text-sm font-medium no-underline transition',
+                    'btn-lg mt-12 inline-block rounded-sm font-medium no-underline transition',
                     dark
                       ? 'bg-or text-blanc hover:brightness-110'
                       : 'bg-azur-profond text-blanc hover:bg-azur',
@@ -128,25 +142,26 @@ import { services } from '../data/content';
     })
   }
 
-  <!-- CTA -->
-  <section data-nav="light" class="border-t border-nuit/5 bg-ivoire py-20 text-center md:py-28">
-    <div class="reveal mx-auto max-w-xl px-4">
-      <div class="gold-rule mx-auto"></div>
-      <h2 class="mt-8 font-display text-3xl text-nuit md:text-4xl">Un départ à préparer ?</h2>
-      <p class="mt-4 text-nuit/65">Bureau 8h–17h · réservation de billets 24h/24.</p>
-      <div class="mt-8 flex flex-wrap justify-center gap-3">
-        <a
-          href="/contact"
-          class="rounded-sm bg-azur-profond px-7 py-3.5 text-sm font-medium text-blanc no-underline transition hover:bg-azur"
-        >
-          Nous contacter
-        </a>
-        <a
-          href="/contact#formulaire"
-          class="rounded-sm border border-nuit/20 px-7 py-3.5 text-sm text-nuit no-underline transition hover:border-azur hover:text-azur"
-        >
-          Demander un devis
-        </a>
+  <section data-nav="light" class="section-pad border-t border-nuit/5 bg-ivoire text-center">
+    <div class="site-shell reveal text-center">
+      <div class="mx-auto max-w-2xl">
+        <div class="gold-rule mx-auto"></div>
+        <h2 class="type-display mt-8 text-nuit">Un départ à préparer ?</h2>
+        <p class="type-lead mt-5 text-nuit/65">Bureau 8h–17h · réservation de billets 24h/24.</p>
+        <div class="mt-10 flex flex-wrap justify-center gap-4">
+          <a
+            href="/contact"
+            class="btn-lg rounded-sm bg-azur-profond font-medium text-blanc no-underline transition hover:bg-azur"
+          >
+            Nous contacter
+          </a>
+          <a
+            href="/contact#formulaire"
+            class="btn-lg rounded-sm border border-nuit/20 text-nuit no-underline transition hover:border-azur hover:text-azur"
+          >
+            Demander un devis
+          </a>
+        </div>
       </div>
     </div>
   </section>

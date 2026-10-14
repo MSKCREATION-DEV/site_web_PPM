@@ -31,20 +31,18 @@ const { eyebrow, title, sub, image, imageAlt = '', compact = false } = Astro.pro
     aria-hidden="true"
   >
   </div>
-  <div class="relative z-10 mx-auto w-full max-w-6xl px-4 pb-16 pt-32 md:px-6 md:pb-24 md:pt-40">
+  <div class="site-shell relative z-10 w-full pb-20 pt-36 md:pb-28 md:pt-44">
     {
       eyebrow && (
-        <p class="reveal text-xs tracking-[0.28em] text-or uppercase md:text-sm">{eyebrow}</p>
+        <p class="reveal type-eyebrow text-or">{eyebrow}</p>
       )
     }
-    <h1
-      class="reveal reveal-delay-1 mt-4 max-w-4xl font-display text-4xl leading-[1.08] md:text-6xl lg:text-7xl"
-    >
+    <h1 class="reveal reveal-delay-1 type-display-lg mt-5 max-w-5xl">
       {title}
     </h1>
     {
       sub && (
-        <p class="reveal reveal-delay-2 mt-5 max-w-xl text-base text-ivoire/80 md:text-lg">{sub}</p>
+        <p class="reveal reveal-delay-2 type-lead mt-6 max-w-2xl text-ivoire/80">{sub}</p>
       )
     }
     <div class="reveal reveal-delay-3 mt-2">

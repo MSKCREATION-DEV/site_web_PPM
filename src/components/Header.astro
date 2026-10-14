@@ -11,14 +11,14 @@ const { logoHorizontalBlanc, logoHorizontalClair } = site.brandAssets;
   data-theme="dark"
   data-scrolled="false"
 >
-  <div class="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-4 md:px-6 md:py-5">
+  <div class="site-shell flex items-center justify-between gap-4 py-4 md:py-5 lg:py-6">
     <a href="/" class="group relative z-10 flex shrink-0 no-underline" aria-label={site.brand}>
       <img
         src={logoHorizontalBlanc}
         alt={site.brand}
         width="212"
         height="60"
-        class="nav-logo nav-logo--dark h-9 w-auto md:h-10"
+        class="nav-logo nav-logo--dark h-10 w-auto md:h-11 lg:h-12"
         decoding="async"
       />
       <img
@@ -26,13 +26,13 @@ const { logoHorizontalBlanc, logoHorizontalClair } = site.brandAssets;
         alt=""
         width="212"
         height="60"
-        class="nav-logo nav-logo--light h-9 w-auto md:h-10"
+        class="nav-logo nav-logo--light h-10 w-auto md:h-11 lg:h-12"
         decoding="async"
         aria-hidden="true"
       />
     </a>
 
-    <nav aria-label="Principale" class="hidden items-center gap-8 text-[0.8rem] tracking-[0.14em] uppercase md:flex">
+    <nav aria-label="Principale" class="hidden items-center gap-8 text-[0.85rem] tracking-[0.16em] uppercase md:flex lg:gap-12 lg:text-[0.9rem]">
       {
         nav.map((item) => {
           const active =
@@ -53,7 +53,7 @@ const { logoHorizontalBlanc, logoHorizontalClair } = site.brandAssets;
     <div class="flex items-center gap-3">
       <a
         href="/contact"
-        class="nav-cta hidden rounded-sm bg-or px-4 py-2.5 text-xs font-medium tracking-wide text-blanc no-underline transition hover:brightness-110 sm:inline-block"
+        class="nav-cta hidden rounded-sm bg-or px-5 py-3 text-sm font-medium tracking-wide text-blanc no-underline transition hover:brightness-110 sm:inline-block"
       >
         Demander un devis
       </a>
@@ -73,7 +73,7 @@ const { logoHorizontalBlanc, logoHorizontalClair } = site.brandAssets;
     </div>
   </div>
 
-  <div id="mobile-nav" class="nav-mobile hidden border-t px-4 py-6 md:hidden">
+  <div id="mobile-nav" class="nav-mobile site-shell hidden border-t py-6 md:hidden">
     <ul class="flex flex-col gap-4 text-sm tracking-wide">
       {
         nav.map((item) => (

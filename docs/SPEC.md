@@ -1,6 +1,6 @@
 # SPEC — Site vitrine Prosperity Travel
 
-**Version :** 1.6  
+**Version :** 1.7  
 **Palette active :** Charte officielle Travel — Bleu azur `#2F8AD0` · Azur profond `#123F70` · Or `#C9A24E` · Craie `#F5EFE0` · Blanc  
 **Source marque :** `docs/brand/CHARTE-TRAVEL.md`  
 **Archive PDF :** `docs/brand/Prosperity-Mises-en-situation.pdf`
@@ -104,7 +104,7 @@ Le cahier client liste d’autres activités (BTP, restauration, gardiennage, or
 **Inspiration UX :** [Wilderness Destinations](https://www.wildernessdestinations.com/) — storytelling immersif, hero plein écran, grilles destinations, listes expériences, CTA fort.  
 **Originalité :** ancrage Malien, pèlerinage, billetterie, identité charte Travel (azur / or / craie) — **pas de clone**. Contenu : `src/data/content.ts` + `docs/brand/CHARTE-TRAVEL.md`.  
 
-**Motion V1 :** reveal scroll, parallax hero léger, zoom image hover, header sticky. `prefers-reduced-motion` respecté.
+**Motion V1 :** reveal scroll, parallax hero léger, Play vidéo hero, zoom image hover, header sticky. `prefers-reduced-motion` respecté.
 
 ---
 
@@ -129,20 +129,21 @@ Source : `docs/brand/CHARTE-TRAVEL.md`.
 
 ### Typographie
 
-- **Wordmark marque :** PNG officiels (`public/brand/`) uniquement  
+- **Logo marque (header / footer) :** PNG officiels (`public/brand/`) uniquement  
+- **Marque hero accueil :** wordmark typographique Cormorant (plein écran, centré) — logo PNG non doublé sur la photo  
 - **Display / titres :** serif expressive (Cormorant Garamond)  
 - **Corps / UI :** sans-serif lisible (DM Sans) — **pas** Inter / Roboto / Arial  
-- Hiérarchie claire : H1 hero ≤ 1 ligne d’accroche + 1 sous-texte court
+- Hiérarchie hero : H1 = marque ; blurb métier en bas (pas un second H1)
 
 ### Principes UI/UX (expert)
 
-1. **Premier viewport = une composition** : logo PNG + 1 headline + 1 phrase + CTA + image plein cadre  
+1. **Premier viewport = une composition** : marque typo centrée + ligne Play + coords / blurb + image (ou vidéo) plein cadre — **pas de CTA dans le hero**  
 2. **Pas de cards dans le hero** ; cards seulement si interaction (formulaire, service cliquable)  
-3. **Hero full-bleed** (pas d’image inset / collage)  
-4. **Pas d’overlays marketing** (badges, chips) ; overlay azur pour lisibilité logo OK  
+3. **Hero full-bleed** `100svh` (pas d’image inset / collage)  
+4. **Pas d’overlays marketing** (badges, chips) ; overlay azur-profond bas pour lisibilité  
 5. Alternance sections **craie** / **azur-profond**  
-6. Motion : 2–3 animations intentionnelles — élégantes, lentes, pas de bounce  
-7. WhatsApp flottant discret mais toujours visible  
+6. Motion : reveal, parallax hero, Play vidéo — élégantes, lentes, pas de bounce ; `prefers-reduced-motion`  
+7. WhatsApp flottant + CTA devis dans le **header**  
 8. Performance Mali : images optimisées, lazy-load, CSS léger, peu de JS  
 9. Header / footer = logo **horizontal** (pas emblème seul)
 ---
@@ -151,7 +152,7 @@ Source : `docs/brand/CHARTE-TRAVEL.md`.
 
 ### `/` Accueil
 
-1. Hero full-bleed + logo PNG + headline + 2 CTA + coords  
+1. Hero full-bleed (`HomeHero`) : poster + slot vidéo, marque centrée, ligne Play or, coords / blurb métier — CTA via header  
 2. Manifesto centré sur fond craie  
 3. Destinations (grille portraits)  
 4. Expériences = liste numérotée vers `/services#…`  
@@ -165,7 +166,7 @@ Histoire, philosophie, valeurs charte (**Sérénité · Disponibilité · Ouvert
 ### `/services`
 
 1. Intro (fond azur-profond) + nav ancres `01…05`  
-2. Cinq bandes éditoriales 50/50 (image inset panneau adouci / texte) — ordre : Billetterie · Hadj · Omra · Visa · Hôtels  
+2. Cinq bandes éditoriales 50/50 (image inset panneau adouci / texte) — ordre : Billetterie · Hadj · Umrah · Visa · Hôtels  
 3. CTA final : bureau 8h–17h · billets 24h/24  
 
 ### `/contact`

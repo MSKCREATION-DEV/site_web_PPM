@@ -42,6 +42,137 @@ function initHeroMotion() {
 }
 
 /**
+ * Hero Play — pattern Wilderness adapté Mali :
+ * - Poster visible par défaut (et si lecture échoue / pause)
+ * - Vidéo preload=none : téléchargement seulement au 1er Play
+ * - États loading / playing / idle sur le bouton
+ */
+function initHeroPlay() {
+  const section = document.getElementById('home-hero');
+  if (!section) return;
+
+  const btn = section.querySelector<HTMLButtonElement>('[data-hero-play]');
+  const video = section.querySelector<HTMLVideoElement>('[data-hero-video]');
+  const iconPlay = section.querySelector<HTMLElement>('[data-icon-play]');
+  const iconPause = section.querySelector<HTMLElement>('[data-icon-pause]');
+  const iconLoading = section.querySelector<HTMLElement>('[data-icon-loading]');
+
+  if (!btn || !video) return;
+
+  let loadStarted = false;
+
+  const setIcons = (state: 'idle' | 'loading' | 'playing') => {
+    iconPlay?.classList.toggle('hidden', state !== 'idle');
+    iconPause?.classList.toggle('hidden', state !== 'playing');
+    iconLoading?.classList.toggle('hidden', state !== 'loading');
+  };
+
+  const setPlaying = (playing: boolean) => {
+    section.dataset.heroPlaying = playing ? 'true' : 'false';
+    section.dataset.heroLoading = 'false';
+    btn.setAttribute('aria-pressed', playing ? 'true' : 'false');
+    btn.setAttribute('aria-label', playing ? 'Mettre la vidéo en pause' : 'Lire la vidéo');
+    btn.disabled = false;
+    setIcons(playing ? 'playing' : 'idle');
+  };
+
+  const setLoading = (loading: boolean) => {
+    section.dataset.heroLoading = loading ? 'true' : 'false';
+    if (loading) {
+      btn.setAttribute('aria-label', 'Chargement de la vidéo');
+      setIcons('loading');
+    }
+  };
+
+  const showPoster = () => {
+    section.dataset.heroPlaying = 'false';
+    video.classList.add('opacity-0');
+    video.classList.remove('opacity-100');
+  };
+
+  const ensureLoaded = () =>
+    new Promise<void>((resolve, reject) => {
+      if (video.readyState >= HTMLMediaElement.HAVE_CURRENT_DATA) {
+        resolve();
+        return;
+      }
+
+      const onReady = () => {
+        cleanup();
+        resolve();
+      };
+      const onError = () => {
+        cleanup();
+        reject(new Error('video load failed'));
+      };
+      const cleanup = () => {
+        video.removeEventListener('canplay', onReady);
+        video.removeEventListener('loadeddata', onReady);
+        video.removeEventListener('error', onError);
+      };
+
+      video.addEventListener('canplay', onReady, { once: true });
+      video.addEventListener('loadeddata', onReady, { once: true });
+      video.addEventListener('error', onError, { once: true });
+
+      if (!loadStarted) {
+        loadStarted = true;
+        video.load();
+      }
+    });
+
+  btn.addEventListener('click', async () => {
+    if (!video.paused && !video.ended) {
+      video.pause();
+      setPlaying(false);
+      showPoster();
+      return;
+    }
+
+    setLoading(true);
+    try {
+      await ensureLoaded();
+      await video.play();
+      // Ne masquer le poster qu’une fois la lecture réelle démarrée
+      setPlaying(true);
+      video.classList.remove('opacity-0');
+      video.classList.add('opacity-100');
+    } catch {
+      video.pause();
+      setPlaying(false);
+      showPoster();
+    }
+  });
+
+  video.addEventListener('playing', () => {
+    setPlaying(true);
+    video.classList.remove('opacity-0');
+    video.classList.add('opacity-100');
+  });
+
+  video.addEventListener('pause', () => {
+    if (video.ended) return;
+    setPlaying(false);
+    showPoster();
+  });
+
+  video.addEventListener('ended', () => {
+    setPlaying(false);
+    showPoster();
+  });
+
+  video.addEventListener('waiting', () => {
+    if (section.dataset.heroPlaying === 'true') setLoading(true);
+  });
+
+  video.addEventListener('canplay', () => {
+    if (section.dataset.heroLoading === 'true' && !video.paused) {
+      setPlaying(true);
+    }
+  });
+}
+
+/**
  * La nav reprend la couleur de fond exacte de la section sous le header.
  * Sections : data-nav="dark" | data-nav="light"
  */
@@ -118,5 +249,6 @@ function initNavTheme() {
 document.addEventListener('DOMContentLoaded', () => {
   initReveal();
   initHeroMotion();
+  initHeroPlay();
   initNavTheme();
 });

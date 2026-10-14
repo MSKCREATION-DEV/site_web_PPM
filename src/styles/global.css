@@ -40,6 +40,63 @@
 }
 
 @layer utilities {
+  /**
+   * Conteneur plein écran — padding latéral + échelle fluide.
+   * Les utilitaires type-* / section-pad suivent la largeur viewport.
+   */
+  .site-shell {
+    width: 100%;
+    max-width: none;
+    margin-inline: auto;
+    padding-inline: clamp(1.25rem, 4.5vw, 5.5rem);
+  }
+
+  .section-pad {
+    padding-block: clamp(4.5rem, 7.5vw, 9rem);
+  }
+
+  .type-eyebrow {
+    font-size: clamp(0.7rem, 0.62rem + 0.2vw, 0.85rem);
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+  }
+
+  .type-display {
+    font-family: var(--font-display);
+    font-size: clamp(2.15rem, 1.35rem + 2.4vw, 4rem);
+    line-height: 1.08;
+    font-weight: 600;
+  }
+
+  .type-display-lg {
+    font-family: var(--font-display);
+    font-size: clamp(2.5rem, 1.5rem + 3vw, 4.75rem);
+    line-height: 1.05;
+    font-weight: 600;
+  }
+
+  .type-title {
+    font-family: var(--font-display);
+    font-size: clamp(1.65rem, 1.25rem + 1.2vw, 2.5rem);
+    line-height: 1.15;
+    font-weight: 600;
+  }
+
+  .type-lead {
+    font-size: clamp(1.05rem, 0.95rem + 0.35vw, 1.3rem);
+    line-height: 1.65;
+  }
+
+  .type-body {
+    font-size: clamp(0.95rem, 0.88rem + 0.25vw, 1.125rem);
+    line-height: 1.65;
+  }
+
+  .btn-lg {
+    padding: 0.95rem 1.9rem;
+    font-size: clamp(0.875rem, 0.8rem + 0.2vw, 1rem);
+  }
+
   .reveal {
     opacity: 0;
     transform: translate3d(0, 28px, 0);
@@ -70,7 +127,78 @@
     transform: scale(1.08);
     transform-origin: center center;
     will-change: transform;
-    transition: transform 0.1s linear;
+    transition:
+      transform 0.1s linear,
+      opacity 0.7s ease-out;
+  }
+
+  /* Marque hero — Prosperity (blanc) + Travel (or) */
+  .hero-brand {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.15em;
+    font-family: var(--font-display);
+    font-weight: 600;
+    line-height: 0.95;
+    text-transform: uppercase;
+  }
+
+  .hero-brand__primary {
+    font-size: clamp(3rem, 2rem + 7vw, 8rem);
+    letter-spacing: 0.12em;
+    color: var(--color-blanc);
+    text-shadow: 0 2px 28px rgba(18, 63, 112, 0.45);
+  }
+
+  .hero-brand__accent {
+    font-size: clamp(1.85rem, 1.2rem + 3.2vw, 3.75rem);
+    letter-spacing: 0.42em;
+    color: var(--color-or);
+    text-shadow: 0 1px 18px rgba(18, 63, 112, 0.35);
+  }
+
+  .hero-play {
+    width: clamp(5.75rem, 4.5rem + 2.5vw, 7.75rem);
+    height: clamp(5.75rem, 4.5rem + 2.5vw, 7.75rem);
+  }
+
+  .hero-blurb {
+    width: min(100%, clamp(17rem, 22vw, 22rem));
+    font-size: clamp(0.9rem, 0.82rem + 0.25vw, 1.05rem);
+    line-height: 1.65;
+  }
+
+  .hero-play__spinner {
+    width: 14px;
+    height: 14px;
+    border: 1.5px solid color-mix(in srgb, var(--color-or) 35%, transparent);
+    border-top-color: var(--color-or);
+    border-radius: 50%;
+    animation: hero-spin 0.7s linear infinite;
+  }
+
+  @keyframes hero-spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  .home-hero[data-hero-playing='true'] [data-hero-poster] {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .home-hero[data-hero-playing='true'] [data-hero-video] {
+    opacity: 1;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-play__spinner {
+      animation: none;
+      border-top-color: var(--color-or);
+      opacity: 0.7;
+    }
   }
 
   .img-zoom {
@@ -83,7 +211,7 @@
 
   .gold-rule {
     height: 1px;
-    width: 3rem;
+    width: clamp(3rem, 2rem + 2.5vw, 5.5rem);
     background: var(--gradient-or-metal);
   }
 
@@ -91,7 +219,25 @@
   .service-frame {
     position: relative;
     width: 100%;
-    max-width: 42rem;
+    max-width: min(36rem, 100%);
+  }
+
+  @media (min-width: 1024px) {
+    .service-frame {
+      max-width: min(42rem, 100%);
+    }
+  }
+
+  .services-toc a:hover .font-display {
+    color: var(--color-or);
+  }
+
+  .dest-card {
+    min-height: clamp(22rem, 28vw, 36rem);
+  }
+
+  .dest-card__overlay {
+    padding: clamp(1.25rem, 1rem + 1vw, 2rem);
   }
 
   .service-frame__svg {

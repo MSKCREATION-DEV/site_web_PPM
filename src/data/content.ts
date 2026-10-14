@@ -22,21 +22,24 @@ export const images = {
 
 export const home = {
   hero: {
-    eyebrow: 'Bamako',
+    eyebrow: 'Bienvenue à',
     brand: 'Prosperity Travel',
-    headline: 'Billets d’avion, Hadj et Omra.',
-    sub: 'Une agence locale pour réserver, organiser et partir dans de bonnes conditions.',
-    ctaPrimary: { label: 'Demander un devis', href: '/contact' },
-    ctaSecondary: { label: 'Voir les services', href: '/services' },
+    brandPrimary: 'Prosperity',
+    brandAccent: 'Travel',
+    blurbTitle: 'Billets d’avion, Hadj et Umrah.',
+    blurb:
+      'Une agence locale pour réserver, organiser et partir dans de bonnes conditions.',
     image: images.coverVoyageuse,
     imageAlt: 'Voyageuse — Prosperity Travel',
-    coords: '12.6392° N · 8.0029° W',
+    coords: '12.6392° N, 8.0029° W',
+    /** Chargée uniquement au clic Play (preload none) — Mali-friendly. */
+    videoSrc: '/videos/hero-presentation.mp4',
   },
   manifesto: {
     eyebrow: 'Prosperity Travel',
-    title: 'Billetterie aérienne, Hadj et Omra à Bamako.',
+    title: 'Billetterie aérienne, Hadj et Umrah à Bamako.',
     body:
-      'Nous émettons vos billets (24h/24), organisons le Hadj et la Omra, et vous accompagnons sur le visa et l’hébergement. Vous parlez à quelqu’un sur place, pas à un formulaire anonyme.',
+      'Nous émettons vos billets (24h/24), organisons le Hadj et l’Umrah, et vous accompagnons sur le visa et l’hébergement. Vous parlez à quelqu’un sur place, pas à un formulaire anonyme.',
   },
   destinations: {
     eyebrow: 'Exemples de destinations',
@@ -46,7 +49,7 @@ export const home = {
       {
         name: 'La Mecque & Médine',
         region: 'Pèlerinage',
-        blurb: 'Hadj et Omra : dossier, vols, hébergement et suivi.',
+        blurb: 'Hadj et Umrah : dossier, vols, hébergement et suivi.',
         image: images.laMecque,
         href: '/services#hadj',
       },
@@ -91,14 +94,14 @@ export const home = {
       },
       {
         id: '03',
-        title: 'Organisation de la Omra',
-        text: 'Omra avec billets, hébergement, transferts et accompagnement personnalisé.',
-        href: '/services#omra',
+        title: 'Organisation de l’Umrah',
+        text: 'Umrah avec billets, hébergement, transferts et accompagnement personnalisé.',
+        href: '/services#umrah',
       },
       {
         id: '04',
         title: 'Visa & hôtels',
-        text: 'Démarches visa Hadj et Omra, et réservation d’hébergements à La Mecque et Médine.',
+        text: 'Démarches visa Hadj et Umrah, et réservation d’hébergements à La Mecque et Médine.',
         href: '/services#visa',
       },
     ],
@@ -110,7 +113,7 @@ export const home = {
       { title: 'Famille', text: 'Plusieurs passagers, mêmes dates, sièges coordonnés.' },
       { title: 'Affaires', text: 'Départs rapides, changements de date, réponse WhatsApp.' },
       { title: 'Seul(e)', text: 'Un trajet clair, billet émis, infos utiles avant le vol.' },
-      { title: 'Pèlerinage', text: 'Hadj ou Omra : dossier suivi, vols et organisation groupés.' },
+      { title: 'Pèlerinage', text: 'Hadj ou Umrah : dossier suivi, vols et organisation groupés.' },
     ],
   },
   cta: {
@@ -138,7 +141,7 @@ export const about = {
   story: {
     title: 'Prosperity Travel',
     body: [
-      'Prosperity Travel est le pôle voyage de Prosperity Management Mali, basé à Bamako. Nous travaillons la billetterie aérienne, le Hadj, la Omra, les visas et l’hébergement.',
+      'Prosperity Travel est le pôle voyage de Prosperity Management Mali, basé à Bamako. Nous travaillons la billetterie aérienne, le Hadj, l’Umrah, les visas et l’hébergement.',
       'Bureau ouvert de 8h à 17h. Réservation de billets possible 24h/24. Infos claires, délais tenus, interlocuteur joignable.',
     ],
   },
@@ -162,7 +165,7 @@ export const services = {
   hero: {
     eyebrow: 'Nos services',
     title: 'Un accompagnement clair pour chaque départ',
-    sub: 'Billetterie, Hadj, Omra — et l’accompagnement autour du voyage. À Bamako, un interlocuteur joignable.',
+    sub: 'Billetterie, Hadj, Umrah — et l’accompagnement autour du voyage. À Bamako, un interlocuteur joignable.',
     image: images.voyageuseDunes,
   },
   blocks: [
@@ -187,21 +190,21 @@ export const services = {
       imageAlt: 'La Mecque — organisation du Hadj',
     },
     {
-      id: 'omra',
+      id: 'umrah',
       eyebrow: '03',
-      title: 'Organisation de la Omra',
+      title: 'Organisation de l’Umrah',
       text:
-        'Organisation de votre Omra avec billets, hébergement, transferts et accompagnement personnalisé.',
+        'Organisation de votre Umrah avec billets, hébergement, transferts et accompagnement personnalisé.',
       points: ['Billets et transferts', 'Hébergement', 'Accompagnement personnalisé'],
       image: images.istanbul,
-      imageAlt: 'Istanbul — escale et Omra',
+      imageAlt: 'Istanbul — escale et Umrah',
     },
     {
       id: 'visa',
       eyebrow: '04',
-      title: 'Visa Hadj et Omra',
+      title: 'Visa Hadj et Umrah',
       text:
-        'Assistance complète pour vos démarches de visa Hadj et Omra : préparation du dossier, vérification des pièces et suivi administratif.',
+        'Assistance complète pour vos démarches de visa Hadj et Umrah : préparation du dossier, vérification des pièces et suivi administratif.',
       points: ['Préparation du dossier', 'Vérification des pièces', 'Suivi administratif'],
       image: images.conseillere,
       imageAlt: 'Conseillère Prosperity Travel',

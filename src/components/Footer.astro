@@ -6,18 +6,18 @@ const waHref = `https://wa.me/${site.contact.whatsappE164}`;
 ---
 
 <footer data-nav="dark" class="bg-nuit text-ivoire">
-  <div class="mx-auto grid max-w-6xl gap-10 px-4 py-14 md:grid-cols-12 md:gap-8 md:px-6 md:py-16">
+  <div class="site-shell grid gap-12 py-16 md:grid-cols-12 md:gap-10 md:py-20 lg:py-24">
     <div class="md:col-span-5">
       <img
         src={site.brandAssets.logoHorizontalBlanc}
         alt={site.brand}
         width="212"
         height="60"
-        class="h-10 w-auto"
+        class="h-11 w-auto md:h-12"
         loading="lazy"
         decoding="async"
       />
-      <p class="mt-4 max-w-sm text-sm leading-relaxed text-ivoire/60">{site.tagline}</p>
+      <p class="type-body mt-5 max-w-md leading-relaxed text-ivoire/60">{site.tagline}</p>
       <p class="mt-6 text-xs text-ivoire/40">{site.legalName}</p>
     </div>
 
@@ -78,7 +78,7 @@ const waHref = `https://wa.me/${site.contact.whatsappE164}`;
   <!-- Crédit : « Design by » + SVG complet (logo + MSK CREATION déjà dans le fichier) -->
   <div class="border-t border-ivoire/10">
     <div
-      class="mx-auto flex max-w-6xl flex-col items-start justify-between gap-4 px-4 py-4 text-xs text-ivoire/45 sm:flex-row sm:items-center md:px-6"
+      class="site-shell flex flex-col items-start justify-between gap-4 py-4 text-xs text-ivoire/45 sm:flex-row sm:items-center"
     >
       <p>© {year} {site.brand}. Tous droits réservés.</p>
       <a

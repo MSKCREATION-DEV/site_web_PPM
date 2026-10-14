@@ -1,12 +1,36 @@
 # Changelog — Prosperity Travel
 
+## 2026-10-14 — Services sommaire
+
+- Sommaire 01–05 : ligne numérotée pleine largeur (plus de cases vides)
+- Images services : panneau adouci SVG conservé
+
+## 2026-10-14 — Orthographe Umrah
+
+- Forme internationale **Umrah** (EN) retenue à la place de Omra (FR) — textes, ancres `#umrah`, options formulaire
+
+## 2026-10-14 — Layout plein écran + échelle fluide
+
+- Conteneur `.site-shell` : plus de `max-w-6xl` — contenu sur toute la largeur avec padding latéral fluide
+- Échelle typo / sections : `.type-display`, `.type-title`, `.type-lead`, `.section-pad`, `.btn-lg`
+- Hero, cards destinations, nav, footer, services et contact redimensionnés pour grands écrans
+- Appliqué header, footer, accueil, à propos, services, contact
+
+## 2026-10-14 — Hero accueil type Wilderness (adapté charte)
+
+- **Hero** : plein écran `100svh`, marque typo centrée, ligne + Play or, coords gauche / blurb métier droite
+- Eyebrow « Bienvenue à » ; marque **Prosperity** (blanc) + **Travel** (or) + filet or
+- Media : poster + `/videos/hero-presentation.mp4` ; `preload=none` (charge au Play) ; poster si pause / erreur
+- CTA retirés du hero → header « Demander un devis » + WhatsApp FAB
+- Composant `HomeHero.astro` ; orthographe **Umrah** / **l’Umrah** dans les textes
+
 ## 2026-10-06 — Accueil restauré + Services bandes 50/50 + photos locales
 
 - **Accueil** : structure validée (hero logo, manifesto craie, destinations, liste expériences, parcours, CTA) + polish léger
 - **Services** : intro + ancres 01–05 + bandes éditoriales 50/50 ; images inset forme panneau adouci (fondu 4 côtés) ; CTA horaires
 - **Contact** : hero split immersif, horaires éditoriaux, formulaire line-fields, carte fondue
 - Photos : `public/images/*.webp` (pack Travel) — Unsplash retiré ; `hero-horizon.jpg` retiré
-- Services (priorité) : Billetterie · Hadj · Omra · Visa · Hôtels
+- Services (priorité) : Billetterie · Hadj · Umrah · Visa · Hôtels
 - Horaires : bureau 8h–17h · réservation de billets 24h/24
 
 ## 2026-10-05 — Charte officielle Travel

@@ -1,0 +1,124 @@
+---
+import { home } from '../data/content';
+
+const { hero } = home;
+const hasVideo = Boolean(hero.videoSrc);
+---
+
+<section
+  id="home-hero"
+  data-nav="dark"
+  data-hero-playing="false"
+  data-hero-loading="false"
+  class="home-hero relative flex h-[100svh] min-h-[100svh] flex-col overflow-hidden bg-nuit text-ivoire"
+>
+  <div class="absolute inset-0">
+    <img
+      src={hero.image}
+      alt={hero.imageAlt}
+      class="hero-media absolute inset-0 z-10 h-full w-full object-cover transition-opacity duration-700 ease-out"
+      width="2000"
+      height="1493"
+      fetchpriority="high"
+      data-hero-poster
+    />
+    {
+      hasVideo && (
+        <div class="absolute inset-0 z-[5] overflow-hidden" aria-hidden="true">
+          <video
+            class="hero-video absolute inset-0 h-full w-full object-cover opacity-0 transition-opacity duration-700 ease-out"
+            data-hero-video
+            muted
+            playsinline
+            loop
+            preload="none"
+            poster={hero.image}
+          >
+            <source data-hero-source src={hero.videoSrc} type="video/mp4" />
+          </video>
+        </div>
+      )
+    }
+    <div
+      class="pointer-events-none absolute inset-0 z-20 bg-gradient-to-t from-nuit via-nuit/40 to-nuit/20"
+      aria-hidden="true"
+    >
+    </div>
+  </div>
+
+  <div class="relative z-30 flex h-full flex-col items-center justify-between">
+    <div class="relative h-28 shrink-0 md:h-36 lg:h-40" aria-hidden="true"></div>
+
+    <div class="site-shell relative w-full text-center">
+      <p class="reveal type-eyebrow font-medium text-ivoire/80">{hero.eyebrow}</p>
+
+      <h1 class="reveal reveal-delay-1 hero-brand mt-5 md:mt-7">
+        <span class="hero-brand__primary">{hero.brandPrimary}</span>
+        <span class="hero-brand__accent">{hero.brandAccent}</span>
+      </h1>
+
+      <div class="reveal reveal-delay-1 gold-rule mx-auto mt-6 md:mt-8" aria-hidden="true"></div>
+
+      <div class="reveal reveal-delay-2 hero-blurb mx-auto mt-6 text-ivoire/80 sm:hidden">
+        <p class="font-medium text-ivoire/90">{hero.blurbTitle}</p>
+        <p class="mt-2">{hero.blurb}</p>
+      </div>
+    </div>
+
+    <div class="relative w-full shrink-0 pb-10 md:pb-14 lg:pb-16">
+      <div class="site-shell flex w-full flex-row items-center justify-center pb-8 sm:pb-5">
+        <div class="mt-4 h-px flex-1 bg-blanc/50 opacity-50" aria-hidden="true"></div>
+        <div class="mx-4 flex flex-col items-center lg:mx-12">
+          <div class="mb-2 h-3 w-3 rounded-full border border-blanc/50 md:mb-3 md:h-3.5 md:w-3.5" aria-hidden="true"></div>
+          <button
+            type="button"
+            class="hero-play relative flex cursor-pointer items-center justify-center rounded-full border-2 border-blanc/50 transition hover:border-or/80 focus-visible:outline-offset-4 disabled:cursor-default disabled:opacity-60"
+            data-hero-play
+            aria-label={hasVideo ? 'Lire la vidéo' : 'Vidéo bientôt disponible'}
+            aria-pressed="false"
+            disabled={!hasVideo}
+          >
+            <span
+              class="flex h-8 w-8 items-center justify-center rounded-full bg-nuit/55 md:h-9 md:w-9"
+              aria-hidden="true"
+            >
+              <svg
+                data-icon-play
+                width="8"
+                height="12"
+                viewBox="0 0 6 10"
+                xmlns="http://www.w3.org/2000/svg"
+                class="ml-0.5 fill-or stroke-or"
+              >
+                <path d="M0 9.5L6 5L0 0.5V9.5Z"></path>
+              </svg>
+              <svg
+                data-icon-pause
+                width="12"
+                height="12"
+                viewBox="0 0 10 10"
+                xmlns="http://www.w3.org/2000/svg"
+                class="hidden fill-or"
+              >
+                <rect x="1" y="1" width="2.5" height="8" rx="0.5"></rect>
+                <rect x="6.5" y="1" width="2.5" height="8" rx="0.5"></rect>
+              </svg>
+              <span data-icon-loading class="hero-play__spinner hidden"></span>
+            </span>
+          </button>
+        </div>
+        <hr class="mt-4 flex-1 border-0 border-t border-blanc/50 opacity-50" aria-hidden="true" />
+      </div>
+
+      <div class="site-shell hidden w-full flex-row items-start justify-between sm:flex">
+        <p class="font-mono text-[0.75rem] tracking-[0.22em] text-ivoire/55 md:text-sm">
+          {hero.coords}
+        </p>
+        <div class="hero-blurb text-ivoire/80">
+          <p class="font-medium text-ivoire/90">{hero.blurbTitle}</p>
+          <p class="mt-2">{hero.blurb}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

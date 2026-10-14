@@ -8,12 +8,14 @@ alwaysApply: false
 
 Source marque : `docs/brand/CHARTE-TRAVEL.md`. Inspiration Wilderness : immersif, photo-first, CTA clair. Identité = bleu azur · or · craie.
 
-## Premier viewport
+## Premier viewport (accueil)
 
-- Une seule composition : marque (logo PNG) + 1 headline + 1 phrase + groupe CTA + image **full-bleed**
-- Pas de stats, cartes, badges, chips, promo overlays sur le hero
-- Marque = signal hero-level (logo horizontal officiel, pas seulement la nav)
-- Logo sur photo : overlay azur profond / zone calme (interdit charte : photo chargée)
+- Une seule composition full-bleed `100svh` : marque typo centrée + ligne Play + bas (coords / blurb métier)
+- Pas de stats, cartes, badges, chips, promo overlays, ni CTA dans le hero
+- Conversion : CTA « Demander un devis » dans le **header** + WhatsApp FAB
+- H1 = `Prosperity Travel` (Cormorant) ; texte métier en bas à droite (pas un second H1)
+- Media : poster image + slot vidéo (`videoSrc`) ; Play or (`#C9A24E`) révèle / lance la vidéo
+- Overlay azur-profond en bas pour lisibilité (interdit charte : logo PNG posé sur photo chargée)
 
 ## Layout
 
@@ -21,11 +23,12 @@ Source marque : `docs/brand/CHARTE-TRAVEL.md`. Inspiration Wilderness : immersif
 - Alternance fonds `--color-craie` / `--color-azur-profond`
 - Cards : seulement si interaction (service, formulaire) — pas en hero
 - Header sticky : transparent → azur-profond au scroll ; CTA Contact / WhatsApp visibles
-- Header / footer : logo **horizontal** (pas l’emblème seul)
+- Header / footer : logo **horizontal** PNG (pas l’emblème seul)
 
 ## Typo
 
-- Wordmark marque : PNG officiels uniquement
+- Logo PNG officiels : header / footer uniquement
+- Marque hero accueil : wordmark typographique (Cormorant) — pattern immersif Wilderness adapté
 - Titres éditoriaux : serif expressive (Cormorant) — pas Inter/Roboto/Arial
 - Corps : sans lisible (DM Sans)
 
