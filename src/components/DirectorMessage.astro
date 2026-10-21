@@ -1,0 +1,109 @@
+---
+interface Props {
+  eyebrow: string;
+  name: string;
+  role: string;
+  quote: readonly string[];
+  image: string;
+  imageAlt?: string;
+}
+
+const { eyebrow, name, role, quote, image, imageAlt = '' } = Astro.props;
+---
+
+<section data-nav="light" class="director-msg section-pad border-t border-nuit/5 bg-ivoire">
+  <div class="site-shell">
+    <div class="director-msg__col reveal mx-auto flex max-w-2xl flex-col items-center text-center">
+      <p class="type-eyebrow text-or">{eyebrow}</p>
+
+      <div class="director-msg__portrait mt-10">
+        <div class="director-msg__ring">
+          <img
+            src={image}
+            alt={imageAlt}
+            width="400"
+            height="400"
+            class="director-msg__photo"
+            loading="lazy"
+            decoding="async"
+          />
+        </div>
+        <span class="director-msg__pointer" aria-hidden="true"></span>
+      </div>
+
+      <p class="mt-8 font-display text-3xl text-nuit md:text-4xl">{name}</p>
+      <p class="type-eyebrow mt-3 text-or">{role}</p>
+      <div class="gold-rule mx-auto mt-7"></div>
+
+      <blockquote class="mt-8 space-y-4">
+        {
+          quote.map((p) => (
+            <p class="type-lead text-nuit/75">{p}</p>
+          ))
+        }
+      </blockquote>
+    </div>
+  </div>
+</section>
+
+<style>
+  .director-msg__portrait {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: min(100%, 15rem);
+  }
+
+  @media (min-width: 768px) {
+    .director-msg__portrait {
+      width: 17rem;
+    }
+  }
+
+  .director-msg__ring {
+    width: 100%;
+    aspect-ratio: 1;
+    border-radius: 999px;
+    padding: 0.4rem;
+    background: linear-gradient(
+      145deg,
+      var(--color-or) 0%,
+      color-mix(in srgb, var(--color-or) 50%, var(--color-azur)) 55%,
+      var(--color-azur-profond) 100%
+    );
+    box-shadow: 0 22px 48px rgba(18, 63, 112, 0.16);
+    transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .director-msg__col:hover .director-msg__ring {
+    transform: translateY(-4px) scale(1.02);
+  }
+
+  .director-msg__photo {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border-radius: 999px;
+    object-fit: cover;
+    object-position: center top;
+    background: var(--color-craie);
+  }
+
+  .director-msg__pointer {
+    width: 0;
+    height: 0;
+    margin-top: -1px;
+    border-left: 0.7rem solid transparent;
+    border-right: 0.7rem solid transparent;
+    border-top: 0.85rem solid var(--color-or);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .director-msg__ring,
+    .director-msg__col:hover .director-msg__ring {
+      transition: none;
+      transform: none;
+    }
+  }
+</style>

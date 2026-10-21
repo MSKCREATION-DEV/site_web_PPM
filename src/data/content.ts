@@ -198,6 +198,56 @@ export const about = {
       text: 'Des destinations pour chaque budget, sans jamais sacrifier la qualité.',
     },
   ],
+  /** Placeholders — remplacer photo / nom / texte après validation client. */
+  director: {
+    eyebrow: 'Mot du directeur',
+    name: 'Nom à confirmer',
+    role: 'Directeur',
+    quote: [
+      'Depuis Bamako, notre rôle est simple : vous aider à partir dans de bonnes conditions.',
+      'Billet, dossier, pèlerinage — vous avez un interlocuteur joignable, du premier échange jusqu’au retour.',
+    ],
+    image: images.conseillere,
+    imageAlt: 'Portrait du directeur — placeholder',
+  },
+  team: {
+    eyebrow: 'L’équipe',
+    title: 'Ceux qui vous accompagnent',
+    members: [
+      {
+        id: '01',
+        name: 'Nom à confirmer',
+        role: 'Billetterie',
+        bio: 'Recherche de vols, émission de billets et suivi jusqu’au départ.',
+        image: images.conseillere,
+        imageAlt: 'Conseiller billetterie — placeholder',
+      },
+      {
+        id: '02',
+        name: 'Nom à confirmer',
+        role: 'Hadj & Umrah',
+        bio: 'Dossiers pèlerinage, vols, hébergement et accompagnement des pèlerins.',
+        image: images.conseillere,
+        imageAlt: 'Conseiller pèlerinage — placeholder',
+      },
+      {
+        id: '03',
+        name: 'Nom à confirmer',
+        role: 'Visa',
+        bio: 'Préparation des dossiers visa Hadj et Umrah, vérification et suivi.',
+        image: images.conseillere,
+        imageAlt: 'Conseiller visa — placeholder',
+      },
+      {
+        id: '04',
+        name: 'Nom à confirmer',
+        role: 'Accueil',
+        bio: 'Accueil au bureau, réponses WhatsApp et prise de rendez-vous.',
+        image: images.conseillere,
+        imageAlt: 'Conseiller accueil — placeholder',
+      },
+    ],
+  },
 } as const;
 
 export type ServiceBlock = {

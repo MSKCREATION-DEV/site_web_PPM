@@ -99,15 +99,15 @@
 
   .reveal {
     opacity: 0;
-    transform: translate3d(0, 28px, 0);
+    transform: translate3d(0, 36px, 0) scale(0.98);
     transition:
-      opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
-      transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+      opacity 0.95s cubic-bezier(0.22, 1, 0.36, 1),
+      transform 0.95s cubic-bezier(0.22, 1, 0.36, 1);
   }
 
   .reveal.is-visible {
     opacity: 1;
-    transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0) scale(1);
   }
 
   .reveal-delay-1 {
@@ -145,7 +145,7 @@
       );
   }
 
-  /* Marque hero — Prosperity (blanc) + Travel (or) */
+  /* Marque hero — Prosperity (blanc) + Travel (azur profond) */
   .hero-brand {
     display: flex;
     flex-direction: column;
@@ -167,8 +167,10 @@
   .hero-brand__accent {
     font-size: clamp(1.85rem, 1.2rem + 3.2vw, 3.75rem);
     letter-spacing: 0.42em;
-    color: var(--color-or);
-    text-shadow: 0 1px 18px rgba(18, 63, 112, 0.35);
+    color: var(--color-azur-profond);
+    text-shadow:
+      0 0 1px rgba(255, 255, 255, 0.35),
+      0 2px 18px rgba(255, 255, 255, 0.25);
   }
 
   .hero-play {
@@ -226,6 +228,10 @@
     height: 1px;
     width: clamp(3rem, 2rem + 2.5vw, 5.5rem);
     background: var(--gradient-or-metal);
+  }
+
+  .gold-rule--azur {
+    background: var(--color-azur-profond);
   }
 
   /* Services — image inset, grande, fondu 4 côtés via SVG mask */

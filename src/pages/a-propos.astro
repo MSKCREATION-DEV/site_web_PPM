@@ -1,6 +1,8 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PageHero from '../components/PageHero.astro';
+import DirectorMessage from '../components/DirectorMessage.astro';
+import TeamGrid from '../components/TeamGrid.astro';
 import { about } from '../data/content';
 ---
 
@@ -45,8 +47,29 @@ import { about } from '../data/content';
     </div>
   </section>
 
-  <section data-nav="dark" class="section-pad bg-nuit text-ivoire">
-    <div class="site-shell">
+  <DirectorMessage
+    eyebrow={about.director.eyebrow}
+    name={about.director.name}
+    role={about.director.role}
+    quote={about.director.quote}
+    image={about.director.image}
+    imageAlt={about.director.imageAlt}
+  />
+
+  <TeamGrid
+    eyebrow={about.team.eyebrow}
+    title={about.team.title}
+    members={about.team.members}
+  />
+
+  <section data-nav="dark" class="section-pad relative overflow-hidden bg-nuit text-ivoire">
+    <div
+      class="pointer-events-none absolute inset-0 opacity-40"
+      style="background:radial-gradient(ellipse 60% 50% at 10% 20%, rgba(47,138,208,0.35), transparent 60%), radial-gradient(ellipse 50% 40% at 90% 80%, rgba(201,162,78,0.18), transparent 55%)"
+      aria-hidden="true"
+    >
+    </div>
+    <div class="site-shell relative z-10">
       <p class="reveal type-eyebrow text-or">Valeurs</p>
       <h2 class="reveal reveal-delay-1 type-display mt-4">Ce qui nous guide</h2>
       <ul class="mt-16 grid gap-10 sm:grid-cols-3 lg:gap-12">
@@ -54,12 +77,12 @@ import { about } from '../data/content';
           about.values.map((v, i) => (
             <li
               class:list={[
-                'reveal border-t border-or/40 pt-7',
+                'reveal group border-t border-or/40 pt-7 transition duration-500 hover:border-or',
                 i === 1 && 'reveal-delay-1',
                 i === 2 && 'reveal-delay-2',
               ]}
             >
-              <h3 class="type-title">{v.title}</h3>
+              <h3 class="type-title transition duration-500 group-hover:text-or">{v.title}</h3>
               <p class="type-body mt-4 text-ivoire/65">{v.text}</p>
             </li>
           ))
