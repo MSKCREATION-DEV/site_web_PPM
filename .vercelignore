@@ -1,0 +1,20 @@
+# Dépendances & build local
+node_modules
+dist
+.astro
+.git
+.cursor
+.vscode
+.env*
+CLAUDE.md
+
+# Sources lourdes hors site
+PHOTO EQUIPE *
+docs/contrat
+docs/cahier
+docs/references
+docs/brand/Prosperity-Mises-en-situation.pdf
+docs/brand/assets
+
+# Agent / interne
+agent-transcripts

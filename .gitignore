@@ -28,3 +28,5 @@ docs/brand/Prosperity-Mises-en-situation.pdf
 
 # Sources photos brutes (optimisées dans public/images/team/)
 PHOTO EQUIPE */
+.vercel
+.env*
