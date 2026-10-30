@@ -34,10 +34,10 @@ export const site = {
     hoursTickets: 'Réservation de billets · 24h/24',
     /** WhatsApp Business — même numéro placeholder */
     whatsappE164: '22370869191',
-    /** Embed Maps placeholder (Bamako centre — à remplacer) */
+    /** Localisation réelle (lat/lng validés) */
     mapsEmbedUrl:
-      'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3890.0!2d-8.0029!3d12.6392!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2sBamako!5e0!3m2!1sfr!2sml!4v1700000000000!5m2!1sfr!2sml',
-    mapsLink: 'https://maps.google.com/?q=Kalaban+Coura+ACI,+Bamako,+Mali',
+      'https://www.google.com/maps?q=12.576008,-8.010945&hl=fr&z=16&output=embed',
+    mapsLink: 'https://maps.google.com/?q=12.576008,-8.010945',
   },
 
   social: {
