@@ -33,6 +33,21 @@
   --color-fg: var(--color-azur-profond);
   --color-accent: var(--color-or);
   --color-muted: color-mix(in srgb, var(--color-azur-profond) 65%, transparent);
+
+  /* Hauteur header fixe (py + logo) — heroes / ancres scroll */
+  --site-header-height: 4.75rem;
+}
+
+@media (min-width: 768px) {
+  :root {
+    --site-header-height: 5.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  :root {
+    --site-header-height: 6rem;
+  }
 }
 
 @theme inline {

@@ -1,0 +1,243 @@
+---
+interface Props {
+  eyebrow: string;
+  title: string;
+  sub: string;
+  image: string;
+  imageAlt: string;
+  whatsappHref: string;
+  formHref?: string;
+}
+
+const {
+  eyebrow,
+  title,
+  sub,
+  image,
+  imageAlt,
+  whatsappHref,
+  formHref = '#formulaire',
+} = Astro.props;
+---
+
+<section data-nav="dark" class="contact-hero">
+  <div class="contact-hero__media" aria-hidden="true">
+    <img
+      src={image}
+      alt=""
+      class="contact-hero__photo"
+      width="1512"
+      height="1512"
+      fetchpriority="high"
+      decoding="async"
+    />
+    <div class="contact-hero__veil"></div>
+  </div>
+  <div class="contact-hero__fade" aria-hidden="true"></div>
+
+  <div class="contact-hero__inner site-shell">
+    <div class="contact-hero__copy">
+      <p class="reveal type-eyebrow text-or">{eyebrow}</p>
+      <h1 class="reveal reveal-delay-1 contact-hero__title">{title}</h1>
+      <p class="reveal reveal-delay-2 contact-hero__sub">{sub}</p>
+      <div class="reveal reveal-delay-3 contact-hero__actions">
+        <a
+          href={whatsappHref}
+          class="contact-hero__btn contact-hero__btn--primary btn-lg rounded-sm font-medium no-underline"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Écrire sur WhatsApp
+        </a>
+        <a
+          href={formHref}
+          class="contact-hero__btn contact-hero__btn--secondary btn-lg rounded-sm font-medium no-underline"
+        >
+          Remplir le formulaire
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<span class="sr-only">{imageAlt}</span>
+
+<style>
+  .contact-hero {
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    overflow: hidden;
+    background: var(--color-azur-profond);
+    color: var(--color-ivoire);
+    min-height: clamp(26rem, 68svh, 38rem);
+  }
+
+  .contact-hero__media {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    background: var(--color-azur-profond);
+  }
+
+  .contact-hero__photo {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 28%;
+  }
+
+  /* Bleu sur toute la zone + renfort à gauche pour le texte */
+  .contact-hero__veil {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background:
+      linear-gradient(
+        90deg,
+        var(--color-azur-profond) 0%,
+        color-mix(in srgb, var(--color-azur-profond) 88%, transparent) 38%,
+        color-mix(in srgb, var(--color-azur-profond) 62%, transparent) 68%,
+        color-mix(in srgb, var(--color-azur-profond) 55%, transparent) 100%
+      ),
+      color-mix(in srgb, var(--color-azur-profond) 42%, transparent);
+  }
+
+  /* Fondu bas doux — reste sous les CTA */
+  .contact-hero__fade {
+    position: absolute;
+    inset-inline: 0;
+    bottom: 0;
+    z-index: 1;
+    height: 4rem;
+    pointer-events: none;
+    background: linear-gradient(
+      180deg,
+      transparent 0%,
+      color-mix(in srgb, var(--color-blanc) 55%, transparent) 55%,
+      var(--color-blanc) 100%
+    );
+  }
+
+  @media (min-width: 768px) {
+    .contact-hero__fade {
+      height: 4.75rem;
+    }
+  }
+
+  .contact-hero__inner {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    padding-top: calc(var(--site-header-height) + clamp(1.75rem, 3vw, 2.75rem));
+    /* Remonte les boutons au-dessus du fondu */
+    padding-bottom: clamp(3.25rem, 6vw, 5rem);
+  }
+
+  .contact-hero__copy {
+    max-width: 36rem;
+  }
+
+  .contact-hero__title {
+    margin-top: 1rem;
+    font-family: var(--font-display);
+    font-size: clamp(2.15rem, 1.4rem + 2.4vw, 3.75rem);
+    font-weight: 600;
+    line-height: 1.08;
+    max-width: 14ch;
+  }
+
+  .contact-hero__sub {
+    margin-top: 1.15rem;
+    max-width: 28rem;
+    font-size: clamp(1.02rem, 0.95rem + 0.3vw, 1.2rem);
+    line-height: 1.65;
+    color: color-mix(in srgb, var(--color-ivoire) 80%, transparent);
+  }
+
+  .contact-hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.85rem 1rem;
+    margin-top: clamp(1.5rem, 3vw, 2.35rem);
+  }
+
+  .contact-hero__btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition:
+      background-color 0.25s ease,
+      color 0.25s ease,
+      border-color 0.25s ease,
+      filter 0.25s ease;
+  }
+
+  .contact-hero__btn--primary {
+    background: var(--color-or);
+    color: var(--color-blanc);
+  }
+
+  .contact-hero__btn--primary:hover {
+    filter: brightness(1.08);
+  }
+
+  /* Plein blanc — lisible même sur le fondu bas */
+  .contact-hero__btn--secondary {
+    background: var(--color-blanc);
+    color: var(--color-azur-profond);
+    border: 1px solid var(--color-blanc);
+    box-shadow: 0 8px 24px color-mix(in srgb, var(--color-azur-profond) 18%, transparent);
+  }
+
+  .contact-hero__btn--secondary:hover {
+    background: var(--color-craie);
+    border-color: var(--color-or);
+    color: var(--color-azur-profond);
+  }
+
+  .contact-hero__btn--secondary:focus-visible {
+    outline: 2px solid var(--color-or);
+    outline-offset: 3px;
+  }
+
+  @media (max-width: 767px) {
+    .contact-hero {
+      min-height: clamp(24rem, 78svh, 34rem);
+    }
+
+    .contact-hero__photo {
+      object-position: 58% 22%;
+    }
+
+    .contact-hero__veil {
+      background:
+        linear-gradient(
+          180deg,
+          color-mix(in srgb, var(--color-azur-profond) 70%, transparent) 0%,
+          color-mix(in srgb, var(--color-azur-profond) 48%, transparent) 40%,
+          color-mix(in srgb, var(--color-azur-profond) 82%, transparent) 78%,
+          var(--color-azur-profond) 100%
+        ),
+        color-mix(in srgb, var(--color-azur-profond) 40%, transparent);
+    }
+
+    .contact-hero__copy {
+      max-width: none;
+    }
+
+    .contact-hero__title {
+      max-width: none;
+    }
+
+    .contact-hero__actions {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .contact-hero__actions a {
+      text-align: center;
+    }
+  }
+</style>

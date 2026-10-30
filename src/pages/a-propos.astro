@@ -1,14 +1,16 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PageHero from '../components/PageHero.astro';
+import AboutIdentity from '../components/AboutIdentity.astro';
 import DirectorMessage from '../components/DirectorMessage.astro';
 import TeamGrid from '../components/TeamGrid.astro';
+import TeamShowcase from '../components/TeamShowcase.astro';
 import { about } from '../data/content';
 ---
 
 <BaseLayout
   title="À propos"
-  description="Prosperity Travel à Bamako. Présentation de l’agence de voyage et de billetterie."
+  description="Prosperity Travel à Bamako. Équipe, direction et agence de voyage — billets d’avion, Hadj et Umrah."
 >
   <PageHero
     eyebrow={about.hero.eyebrow}
@@ -18,47 +20,45 @@ import { about } from '../data/content';
     compact
   />
 
-  <section data-nav="light" class="section-pad bg-ivoire">
-    <div class="site-shell grid gap-14 md:grid-cols-12 md:gap-16 lg:gap-20">
-      <div class="reveal md:col-span-5">
-        <div class="gold-rule"></div>
-        <h2 class="type-display mt-6">{about.story.title}</h2>
-      </div>
-      <div class="reveal reveal-delay-1 space-y-6 md:col-span-7">
-        {
-          about.story.body.map((p) => (
-            <p class="type-lead text-nuit/75">{p}</p>
-          ))
-        }
-      </div>
-    </div>
-  </section>
-
-  <section data-nav="light" class="border-t border-nuit/5 bg-ivoire pb-[clamp(4.5rem,7.5vw,9rem)]">
-    <div class="site-shell grid gap-12 md:grid-cols-2 md:gap-16 lg:gap-24">
-      <div class="reveal">
-        <p class="type-eyebrow text-or">{about.mission.title}</p>
-        <p class="type-title mt-5 leading-snug text-nuit">{about.mission.text}</p>
-      </div>
-      <div class="reveal reveal-delay-1">
-        <p class="type-eyebrow text-or">{about.vision.title}</p>
-        <p class="type-title mt-5 leading-snug text-nuit">{about.vision.text}</p>
-      </div>
-    </div>
-  </section>
+  <AboutIdentity
+    storyEyebrow={about.story.eyebrow}
+    storyTitle={about.story.title}
+    storyLead={about.story.lead}
+    practical={about.story.practical}
+    practicalNote={about.story.practicalNote}
+    missionEyebrow={about.mission.eyebrow}
+    missionText={about.mission.text}
+    visionEyebrow={about.vision.eyebrow}
+    visionText={about.vision.text}
+  />
 
   <DirectorMessage
     eyebrow={about.director.eyebrow}
+    title={about.director.title}
     name={about.director.name}
     role={about.director.role}
     quote={about.director.quote}
     image={about.director.image}
+    initials={about.director.initials}
     imageAlt={about.director.imageAlt}
+    brand={about.director.brand}
+  />
+
+  <TeamShowcase
+    eyebrow={about.teamScene.eyebrow}
+    titleLead={about.teamScene.titleLead}
+    titleAccent={about.teamScene.titleAccent}
+    text={about.teamScene.text}
+    image={about.teamScene.image}
+    imageAlt={about.teamScene.imageAlt}
+    highlights={about.teamScene.highlights}
+    values={about.teamScene.values}
   />
 
   <TeamGrid
     eyebrow={about.team.eyebrow}
     title={about.team.title}
+    kicker={about.team.kicker}
     members={about.team.members}
   />
 
@@ -70,7 +70,7 @@ import { about } from '../data/content';
     >
     </div>
     <div class="site-shell relative z-10">
-      <p class="reveal type-eyebrow text-or">Valeurs</p>
+      <p class="reveal type-eyebrow text-or">Valeurs charte</p>
       <h2 class="reveal reveal-delay-1 type-display mt-4">Ce qui nous guide</h2>
       <ul class="mt-16 grid gap-10 sm:grid-cols-3 lg:gap-12">
         {

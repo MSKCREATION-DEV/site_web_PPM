@@ -4,250 +4,581 @@ interface Member {
   name: string;
   role: string;
   bio: string;
-  image: string;
+  image?: string;
+  initials?: string;
   imageAlt?: string;
 }
 
 interface Props {
   eyebrow: string;
   title: string;
+  kicker?: string;
   members: readonly Member[];
 }
 
-const { eyebrow, title, members } = Astro.props;
+const { eyebrow, title, kicker, members } = Astro.props;
+
+const [lead, ...rest] = members;
+const leadCompanions = rest.slice(0, 2);
+const remaining = rest.slice(2);
+
+function memberInitials(member: Member) {
+  return (
+    member.initials ||
+    member.name
+      .split(' ')
+      .filter(Boolean)
+      .slice(0, 2)
+      .map((w) => w[0])
+      .join('')
+      .toUpperCase()
+  );
+}
 ---
 
-<section data-nav="light" class="team-grid section-pad relative overflow-hidden bg-blanc">
-  <div class="team-grid__glow pointer-events-none absolute inset-0" aria-hidden="true"></div>
+<section data-nav="light" class="team-gallery section-pad relative overflow-hidden bg-ivoire">
+  <!-- Motifs discrets : arc + trajectoire -->
+  <div class="team-gallery__decor pointer-events-none absolute inset-0" aria-hidden="true">
+    <svg class="team-gallery__arc" viewBox="0 0 400 400" fill="none">
+      <circle
+        cx="40"
+        cy="200"
+        r="180"
+        stroke="currentColor"
+        stroke-width="0.8"
+        opacity="0.35"
+      />
+    </svg>
+    <svg class="team-gallery__flight" viewBox="0 0 220 60" fill="none">
+      <path
+        d="M8 42 C 60 8, 120 8, 170 28"
+        stroke="currentColor"
+        stroke-width="1.2"
+        stroke-dasharray="2.5 5"
+        stroke-linecap="round"
+      />
+      <path
+        d="M168 24 L182 30 L168 36 L172 30 Z"
+        fill="currentColor"
+        opacity="0.85"
+      />
+    </svg>
+  </div>
 
   <div class="site-shell relative z-10">
-    <div class="reveal mx-auto max-w-3xl text-center">
+    <header class="reveal team-gallery__header mx-auto max-w-3xl text-center">
       <p class="type-eyebrow text-or">{eyebrow}</p>
-      <h2 class="type-display mt-4 text-nuit">{title}</h2>
-      <div class="gold-rule mx-auto mt-7"></div>
-    </div>
-
-    <ul class="mt-16 grid gap-20 sm:grid-cols-2 lg:mt-20 lg:grid-cols-4 lg:gap-x-12 lg:gap-y-24">
+      <div class="gold-rule mx-auto mt-5"></div>
+      <h2 class="type-display mt-6 text-nuit">{title}</h2>
       {
-        members.map((member, i) => (
-          <li
+        kicker && (
+          <p class="team-gallery__kicker mt-5 text-or">{kicker}</p>
+        )
+      }
+    </header>
+
+    {
+      members.length === 0 ? null : (
+        <div class="team-gallery__layout mt-14 lg:mt-16">
+          {/* Rangée focale : lead + 0–2 compagnons */}
+          <div
             class:list={[
-              'team-member reveal',
-              i === 1 && 'reveal-delay-1',
-              i === 2 && 'reveal-delay-2',
-              i === 3 && 'reveal-delay-3',
+              'team-gallery__lead-row',
+              leadCompanions.length === 0 && 'team-gallery__lead-row--solo',
+              leadCompanions.length === 1 && 'team-gallery__lead-row--duo',
             ]}
           >
-            <div class="team-member__media">
-              {/*
-                Arc inférieur + pastilles (copie exacte du template Meet Our Team).
-                viewBox centré : photo r≈62, arc r≈74, balayant le bas.
-              */}
-              <svg class="team-member__arc" viewBox="0 0 200 200" aria-hidden="true">
-                {/*
-                  Arc bas jusqu’à mi-hauteur du cercle (y=100).
-                  Centre 100,100 · r=84 · demi-cercle inférieur + pastilles.
-                */}
-                <path
-                  d="M 16 100 A 84 84 0 0 0 184 100"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="1.6"
-                  stroke-linecap="round"
-                />
-                <circle cx="16" cy="100" r="4.25" fill="currentColor" />
-                <circle cx="184" cy="100" r="4.25" fill="currentColor" />
-              </svg>
+            {lead && (
+              <article class="team-card team-card--featured reveal">
+                <div class="team-card__media">
+                  {lead.image ? (
+                    <img
+                      src={lead.image}
+                      alt={lead.imageAlt ?? `${lead.name}, ${lead.role} — Prosperity Travel Bamako`}
+                      width="640"
+                      height="640"
+                      class="team-card__photo"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  ) : (
+                    <div class="team-card__placeholder" aria-label={lead.imageAlt ?? lead.name}>
+                      <span>{memberInitials(lead)}</span>
+                    </div>
+                  )}
+                </div>
+                <div class="team-card__panel">
+                  <span class="team-card__num" aria-hidden="true">
+                    {lead.id}
+                  </span>
+                  <div class="team-card__body">
+                    <h3 class="team-card__name">{lead.name}</h3>
+                    <p class="team-card__role">{lead.role}</p>
+                    <span class="team-card__rule" aria-hidden="true" />
+                    <p class="team-card__bio">{lead.bio}</p>
+                    {!lead.image && <p class="team-card__pending">Photo à venir</p>}
+                  </div>
+                </div>
+              </article>
+            )}
 
-              <div class="team-member__avatar">
-                <img
-                  src={member.image}
-                  alt={member.imageAlt ?? member.name}
-                  width="300"
-                  height="300"
-                  class="team-member__photo"
-                  loading="lazy"
-                  decoding="async"
-                />
-              </div>
+            {leadCompanions.map((member, i) => {
+              const hasPhoto = Boolean(member.image);
+              return (
+                <article
+                  class:list={[
+                    'team-card team-card--secondary reveal',
+                    i === 0 && 'reveal-delay-1',
+                    i === 1 && 'reveal-delay-2',
+                  ]}
+                >
+                  <div class="team-card__media">
+                    {hasPhoto ? (
+                      <img
+                        src={member.image}
+                        alt={
+                          member.imageAlt ??
+                          `${member.name}, ${member.role} — Prosperity Travel Bamako`
+                        }
+                        width="480"
+                        height="600"
+                        class="team-card__photo"
+                        loading="lazy"
+                        decoding="async"
+                      />
+                    ) : (
+                      <div
+                        class="team-card__placeholder"
+                        aria-label={member.imageAlt ?? member.name}
+                      >
+                        <span>{memberInitials(member)}</span>
+                      </div>
+                    )}
+                  </div>
+                  <div class="team-card__panel">
+                    <span class="team-card__num" aria-hidden="true">
+                      {member.id}
+                    </span>
+                    <div class="team-card__body">
+                      <h3 class="team-card__name">{member.name}</h3>
+                      <p class="team-card__role">{member.role}</p>
+                      <span class="team-card__rule" aria-hidden="true" />
+                      <p class="team-card__bio">{member.bio}</p>
+                      {!hasPhoto && <p class="team-card__pending">Photo à venir</p>}
+                    </div>
+                  </div>
+                </article>
+              );
+            })}
+          </div>
 
-              <span class="team-member__badge">{member.id}</span>
-            </div>
-
-            <h3 class="team-member__name">{member.name}</h3>
-            <p class="team-member__role">{member.role}</p>
-            <p class="team-member__bio">{member.bio}</p>
-          </li>
-        ))
-      }
-    </ul>
+          {/* Rangée suivante */}
+          {remaining.length > 0 && (
+            <ul class="team-gallery__rest-row">
+              {remaining.map((member, i) => {
+                const hasPhoto = Boolean(member.image);
+                return (
+                  <li>
+                    <article
+                      class:list={[
+                        'team-card team-card--secondary reveal',
+                        i % 3 === 1 && 'reveal-delay-1',
+                        i % 3 === 2 && 'reveal-delay-2',
+                      ]}
+                    >
+                      <div class="team-card__media">
+                        {hasPhoto ? (
+                          <img
+                            src={member.image}
+                            alt={
+                              member.imageAlt ??
+                              `${member.name}, ${member.role} — Prosperity Travel Bamako`
+                            }
+                            width="480"
+                            height="600"
+                            class="team-card__photo"
+                            loading="lazy"
+                            decoding="async"
+                          />
+                        ) : (
+                          <div
+                            class="team-card__placeholder"
+                            aria-label={member.imageAlt ?? member.name}
+                          >
+                            <span>{memberInitials(member)}</span>
+                          </div>
+                        )}
+                      </div>
+                      <div class="team-card__panel">
+                        <span class="team-card__num" aria-hidden="true">
+                          {member.id}
+                        </span>
+                        <div class="team-card__body">
+                          <h3 class="team-card__name">{member.name}</h3>
+                          <p class="team-card__role">{member.role}</p>
+                          <span class="team-card__rule" aria-hidden="true" />
+                          <p class="team-card__bio">{member.bio}</p>
+                          {!hasPhoto && <p class="team-card__pending">Photo à venir</p>}
+                        </div>
+                      </div>
+                    </article>
+                  </li>
+                );
+              })}
+            </ul>
+          )}
+        </div>
+      )
+    }
   </div>
 </section>
 
 <style>
-  .team-grid__glow {
-    background:
-      radial-gradient(
-        ellipse 55% 45% at 15% 0%,
-        color-mix(in srgb, var(--color-azur) 10%, transparent),
-        transparent 70%
-      ),
-      radial-gradient(
-        ellipse 45% 40% at 90% 100%,
-        color-mix(in srgb, var(--color-or) 9%, transparent),
-        transparent 65%
-      );
+  .team-gallery {
+    --tg-navy: var(--color-azur-profond);
+    --tg-gold: var(--color-or);
+    --tg-radius: 0.55rem;
   }
 
-  .team-member {
+  .team-gallery__decor {
+    color: var(--tg-gold);
+  }
+
+  .team-gallery__arc {
+    position: absolute;
+    left: -8%;
+    top: 8%;
+    width: min(42vw, 22rem);
+    height: auto;
+    opacity: 0.55;
+  }
+
+  .team-gallery__flight {
+    position: absolute;
+    right: 4%;
+    top: 3.5rem;
+    width: min(28vw, 13rem);
+    height: auto;
+    opacity: 0.7;
+  }
+
+  .team-gallery__kicker {
+    font-family: var(--font-sans);
+    font-size: clamp(0.68rem, 0.62rem + 0.18vw, 0.8rem);
+    font-weight: 500;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+  }
+
+  .team-gallery__layout {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    text-align: center;
+    gap: 1.15rem;
   }
 
-  .team-member__media {
-    position: relative;
-    width: 15.5rem;
-    height: 15.5rem;
+  .team-gallery__lead-row,
+  .team-gallery__rest-row {
+    display: grid;
+    gap: 1.15rem;
+    grid-template-columns: 1fr;
+    list-style: none;
+    margin: 0;
+    padding: 0;
   }
 
-  @media (min-width: 1024px) {
-    .team-member__media {
-      width: 17rem;
-      height: 17rem;
+  @media (min-width: 640px) {
+    .team-gallery__rest-row {
+      grid-template-columns: repeat(2, 1fr);
     }
   }
 
-  .team-member__arc {
-    position: absolute;
-    inset: 0;
-    width: 100%;
+  @media (min-width: 1024px) {
+    .team-gallery__lead-row {
+      grid-template-columns: 1.45fr 1fr 1fr;
+      align-items: stretch;
+    }
+
+    .team-gallery__lead-row--solo {
+      grid-template-columns: 1fr;
+      max-width: 42rem;
+    }
+
+    .team-gallery__lead-row--duo {
+      grid-template-columns: 1.45fr 1fr;
+    }
+
+    .team-gallery__rest-row {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  /* ——— Carte de base ——— */
+  .team-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
     height: 100%;
-    color: var(--color-or);
-    pointer-events: none;
-    z-index: 1;
-    overflow: visible;
-  }
-
-  .team-member__avatar {
-    position: absolute;
-    /* Photo à l’intérieur de l’arc (r arc 84 → photo ~ r 70 → inset ~15%) */
-    inset: 15%;
-    z-index: 2;
-    border-radius: 999px;
     overflow: hidden;
+    border-radius: var(--tg-radius);
+    border: 1px solid color-mix(in srgb, var(--tg-gold) 55%, transparent);
+    background: var(--color-blanc);
+    transition:
+      border-color 0.45s ease,
+      box-shadow 0.45s ease,
+      transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .team-card:hover {
+    border-color: var(--tg-gold);
+    box-shadow: 0 14px 36px color-mix(in srgb, var(--tg-navy) 10%, transparent);
+    transform: translateY(-3px);
+  }
+
+  .team-card__media {
+    position: relative;
+    overflow: hidden;
+    flex-shrink: 0;
+    aspect-ratio: 4 / 5;
     background: var(--color-craie);
-    box-shadow:
-      inset 0 0 0 1.5px var(--color-or),
-      0 0 0 1px color-mix(in srgb, var(--color-or) 30%, transparent);
-    transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
   }
 
-  .team-member:hover .team-member__avatar {
-    transform: translateY(-4px) scale(1.025);
-  }
-
-  .team-member__photo {
+  .team-card__photo {
     display: block;
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: center top;
-    filter: grayscale(0.55) contrast(1.06);
-    transition: filter 0.5s ease;
+    object-position: center 18%;
+    transition: transform 0.85s cubic-bezier(0.22, 1, 0.36, 1);
   }
 
-  .team-member:hover .team-member__photo {
-    filter: grayscale(0.1) contrast(1.02);
+  .team-card:hover .team-card__photo {
+    transform: scale(1.04);
   }
 
-  /* Badge 01 sur le bord haut du cercle photo */
-  .team-member__badge {
-    position: absolute;
-    top: 15%;
-    left: 50%;
-    z-index: 4;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 2.65rem;
-    height: 2.65rem;
-    translate: -50% -50%;
-    border-radius: 999px;
-    background: var(--color-or);
+  .team-card__placeholder {
+    display: grid;
+    place-items: center;
+    width: 100%;
+    height: 100%;
+    min-height: 12rem;
+    background: linear-gradient(155deg, var(--tg-navy), var(--color-azur));
     color: #fff;
-    font-family: var(--font-sans);
-    font-size: 0.75rem;
-    font-weight: 700;
-    letter-spacing: 0.04em;
-    box-shadow: 0 3px 12px rgba(18, 63, 112, 0.2);
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 1.5rem + 1.2vw, 2.6rem);
+    font-weight: 600;
+    letter-spacing: 0.06em;
   }
 
-  .team-member__name {
-    margin-top: 2.15rem;
-    font-family: var(--font-sans);
-    font-size: clamp(1.2rem, 1.05rem + 0.5vw, 1.4rem);
-    font-weight: 700;
+  .team-card__panel {
+    position: relative;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 1.15rem 1.15rem 1.25rem;
+    overflow: hidden;
+  }
+
+  .team-card__num {
+    position: absolute;
+    top: 0.35rem;
+    right: 0.55rem;
+    z-index: 0;
+    font-family: var(--font-display);
+    font-size: clamp(3.2rem, 2.4rem + 2vw, 4.5rem);
+    font-weight: 600;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    color: color-mix(in srgb, var(--tg-navy) 8%, transparent);
+    pointer-events: none;
+    user-select: none;
+  }
+
+  .team-card__body {
+    position: relative;
+    z-index: 1;
+  }
+
+  .team-card__name {
+    font-family: var(--font-display);
+    font-size: clamp(1.05rem, 0.95rem + 0.35vw, 1.28rem);
+    font-weight: 600;
     line-height: 1.2;
-    color: var(--color-or);
-    transition: color 0.35s ease;
+    color: var(--tg-navy);
   }
 
-  .team-member:hover .team-member__name {
-    color: var(--color-azur-profond);
-  }
-
-  .team-member__role {
-    margin-top: 0.45rem;
+  .team-card__role {
+    margin-top: 0.4rem;
     font-family: var(--font-sans);
-    font-size: 0.9rem;
-    font-style: italic;
-    font-weight: 400;
-    color: #3a3a3a;
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    color: var(--tg-gold);
   }
 
-  .team-member__bio {
-    margin-top: 0.9rem;
-    max-width: 16.5rem;
+  .team-card__rule {
+    display: block;
+    width: 2rem;
+    height: 1px;
+    margin-top: 0.7rem;
+    background: color-mix(in srgb, var(--tg-gold) 70%, transparent);
+  }
+
+  .team-card__bio {
+    margin-top: 0.7rem;
     font-family: var(--font-sans);
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     line-height: 1.55;
-    color: #8a8a8a;
+    color: color-mix(in srgb, var(--tg-navy) 55%, #6b7280);
   }
 
-  .team-member.is-visible .team-member__media {
-    animation: team-float 5.5s ease-in-out infinite;
+  .team-card__pending {
+    margin-top: 0.5rem;
+    font-size: 0.65rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: color-mix(in srgb, var(--tg-navy) 40%, transparent);
   }
 
-  .team-member.is-visible:nth-child(2) .team-member__media {
-    animation-delay: 0.35s;
+  /* ——— Carte featured ——— */
+  .team-card--featured {
+    background: var(--tg-navy);
   }
 
-  .team-member.is-visible:nth-child(3) .team-member__media {
-    animation-delay: 0.7s;
+  .team-card--featured .team-card__panel {
+    background: var(--tg-navy);
+    padding: 1.35rem 1.25rem 1.45rem;
+    justify-content: center;
   }
 
-  .team-member.is-visible:nth-child(4) .team-member__media {
-    animation-delay: 1.05s;
+  .team-card--featured .team-card__num {
+    color: color-mix(in srgb, #fff 12%, transparent);
+    top: 0.5rem;
+    left: 0.75rem;
+    right: auto;
   }
 
-  @keyframes team-float {
-    0%,
-    100% {
-      transform: translateY(0);
+  .team-card--featured .team-card__name {
+    color: #fff;
+    font-size: clamp(1.2rem, 1rem + 0.55vw, 1.55rem);
+  }
+
+  .team-card--featured .team-card__role {
+    color: var(--tg-gold);
+  }
+
+  .team-card--featured .team-card__rule {
+    background: color-mix(in srgb, var(--tg-gold) 80%, transparent);
+  }
+
+  .team-card--featured .team-card__bio {
+    color: color-mix(in srgb, #fff 72%, transparent);
+    max-width: 22rem;
+  }
+
+  .team-card--featured .team-card__pending {
+    color: color-mix(in srgb, #fff 45%, transparent);
+  }
+
+  /* Tablette+ : split horizontal photo | texte */
+  @media (min-width: 640px) {
+    .team-card--featured,
+    .team-card--secondary {
+      flex-direction: row;
     }
-    50% {
-      transform: translateY(-5px);
+
+    .team-card--featured {
+      min-height: 14.5rem;
+    }
+
+    .team-card--secondary {
+      min-height: 11.25rem;
+    }
+
+    .team-card--featured .team-card__media {
+      width: 46%;
+      aspect-ratio: auto;
+      align-self: stretch;
+    }
+
+    .team-card--featured .team-card__panel {
+      width: 54%;
+      justify-content: center;
+    }
+
+    .team-card--secondary .team-card__media {
+      width: 42%;
+      aspect-ratio: auto;
+      align-self: stretch;
+    }
+
+    .team-card--secondary .team-card__panel {
+      width: 58%;
+      justify-content: center;
+      padding: 1rem 1.05rem 1.1rem;
+    }
+
+    .team-card--secondary .team-card__num {
+      font-size: clamp(2.6rem, 2rem + 1.4vw, 3.75rem);
+      top: 0.2rem;
+      right: 0.4rem;
+    }
+
+    .team-card--secondary .team-card__bio {
+      font-size: 0.76rem;
+      display: -webkit-box;
+      -webkit-line-clamp: 4;
+      line-clamp: 4;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .team-card--featured {
+      min-height: 17.5rem;
+    }
+
+    .team-card--featured .team-card__media {
+      width: 48%;
+    }
+
+    .team-card--featured .team-card__panel {
+      width: 52%;
+      padding: 1.75rem 1.5rem 1.75rem 1.6rem;
+    }
+
+    /* Compagnons de la rangée focale : même hauteur que le lead */
+    .team-gallery__lead-row > .team-card--secondary {
+      min-height: 17.5rem;
+    }
+
+    .team-gallery__lead-row > .team-card--secondary .team-card__media {
+      width: 46%;
+    }
+
+    .team-gallery__lead-row > .team-card--secondary .team-card__panel {
+      width: 54%;
+      padding: 1.15rem 1.1rem 1.2rem;
+    }
+
+    .team-gallery__rest-row .team-card--secondary {
+      min-height: 12rem;
+    }
+
+    .team-gallery__rest-row .team-card--secondary .team-card__bio {
+      -webkit-line-clamp: 3;
+      line-clamp: 3;
     }
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .team-member.is-visible .team-member__media,
-    .team-member:hover .team-member__avatar {
-      animation: none;
-      transform: none;
+    .team-card,
+    .team-card:hover,
+    .team-card__photo,
+    .team-card:hover .team-card__photo {
       transition: none;
+      transform: none;
     }
   }
 </style>

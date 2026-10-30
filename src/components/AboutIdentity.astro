@@ -1,0 +1,317 @@
+---
+interface PracticalItem {
+  label: string;
+  value: string;
+}
+
+interface Props {
+  storyEyebrow: string;
+  storyTitle: string;
+  storyLead: string;
+  practical: readonly PracticalItem[];
+  practicalNote: string;
+  missionEyebrow: string;
+  missionText: string;
+  visionEyebrow: string;
+  visionText: string;
+}
+
+const {
+  storyEyebrow,
+  storyTitle,
+  storyLead,
+  practical,
+  practicalNote,
+  missionEyebrow,
+  missionText,
+  visionEyebrow,
+  visionText,
+} = Astro.props;
+---
+
+<section data-nav="light" class="about-id relative overflow-hidden bg-ivoire">
+  <div class="about-id__decor pointer-events-none absolute inset-0" aria-hidden="true">
+    <svg class="about-id__arc" viewBox="0 0 420 420" fill="none">
+      <circle
+        cx="380"
+        cy="40"
+        r="200"
+        stroke="currentColor"
+        stroke-width="0.75"
+        opacity="0.4"
+      />
+      <circle
+        cx="380"
+        cy="40"
+        r="140"
+        stroke="currentColor"
+        stroke-width="0.55"
+        stroke-dasharray="3 6"
+        opacity="0.35"
+      />
+    </svg>
+  </div>
+
+  <!-- Identité -->
+  <div class="site-shell relative z-10 section-pad">
+    <div class="about-id__story grid gap-10 lg:grid-cols-12 lg:gap-16 xl:gap-20">
+      <div class="reveal lg:col-span-5">
+        <p class="type-eyebrow text-or">{storyEyebrow}</p>
+        <div class="gold-rule mt-5"></div>
+        <h2 class="type-display mt-6 text-nuit">{storyTitle}</h2>
+      </div>
+
+      <div class="reveal reveal-delay-1 lg:col-span-7">
+        <p class="about-id__lead type-lead text-nuit/75">{storyLead}</p>
+
+        <div class="about-id__practical mt-10">
+          <ul class="about-id__facts">
+            {
+              practical.map((item) => (
+                <li class="about-id__fact">
+                  <span class="about-id__fact-label">{item.label}</span>
+                  <span class="about-id__fact-value">{item.value}</span>
+                </li>
+              ))
+            }
+          </ul>
+          <p class="about-id__note">{practicalNote}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mission / Vision -->
+  <div class="relative z-10 pb-[clamp(3.5rem,6vw,6.5rem)]">
+    <div class="site-shell">
+      <div class="about-id__mv grid overflow-hidden rounded-[0.65rem] border border-or/35 lg:grid-cols-2">
+        <article class="about-id__block about-id__block--mission reveal group">
+          <span class="about-id__num" aria-hidden="true">01</span>
+          <div class="about-id__block-inner">
+            <p class="type-eyebrow text-or">{missionEyebrow}</p>
+            <span class="about-id__rule" aria-hidden="true"></span>
+            <p class="about-id__statement">{missionText}</p>
+          </div>
+          <svg class="about-id__route" viewBox="0 0 120 40" fill="none" aria-hidden="true">
+            <path
+              d="M4 28 C 28 8, 52 8, 76 20 S 108 34, 116 22"
+              stroke="currentColor"
+              stroke-width="1.1"
+              stroke-dasharray="2.5 4.5"
+              stroke-linecap="round"
+            />
+            <circle cx="116" cy="22" r="2.2" fill="currentColor" />
+          </svg>
+        </article>
+
+        <article class="about-id__block about-id__block--vision reveal reveal-delay-1 group">
+          <span class="about-id__num" aria-hidden="true">02</span>
+          <div class="about-id__block-inner">
+            <p class="type-eyebrow text-or">{visionEyebrow}</p>
+            <span class="about-id__rule" aria-hidden="true"></span>
+            <p class="about-id__statement">{visionText}</p>
+          </div>
+          <svg class="about-id__route" viewBox="0 0 120 40" fill="none" aria-hidden="true">
+            <path
+              d="M4 14 C 30 30, 54 32, 78 18 S 108 6, 116 16"
+              stroke="currentColor"
+              stroke-width="1.1"
+              stroke-dasharray="2.5 4.5"
+              stroke-linecap="round"
+            />
+            <circle cx="116" cy="16" r="2.2" fill="currentColor" />
+          </svg>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .about-id {
+    --ai-navy: var(--color-azur-profond);
+    --ai-gold: var(--color-or);
+  }
+
+  .about-id__decor {
+    color: var(--ai-gold);
+  }
+
+  .about-id__arc {
+    position: absolute;
+    right: -6%;
+    top: 4%;
+    width: min(48vw, 26rem);
+    height: auto;
+    opacity: 0.55;
+  }
+
+  .about-id__lead {
+    max-width: 38rem;
+  }
+
+  .about-id__practical {
+    max-width: 38rem;
+    border-top: 1px solid color-mix(in srgb, var(--ai-navy) 12%, transparent);
+    padding-top: 1.5rem;
+  }
+
+  .about-id__facts {
+    display: grid;
+    gap: 1.15rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  @media (min-width: 640px) {
+    .about-id__facts {
+      grid-template-columns: 1fr 1fr;
+      gap: 1.25rem 2rem;
+    }
+  }
+
+  .about-id__fact {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    padding-left: 0.85rem;
+    border-left: 1px solid color-mix(in srgb, var(--ai-gold) 70%, transparent);
+  }
+
+  .about-id__fact-label {
+    font-family: var(--font-sans);
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ai-gold);
+  }
+
+  .about-id__fact-value {
+    font-family: var(--font-display);
+    font-size: clamp(1.05rem, 0.95rem + 0.35vw, 1.25rem);
+    font-weight: 600;
+    line-height: 1.3;
+    color: var(--ai-navy);
+  }
+
+  .about-id__note {
+    margin-top: 1.25rem;
+    font-family: var(--font-sans);
+    font-size: 0.92rem;
+    line-height: 1.55;
+    color: color-mix(in srgb, var(--ai-navy) 58%, #6b7280);
+  }
+
+  /* Mission / Vision pair */
+  .about-id__mv {
+    box-shadow: 0 18px 48px color-mix(in srgb, var(--ai-navy) 8%, transparent);
+  }
+
+  .about-id__block {
+    position: relative;
+    overflow: hidden;
+    min-height: clamp(14rem, 22vw, 18rem);
+    transition: background-color 0.45s ease;
+  }
+
+  .about-id__block--mission {
+    background: var(--ai-navy);
+    color: #fff;
+  }
+
+  .about-id__block--vision {
+    background: var(--color-blanc);
+    color: var(--ai-navy);
+    border-top: 1px solid color-mix(in srgb, var(--ai-gold) 28%, transparent);
+  }
+
+  @media (min-width: 1024px) {
+    .about-id__block--vision {
+      border-top: none;
+      border-left: 1px solid color-mix(in srgb, var(--ai-gold) 35%, transparent);
+    }
+  }
+
+  .about-id__block-inner {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+    padding: clamp(1.75rem, 3.5vw, 3rem) clamp(1.5rem, 3vw, 2.75rem);
+  }
+
+  .about-id__num {
+    position: absolute;
+    top: 0.75rem;
+    right: 1rem;
+    z-index: 0;
+    font-family: var(--font-display);
+    font-size: clamp(4rem, 3rem + 3vw, 6rem);
+    font-weight: 600;
+    line-height: 1;
+    letter-spacing: -0.03em;
+    pointer-events: none;
+    user-select: none;
+  }
+
+  .about-id__block--mission .about-id__num {
+    color: color-mix(in srgb, #fff 10%, transparent);
+  }
+
+  .about-id__block--vision .about-id__num {
+    color: color-mix(in srgb, var(--ai-navy) 7%, transparent);
+  }
+
+  .about-id__rule {
+    display: block;
+    width: 2.25rem;
+    height: 1px;
+    margin-top: 1rem;
+    margin-bottom: 1.15rem;
+    background: color-mix(in srgb, var(--ai-gold) 80%, transparent);
+  }
+
+  .about-id__statement {
+    font-family: var(--font-display);
+    font-size: clamp(1.35rem, 1.1rem + 1vw, 1.95rem);
+    font-weight: 600;
+    line-height: 1.28;
+    max-width: 22rem;
+  }
+
+  .about-id__block--mission .about-id__statement {
+    color: #fff;
+  }
+
+  .about-id__block--vision .about-id__statement {
+    color: var(--ai-navy);
+  }
+
+  .about-id__route {
+    position: absolute;
+    right: 1.25rem;
+    bottom: 1.1rem;
+    width: 6.5rem;
+    color: var(--ai-gold);
+    opacity: 0.55;
+    transition: opacity 0.45s ease, transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .about-id__block:hover .about-id__route {
+    opacity: 0.9;
+    transform: translateX(4px);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .about-id__block,
+    .about-id__route,
+    .about-id__block:hover .about-id__route {
+      transition: none;
+      transform: none;
+    }
+  }
+</style>

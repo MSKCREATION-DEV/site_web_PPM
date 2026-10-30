@@ -1,107 +1,331 @@
 ---
 interface Props {
   eyebrow: string;
+  title: string;
   name: string;
   role: string;
   quote: readonly string[];
-  image: string;
+  image?: string;
+  initials?: string;
   imageAlt?: string;
+  brand?: string;
 }
 
-const { eyebrow, name, role, quote, image, imageAlt = '' } = Astro.props;
+const {
+  eyebrow,
+  title,
+  name,
+  role,
+  quote,
+  image = '',
+  initials = '',
+  imageAlt = '',
+  brand = 'Prosperity Travel',
+} = Astro.props;
+
+const hasPhoto = Boolean(image);
+const displayInitials = initials || name.slice(0, 2).toUpperCase();
 ---
 
-<section data-nav="light" class="director-msg section-pad border-t border-nuit/5 bg-ivoire">
-  <div class="site-shell">
-    <div class="director-msg__col reveal mx-auto flex max-w-2xl flex-col items-center text-center">
-      <p class="type-eyebrow text-or">{eyebrow}</p>
+<section data-nav="light" class="director-msg relative overflow-hidden bg-ivoire">
+  <div class="director-msg__decor pointer-events-none absolute inset-0" aria-hidden="true">
+    <svg class="director-msg__arc" viewBox="0 0 400 400" fill="none">
+      <circle
+        cx="36"
+        cy="320"
+        r="170"
+        stroke="currentColor"
+        stroke-width="0.7"
+        opacity="0.35"
+      />
+    </svg>
+  </div>
 
-      <div class="director-msg__portrait mt-10">
-        <div class="director-msg__ring">
-          <img
-            src={image}
-            alt={imageAlt}
-            width="400"
-            height="400"
-            class="director-msg__photo"
-            loading="lazy"
-            decoding="async"
-          />
+  <div class="site-shell relative z-10 section-pad">
+    <div class="director-msg__grid">
+      <!-- Portrait + identité -->
+      <aside class="director-msg__aside reveal">
+        <div class="director-msg__frame-wrap">
+          <div class="director-msg__backdrop" aria-hidden="true"></div>
+          <div class="director-msg__frame">
+            {
+              hasPhoto ? (
+                <img
+                  src={image}
+                  alt={imageAlt || `${name}, ${role} — ${brand}`}
+                  width="640"
+                  height="800"
+                  class="director-msg__photo"
+                  loading="lazy"
+                  decoding="async"
+                />
+              ) : (
+                <div class="director-msg__placeholder" aria-label={imageAlt || name}>
+                  <span>{displayInitials}</span>
+                </div>
+              )
+            }
+          </div>
         </div>
-        <span class="director-msg__pointer" aria-hidden="true"></span>
+
+        <div class="director-msg__identity">
+          <p class="director-msg__name">{name}</p>
+          <p class="director-msg__role">{role}</p>
+        </div>
+      </aside>
+
+      <!-- Message éditorial -->
+      <div class="director-msg__editorial reveal reveal-delay-1">
+        <p class="type-eyebrow text-or">{eyebrow}</p>
+        <h2 class="director-msg__heading">{title}</h2>
+
+        <blockquote class="director-msg__quote">
+          <span class="director-msg__mark" aria-hidden="true">“</span>
+          {
+            quote.map((p) => (
+              <p class="director-msg__p">{p}</p>
+            ))
+          }
+        </blockquote>
+
+        <footer class="director-msg__sign">
+          <span class="director-msg__sign-rule" aria-hidden="true"></span>
+          <p class="director-msg__sign-name">{name}</p>
+          <p class="director-msg__sign-meta">
+            {role} — {brand}
+          </p>
+        </footer>
       </div>
-
-      <p class="mt-8 font-display text-3xl text-nuit md:text-4xl">{name}</p>
-      <p class="type-eyebrow mt-3 text-or">{role}</p>
-      <div class="gold-rule mx-auto mt-7"></div>
-
-      <blockquote class="mt-8 space-y-4">
-        {
-          quote.map((p) => (
-            <p class="type-lead text-nuit/75">{p}</p>
-          ))
-        }
-      </blockquote>
     </div>
   </div>
 </section>
 
 <style>
-  .director-msg__portrait {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: min(100%, 15rem);
+  .director-msg {
+    --dm-navy: var(--color-azur-profond);
+    --dm-gold: var(--color-or);
   }
 
-  @media (min-width: 768px) {
-    .director-msg__portrait {
-      width: 17rem;
+  .director-msg__decor {
+    color: var(--dm-gold);
+  }
+
+  .director-msg__arc {
+    position: absolute;
+    left: -10%;
+    bottom: -8%;
+    width: min(42vw, 22rem);
+    height: auto;
+    opacity: 0.5;
+  }
+
+  .director-msg__grid {
+    display: grid;
+    gap: clamp(2.5rem, 5vw, 4.5rem);
+    align-items: center;
+  }
+
+  @media (min-width: 1024px) {
+    .director-msg__grid {
+      grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.18fr);
+      gap: clamp(2.75rem, 5vw, 5rem);
     }
   }
 
-  .director-msg__ring {
-    width: 100%;
-    aspect-ratio: 1;
-    border-radius: 999px;
-    padding: 0.4rem;
-    background: linear-gradient(
-      145deg,
-      var(--color-or) 0%,
-      color-mix(in srgb, var(--color-or) 50%, var(--color-azur)) 55%,
-      var(--color-azur-profond) 100%
-    );
-    box-shadow: 0 22px 48px rgba(18, 63, 112, 0.16);
-    transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  /* ——— Portrait ——— */
+  .director-msg__aside {
+    max-width: 22rem;
+    margin-inline: auto;
   }
 
-  .director-msg__col:hover .director-msg__ring {
-    transform: translateY(-4px) scale(1.02);
+  @media (min-width: 1024px) {
+    .director-msg__aside {
+      max-width: none;
+      margin-inline: 0;
+    }
+  }
+
+  .director-msg__frame-wrap {
+    position: relative;
+    padding: 0 0 1.1rem 1.1rem;
+  }
+
+  .director-msg__backdrop {
+    position: absolute;
+    inset: 1.35rem 1.35rem -0.15rem -0.15rem;
+    border-radius: 0.55rem;
+    background: var(--dm-navy);
+    z-index: 0;
+  }
+
+  .director-msg__frame {
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+    aspect-ratio: 4 / 5;
+    border-radius: 0.55rem;
+    border: 1px solid color-mix(in srgb, var(--dm-gold) 65%, transparent);
+    background: var(--dm-navy);
+    box-shadow: 0 22px 48px color-mix(in srgb, var(--dm-navy) 14%, transparent);
+    transition:
+      transform 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+      border-color 0.45s ease;
+  }
+
+  .director-msg__aside:hover .director-msg__frame {
+    transform: translateY(-4px);
+    border-color: var(--dm-gold);
   }
 
   .director-msg__photo {
     display: block;
     width: 100%;
     height: 100%;
-    border-radius: 999px;
     object-fit: cover;
-    object-position: center top;
-    background: var(--color-craie);
+    object-position: center 18%;
+    transition: transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
   }
 
-  .director-msg__pointer {
-    width: 0;
-    height: 0;
-    margin-top: -1px;
-    border-left: 0.7rem solid transparent;
-    border-right: 0.7rem solid transparent;
-    border-top: 0.85rem solid var(--color-or);
+  .director-msg__aside:hover .director-msg__photo {
+    transform: scale(1.03);
+  }
+
+  .director-msg__placeholder {
+    display: grid;
+    place-items: center;
+    width: 100%;
+    height: 100%;
+    background:
+      radial-gradient(
+        ellipse 70% 55% at 50% 35%,
+        color-mix(in srgb, var(--color-azur) 28%, transparent),
+        transparent 70%
+      ),
+      linear-gradient(160deg, var(--dm-navy), color-mix(in srgb, var(--dm-navy) 75%, #000));
+    color: #fff;
+  }
+
+  .director-msg__placeholder span {
+    font-family: var(--font-display);
+    font-size: clamp(3.25rem, 2.5rem + 2.5vw, 4.75rem);
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    line-height: 1;
+  }
+
+  .director-msg__identity {
+    margin-top: 1.5rem;
+    padding-left: 0.15rem;
+  }
+
+  .director-msg__name {
+    font-family: var(--font-display);
+    font-size: clamp(1.45rem, 1.2rem + 0.7vw, 1.9rem);
+    font-weight: 600;
+    line-height: 1.2;
+    color: var(--dm-navy);
+  }
+
+  .director-msg__role {
+    margin-top: 0.45rem;
+    font-family: var(--font-sans);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--dm-gold);
+  }
+
+  /* ——— Éditorial ——— */
+  .director-msg__editorial {
+    position: relative;
+    max-width: 36rem;
+  }
+
+  @media (min-width: 1024px) {
+    .director-msg__editorial {
+      padding-left: 1.75rem;
+      border-left: 1px solid color-mix(in srgb, var(--dm-gold) 55%, transparent);
+    }
+  }
+
+  .director-msg__heading {
+    margin-top: 1.15rem;
+    font-family: var(--font-display);
+    font-size: clamp(1.65rem, 1.25rem + 1.3vw, 2.55rem);
+    font-weight: 600;
+    line-height: 1.18;
+    color: var(--dm-navy);
+    max-width: 18ch;
+  }
+
+  .director-msg__quote {
+    position: relative;
+    margin: 1.75rem 0 0;
+    padding: 0;
+    border: none;
+  }
+
+  .director-msg__mark {
+    position: absolute;
+    top: -0.55rem;
+    left: -0.15rem;
+    font-family: var(--font-display);
+    font-size: clamp(4rem, 3rem + 3vw, 5.5rem);
+    font-weight: 600;
+    line-height: 1;
+    color: color-mix(in srgb, var(--dm-gold) 28%, transparent);
+    pointer-events: none;
+    user-select: none;
+  }
+
+  .director-msg__p {
+    position: relative;
+    z-index: 1;
+    font-family: var(--font-sans);
+    font-size: clamp(1.05rem, 0.95rem + 0.35vw, 1.2rem);
+    line-height: 1.7;
+    color: color-mix(in srgb, var(--dm-navy) 72%, #5b6470);
+  }
+
+  .director-msg__p + .director-msg__p {
+    margin-top: 1.15rem;
+  }
+
+  .director-msg__sign {
+    margin-top: 2.25rem;
+    padding-top: 0.25rem;
+  }
+
+  .director-msg__sign-rule {
+    display: block;
+    width: 2.5rem;
+    height: 1px;
+    margin-bottom: 1rem;
+    background: color-mix(in srgb, var(--dm-gold) 80%, transparent);
+  }
+
+  .director-msg__sign-name {
+    font-family: var(--font-display);
+    font-size: clamp(1.15rem, 1rem + 0.4vw, 1.35rem);
+    font-weight: 600;
+    font-style: italic;
+    color: var(--dm-navy);
+  }
+
+  .director-msg__sign-meta {
+    margin-top: 0.35rem;
+    font-family: var(--font-sans);
+    font-size: 0.8rem;
+    letter-spacing: 0.04em;
+    color: color-mix(in srgb, var(--dm-navy) 50%, #6b7280);
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .director-msg__ring,
-    .director-msg__col:hover .director-msg__ring {
+    .director-msg__frame,
+    .director-msg__aside:hover .director-msg__frame,
+    .director-msg__photo,
+    .director-msg__aside:hover .director-msg__photo {
       transition: none;
       transform: none;
     }

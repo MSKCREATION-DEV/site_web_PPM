@@ -25,3 +25,6 @@ pnpm-debug.log*
 
 # Charte PDF archive (trop volumineux pour git — source texte : docs/brand/CHARTE-TRAVEL.md)
 docs/brand/Prosperity-Mises-en-situation.pdf
+
+# Sources photos brutes (optimisées dans public/images/team/)
+PHOTO EQUIPE */

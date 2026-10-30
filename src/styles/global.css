@@ -266,7 +266,12 @@
     overflow: visible;
   }
 
-  /* Contact — image fondue */
+  /* Ancre formulaire Contact — header fixe */
+  .contact-form-anchor {
+    scroll-margin-top: calc(var(--site-header-height) + 1.25rem);
+  }
+
+  /* Utilitaires melt / voile — autres sections éventuelles */
   .media-melt {
     position: absolute;
     inset: 0;
