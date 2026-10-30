@@ -126,9 +126,19 @@ Tout contact / WhatsApp / Maps / réseaux → **`src/data/site.ts` uniquement**.
 
 ## Déploiement Vercel (preview)
 
-Objectif : URL de **preview** pour relecture client — **pas** d’alias production tant que non validé.
+Objectif : URL de **preview** pour relecture client — **ne pas** partager / promouvoir en production tant que non validé.
 
-### Paramètres projet recommandés
+### URLs actuelles (équipe `mskcreations-projects`)
+
+| Type | URL |
+|------|-----|
+| **Preview (à partager au client)** | https://prosperity-travel-9dvtyyle1-mskcreations-projects.vercel.app |
+| Inspect | https://vercel.com/mskcreations-projects/prosperity-travel/H4RU8ftbNaEhzgkDVUduWen4Gd8b |
+| Projet | https://vercel.com/mskcreations-projects/prosperity-travel |
+
+> Le premier deploy CLI a automatiquement créé un alias `prosperity-travel.vercel.app` — **ne pas le traiter comme livrable client**. Utiliser uniquement le lien **Preview** ci-dessus. Ne jamais lancer `vercel --prod` avant validation.
+
+### Paramètres projet
 
 | Réglage | Valeur |
 |---------|--------|
@@ -136,19 +146,17 @@ Objectif : URL de **preview** pour relecture client — **pas** d’alias produc
 | Build command | `npm run build` |
 | Output | `dist` |
 | Node | `22.x` |
-| Production Branch | ne pas promouvoir `dev` en prod sans validation |
+| Protection SSO | désactivée (accès client sans compte Vercel) |
 
 ### CLI
 
 ```bash
 # Lier le projet (une fois)
-npx vercel link
+npx vercel link --scope mskcreations-projects --project prosperity-travel
 
-# Preview uniquement (défaut = preview, pas --prod)
-npx vercel
+# Preview uniquement (sans --prod)
+npx vercel deploy --yes --scope mskcreations-projects
 ```
-
-Ou via dashboard : import du repo → Deploy → cible **Preview**.
 
 ### Branches
 
